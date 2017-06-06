@@ -26,7 +26,7 @@ shinyServer(function(input, output, session) {
 	sessiontemp <- getwd()
 	#####temporary render for 3D page
 
-	g <- read.csv(system.file("extdata", 'clav1.xyz', package = "osteoshiny"), sep=" ", header = FALSE)
+	g <- read.csv(system.file("extdata", 'clav1.xyz', package = "OsteoShiny"), sep=" ", header = FALSE)
 	output$myWebGL <- renderWebGL ({
 		points3d(g[,1], g[,2], g[,3], col="blue")
 		axes3d()
@@ -57,7 +57,7 @@ shinyServer(function(input, output, session) {
 			"standardtemplate.csv"
 		},
 		content <- function(file) {
-			file.copy(system.file("extdata", 'standardtemplate.csv', package = "osteoshiny"), file)                  
+			file.copy(system.file("extdata", 'standardtemplate.csv', package = "OsteoShiny"), file)                  
 		},
 	)  
 			
@@ -66,7 +66,7 @@ shinyServer(function(input, output, session) {
 			"OsteoSort_User_Manual_v1.pdf"
 		},
 		content <- function(file) {
-			file.copy(system.file("extdata", 'OsteoSort_User_Manual_v1.pdf', package = "osteoshiny"), file)                  
+			file.copy(system.file("extdata", 'OsteoSort_User_Manual_v1.pdf', package = "OsteoShiny"), file)                  
 		},
 	)  			
 			

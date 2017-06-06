@@ -11,5 +11,5 @@ OsteoSort <- function()
 {
 	library(shiny)
 	library(shinyBS)
-	runApp(system.file("OsteoSort", package = "osteoshiny"), launch.browser = TRUE)
+	runApp(system.file("OsteoSort", package = "OsteoShiny"), launch.browser = TRUE)
 }

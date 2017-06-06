@@ -1,4 +1,4 @@
-Package: osteoshiny
+Package: OsteoShiny
 Title: Shiny GUI for the osteosort package for R
 Version: 1.0
 Authors@R: person("Jeff", "Lynch", email = "jjlynch@bioarch.net", role = c("aut","cre"))
