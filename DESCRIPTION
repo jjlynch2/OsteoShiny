@@ -1,11 +1,11 @@
 Package: OsteoShiny
 Title: Shiny GUI for the osteosort package for R
-Version: 1.0
+Version: 1.0.1
 Authors@R: person("Jeff", "Lynch", email = "jjlynch@bioarch.net", role = c("aut","cre"))
 Description: This package allows the statistical osteological sorting of commingled
     human skeletal remains using metric, 2D, and 3D data in a shiny GUI. http://osteosort.net
 Depends:
-    osteosort,
+    OsteoSort,
     shinyBS,
     plyr,
     shinythemes,
@@ -17,5 +17,5 @@ Imports:
     shiny,
     shinyBS,
     shinythemes,
-    osteosort
-RoxygenNote: 5.0.1.9000
+    OsteoSort
+RoxygenNote: 6.0.1

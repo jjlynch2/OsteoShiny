@@ -81,8 +81,8 @@
 		#if(nrow(leftimages) > limit1) {} #Do not run if limit
 		#if(nrow(rightimages) > limit2) {} #Do not run if limit
 
-		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, smooth = input$nsmooth2D, nb.h = input$efaH2D)
-		out2 <- match.2d.invariant(outlinedata = out1,  hidedist = input$hidedist, nld = input$shortlistn, oo = input$fileoutput2D, sessiontempdir = sessiontemp, stdout = FALSE, trans = input$trans2D, threads = ncores2D$ncores2D, testme = input$distance2D, mspec =, meanit = input$meanit2D)
+		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, smooth_iterations = input$nsmooth2D, nharmonics = input$efaH2D)
+		out2 <- match.2d.invariant(outlinedata = out1,  hide_distances = input$hidedist, n_lowest_distances = input$shortlistn, oo = input$fileoutput2D, sessiontempdir = sessiontemp, stdout = FALSE, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
 		direc <- out2[[3]]
 		jpeg(paste("graph", ".jpeg", sep=""), height = 1200, width = 1200)
 		dev.control('enable')

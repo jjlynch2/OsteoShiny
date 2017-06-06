@@ -69,7 +69,7 @@
 		if(input$method == "Quartiles") {cutoffvalue <- input$Quartiles}
 		
 		#calls sorting function
-		outtemp <- lengthsort(file = tempdata3, side = input$outlierside, bone = input$zz3, method = input$method, measurement = outliermeasurements, cutoff = cutoffvalue, sessiontempdir = sessiontemp)
+		outtemp <- lengthsort(sort = tempdata3, side = input$outlierside, bone = input$zz3, method = input$method, measurements = outliermeasurements, cutoff = cutoffvalue, sessiontempdir = sessiontemp)
 		
 		
 		#counts number of outliers discovered

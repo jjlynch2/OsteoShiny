@@ -66,7 +66,7 @@
 		if(input$method4 == "Quartiles") {cutoffvalue <- input$Quartiles4}
 		
 		#calls sorting function
-		outtemp <- statsort(file = tempdata3, side = input$outlierside4, bone = input$zz4, method = input$method4, measurement = outliermeasurements, cutoff = cutoffvalue, sessiontempdir = sessiontemp, population = poppop)
+		outtemp <- statsort(sort = tempdata3, side = input$outlierside4, bone = input$zz4, method = input$method4, measurements = outliermeasurements, cutoff = cutoffvalue, sessiontempdir = sessiontemp, population = poppop)
 		
 		
 		#counts number of outliers discovered

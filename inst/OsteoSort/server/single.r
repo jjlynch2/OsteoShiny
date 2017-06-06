@@ -323,8 +323,8 @@
 				#sort1 <- reghum
 				#sort2 <- reguln
 				sortreg <- rbind.fill(as.data.frame(sort1),as.data.frame(sort2))
-				outputtemp1 <- reg.input(sort = sortreg, bone1 = sort1[3], side1 = sort1[2], bone2 = sort2[3], side2 = sort2[2], template = input$a)
-				direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], predlevel = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, oo = c(input$fileoutput3, input$fileoutput4), plotme = TRUE, testtype = input$regtesttypes)		
+				outputtemp1 <- reg.input(sort = sortreg, bone1 = sort1[3], side1 = sort1[2], bone2 = sort2[3], side2 = sort2[2], measurement_standard = input$a)
+				direc2 <- reg.multitest(plot = TRUE, sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput4), test = input$regtesttypes)		
 				
 				direc2tab <- rbind(direc2[[2]], direc2[[3]]) #combine exlcuded and not excluded for table display
 				
@@ -340,8 +340,8 @@
 				dft <- data.frame(dft)
 				colnames(dft)[1:3] <- c("ID","Side","Element")
 
-				wtf <- pm.input(bone=toString(input$zz), sort=dft, template=strsplit(input$a,"_")[[1]][2],tresh=1)                                      
-				direc2 <- pm.ttest(refdata = wtf[[2]], sortdata = wtf[[1]], stdout = FALSE, sessiontemp = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainst = input$testagainstsingle, oo = c(input$fileoutput3, input$fileoutput4), power = input$power1, plotme = TRUE)  
+				wtf <- pm.input(bone=toString(input$zz), sort=dft, measurement_standard=strsplit(input$a,"_")[[1]][2],threshold=1)                                      
+				direc2 <- pm.ttest(plot = TRUE, ref = wtf[[2]], sort = wtf[[1]], stdout = FALSE, sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput4), power = input$power1)  
 				
 				tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 				output$table2 <- DT::renderDataTable({
@@ -356,7 +356,7 @@
 			if(all(is.na(dft[,7:length(dft)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				dft <- data.frame(dft)
 				wtf <- art.input(bone=toString(input$zz), sort=dft)
-				direc2 <- art.ttest(refdata = wtf[[2]], sortdata = wtf[[1]], stdout = FALSE, sessiontemp = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainst = input$testagainstsingle, oo = c(input$fileoutput3, input$fileoutput4), power = input$power1, plotme = TRUE)           
+				direc2 <- art.ttest(plot = TRUE, ref = wtf[[2]], sort = wtf[[1]], stdout = FALSE, sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput4), power = input$power1)           
 				
 				tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 				

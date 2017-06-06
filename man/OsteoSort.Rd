@@ -13,4 +13,3 @@ This function starts the OsteoSort app with shiny
 OsteoSort()
 }
 \keyword{OsteoSort}
-
