@@ -82,7 +82,7 @@
 		#if(nrow(rightimages) > limit2) {} #Do not run if limit
 
 		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, smooth_iterations = input$nsmooth2D, nharmonics = input$efaH2D)
-		out2 <- match.2d.invariant(outlinedata = out1,  hide_distances = input$hidedist, n_lowest_distances = input$shortlistn, oo = input$fileoutput2D, sessiontempdir = sessiontemp, stdout = FALSE, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
+		out2 <- match.2d.invariant(outlinedata = out1,  hide_distances = input$hidedist, n_lowest_distances = input$shortlistn, output_options = input$fileoutput2D, sessiontempdir = sessiontemp, stdout = FALSE, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
 		direc <- out2[[3]]
 		jpeg(paste("graph", ".jpeg", sep=""), height = 1200, width = 1200)
 		dev.control('enable')
@@ -101,21 +101,10 @@
 
 
 
-#		aa <- as.matrix(out2[[2]][,1])
-#		bb <- as.matrix(out2[[2]][,2])
-#		cn <- 0
-#		for(x in 1:nrow(aa)) {
-#			if(aa[x] == bb[x]) {
-#				cn <- cn + 1
-#			}
-#		}
-
-#		ll <- out2[[4]]
-
-#		TP <- (ll - cn) - nrow(aa) #is this correct?
+		output$contents2D <- renderUI({
+			HTML(paste("Potential Matches: ", nrow(as.matrix(out2[[2]][,1]))))
+		})
 		
-		
-
 
 		files <- list.files(direc, recursive = TRUE)
 		setwd(direc)

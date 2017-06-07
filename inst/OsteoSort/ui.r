@@ -1475,9 +1475,9 @@ shinyUI(
 							width = 2
 						),
 						mainPanel(
+							uiOutput("contents2D"),
 							tabsetPanel(id="tabSelected",
 								tabPanel("Starting Mean",
-									uiOutput("contents2D"),
 									imageOutput('meanImage')
 								),
 								tabPanel("Registered Graph",
@@ -1504,7 +1504,6 @@ shinyUI(
 										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
 										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
 										checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE),
-										checkboxInput(inputId = "research2D", label = "Calculate research statistics", value = FALSE),
 										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
 										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff"), selected = "Segmented-Hausdorff"),
 										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 2, step = 1),
