@@ -11,7 +11,7 @@ library(shinyRGL)
 library(rgl)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.0.1"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.0.2"),
 	
 	
 		tabPanel("Help",
@@ -1492,21 +1492,28 @@ shinyUI(
 							bsModal("settings2DD", title = "Settings", trigger = "settings2D", size = "large", 
 								tabsetPanel(id="tabSelected2",
 									tabPanel("Output Parameters",
-										checkboxInput(inputId = "fileoutput2D", label = "Output to excel files ", value = TRUE)
-						 			),
+										checkboxInput(inputId = "fileoutput2Dexcel", label = "Output to excel files ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)						 			
+									),
 						 			
 									tabPanel("Statistical Parameters",
-										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=2, step=1),
+										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1),
 										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
-										sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=400, step=1),
-										sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=1, max=1000, value=200, step=1),
+										sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1),
+										sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1),
 										sliderInput(inputId = "nsmooth2D", label = "Number of smoothing iterations in Elliptical Fourier Analysis", min=1, max=100, value=1, step=1),
 										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
 										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
 										checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE),
 										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
-										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff"), selected = "Segmented-Hausdorff"),
-										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 2, step = 1),
+										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff", "Procrustes"), selected = "Segmented-Hausdorff"),
+										
+					 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
+										uiOutput('n_regions')
+									),
+
+										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 1, step = 1),
 										checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)
 									),
 									tabPanel("Computational Parameters",

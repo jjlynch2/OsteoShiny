@@ -214,7 +214,7 @@
 			if(is.null(threshold)) {threshold <- 1}   
 
 			wtf <- pm.input(bone=toString(input$bone), sort=tempdata1, measurement_standard='supplemental',threshold=threshold, measurements=measurements)                                	      
-			direc2 <- pm.ttest(refdata = wtf[[2]], sortdata = wtf[[1]], stdout = FALSE, sessiontempdir=sessiontemp, alphalevel = input$alphalevel, absolutevalue = input$absolutevalue, testagainst = input$testagainst, output_options = c(input$fileoutput1, input$fileoutput2), cores = numbercoresglobal$ncore, power = input$power2)
+			direc2 <- pm.ttest(ref = wtf[[2]], sort = wtf[[1]], stdout = FALSE, sessiontempdir=sessiontemp, alphalevel = input$alphalevel, absolutevalue = input$absolutevalue, testagainst = input$testagainst, output_options = c(input$fileoutput1, input$fileoutput2), cores = numbercoresglobal$ncore, power = input$power2)
 			ll <- nrow(direc2[[2]]) + nrow(direc2[[3]])           
 		}
 		if(input$bone == 'hu' | input$bone == 'hr' | input$bone == 'hs' | input$bone == "hss" | input$bone == 'fi' | input$bone == 'ft' | input$bone == 'ftt') {
@@ -332,7 +332,7 @@
 			TN <- co
 
 		
-			co <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+FN), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+TN), digits = 3), "<br/>", sep = "")
+			co <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+FN), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+FP), digits = 3), "<br/>", sep = "")
 			 
 		}
 		

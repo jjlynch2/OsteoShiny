@@ -29,8 +29,11 @@
 	output$ncores2D <- renderUI({
 		sliderInput(inputId = "ncores2D", label = "Number of cores", min=1, max=detectCores(), value=1, step =1)
 	})
-			
 
+
+	output$n_regions <- renderUI({			
+		sliderInput(inputId = "n_regions", label = "Number of regions", min = 2, max = input$npoints2D, value = 6, step = 1)										
+	})
 	#renders temporary mean
 	observeEvent(input$rightimages, {
 		output$mspec <- renderUI({
@@ -82,7 +85,7 @@
 		#if(nrow(rightimages) > limit2) {} #Do not run if limit
 
 		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, smooth_iterations = input$nsmooth2D, nharmonics = input$efaH2D)
-		out2 <- match.2d.invariant(outlinedata = out1,  hide_distances = input$hidedist, n_lowest_distances = input$shortlistn, output_options = input$fileoutput2D, sessiontempdir = sessiontemp, stdout = FALSE, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
+		out2 <- match.2d.invariant(outlinedata = out1, hide_distances = input$hidedist, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, stdout = FALSE, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
 		direc <- out2[[3]]
 		jpeg(paste("graph", ".jpeg", sep=""), height = 1200, width = 1200)
 		dev.control('enable')
