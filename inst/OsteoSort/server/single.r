@@ -287,7 +287,7 @@
 		}
 		if(input$zz == 'ft') {
 			dft <- cbind(input$ID1, input$ID2, input$side1, input$side1, "Femur", "Tibia", input$b631, input$b701)
-			colnames(dft) <- c("X-#", "X-#", "Side", "Side","Element", "Element", "Fem_04", "Tib_02")
+			colnames(dft) <- c("X-#", "X-#", "Side", "Side","Element", "Element", "Fem_03", "Tib_02")
 			testt <- 'art'     
 		}
 		if(input$zz == 'fi') {
