@@ -11,14 +11,14 @@ library(shinyRGL)
 library(rgl)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.0.2"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.0.3"),
 	
 	
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into three primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting is still under development and research, but will provide single and multiple pairwise comparisons for pair analysis. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p>The input of measurement data for the multiple pairwise comparisons and outlier analyses uses a standardized template in the form of a comma delineated file (.CSV), which can be downloaded below."),
 					HTML("<h1>Downloads</h1><hr /><p>&nbsp;</p>"),
 					downloadButton('standardtemplate', 'Standard template'),
-					downloadButton('coraguide', 'Help Guide')
+					downloadButton('osteoguide', 'Help Guide')
 		),
 		
 		navbarMenu("Osteometric sorting",
@@ -1208,7 +1208,8 @@ shinyUI(
 							tabsetPanel(id="tabSelected2",
 					 		
 							tabPanel("Output Parameters",
-								checkboxInput(inputId = "fileoutput3", label = "Output excel file and plot", value = TRUE)
+								checkboxInput(inputId = "fileoutput3", label = "Output excel file", value = TRUE),
+								checkboxInput(inputId = "fileoutput333", label = "Output plot", value = TRUE)
 					 		),
 					 		tabPanel("Statistical Parameters",
 								checkboxInput(inputId = "regtesttypes", label = "PCA-CCA-Regression", value = TRUE),
@@ -1490,7 +1491,7 @@ shinyUI(
 							bsModal("settings2DD", title = "Settings", trigger = "settings2D", size = "large", 
 								tabsetPanel(id="tabSelected2",
 									tabPanel("Output Parameters",
-										checkboxInput(inputId = "fileoutput2Dexcel", label = "Output to excel files ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dexcel", label = "Output excel files ", value = TRUE),
 										checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot ", value = TRUE),
 										checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)						 			
 									),
@@ -1571,6 +1572,10 @@ shinyUI(
 					
 					 	bsModal("settingsoutlier", title = "Settings", trigger = "settings3", size = "large", 
 					 		tabsetPanel(id="tabSelected2",
+								tabPanel("Output Paramters",
+									checkboxInput(inputId = "fileoutputl1", label = "Output excel file", value = TRUE),
+									checkboxInput(inputId = "fileoutputl2", label = "Output plot", value = TRUE)
+								),	
 					 			tabPanel("Measurements",
 					 						fluidRow(
 					 							column(12,
@@ -1675,7 +1680,11 @@ shinyUI(
 					
 					 	bsModal("settingsoutlier4", title = "Settings", trigger = "settings4", size = "large", 
 					 		tabsetPanel(id="tabSelected2",
-					 			tabPanel("Measurements",
+								tabPanel("Output Paramters",
+									checkboxInput(inputId = "fileoutputstature1", label = "Output excel file", value = TRUE),
+									checkboxInput(inputId = "fileoutputstature2", label = "Output plot", value = TRUE)
+								),					 			
+								tabPanel("Measurements",
 					 						fluidRow(
 												column(12,
 													radioButtons(inputId = 'humerusmeasurements4', 'Humerus', c('Hum_01'), inline = TRUE, selected = 'Hum_01')
