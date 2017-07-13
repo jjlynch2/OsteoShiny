@@ -1208,7 +1208,7 @@ shinyUI(
 							tabsetPanel(id="tabSelected2",
 					 		
 							tabPanel("Output Parameters",
-								checkboxInput(inputId = "fileoutput3", label = "Output to excel files", value = TRUE)
+								checkboxInput(inputId = "fileoutput3", label = "Output excel file and plot", value = TRUE)
 					 		),
 					 		tabPanel("Statistical Parameters",
 								checkboxInput(inputId = "regtesttypes", label = "PCA-CCA-Regression", value = TRUE),
@@ -1266,7 +1266,7 @@ shinyUI(
 					 	bsModal("settings", title = "Settings", trigger = "settings1", size = "large", 
 					 		tabsetPanel(id="tabSelected2",
 					 			tabPanel("Output Parameters",
-									checkboxInput(inputId = "fileoutput1", label = "Output to excel files ", value = TRUE)
+									checkboxInput(inputId = "fileoutput1", label = "Output excel files", value = TRUE)
 					 			),
 					 			tabPanel("Measurements",
 
