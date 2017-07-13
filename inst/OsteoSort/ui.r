@@ -1161,7 +1161,7 @@ shinyUI(
 								fluidRow(
 								h4("Femur_Tibia"),
 									column(4,
-										numericInput(inputId = 'b631', label = 'Fem_03', value = '')								
+										numericInput(inputId = 'b6311', label = 'Fem_03', value = '')								
 									),
 									column(4,							
 										numericInput(inputId = 'b701', label = 'Tib_02', value = '')	
