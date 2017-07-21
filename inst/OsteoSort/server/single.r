@@ -381,8 +381,9 @@
 print(files)
 print(direc)
 print(sessiontemp)
+
 			nooutput <- lapply(files, function(x) {
-				zip(zipfile = direc, files = x)
+				zip(zipfile = direc, files = 			paste(sessiontemp,"/",direc,"/",x, sep=""))
 			})
 
 
