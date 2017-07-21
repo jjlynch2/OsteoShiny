@@ -373,13 +373,14 @@
 
 		removeModal()
 		if(testt != "start" && input$fileoutput3 || testt != "start" && input$fileoutput333) {  
-print("zipping")                     
 			#Zip and download handler
 			direc <- direc2[[1]]
 			setwd(sessiontemp)
 			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
-
+print(files)
+print(direc)
+print(sessiontemp)
 			nooutput <- lapply(files, function(x) {
 				zip(zipfile = direc, files = x)
 			})
