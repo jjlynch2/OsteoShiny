@@ -63,7 +63,7 @@ shinyServer(function(input, output, session) {
 			
 	output$osteoguide <- downloadHandler(
 		filename <- function() {
-			"OsteoSort_User_Manual_v1.0.3.pdf"
+			"OsteoSort_User_Manual_13_July_2017.pdf"
 		},
 		content <- function(file) {
 			file.copy(system.file("extdata", 'OsteoSort_User_Manual_13_July_2017.pdf', package = "OsteoShiny"), file)                  
