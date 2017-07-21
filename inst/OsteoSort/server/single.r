@@ -370,9 +370,10 @@
 				output$plotsingle <- renderPlot({direc2[[4]]})
 		 }
 
-		for(i in 10) { gc() } #clean up 
+
 		removeModal()
-		if(testt != "start" && input$fileoutput3 || testt != "start" && input$fileoutput333) {                       
+		if(testt != "start" && input$fileoutput3 || testt != "start" && input$fileoutput333) {  
+print("zipping")                     
 			#Zip and download handler
 			direc <- direc2[[1]]
 			setwd(sessiontemp)
@@ -398,4 +399,7 @@
 			)
 		}
 		setwd(sessiontemp)
+
+		for(i in 10) { gc() } #clean up 
+
 	})  
