@@ -288,9 +288,9 @@
 
 			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
-			nooutput <- lapply(files, function(x) {
-				zip(zipfile = direc, files = x)
-			})
+
+			zip:::zip(zipfile = direc, files = files)
+
 			setwd(sessiontemp)
 
 			lent <- length(unique(rbind(as.matrix(direc2[[2]][1]),as.matrix(direc2[[2]][4])))) #fix for number of specimens matched

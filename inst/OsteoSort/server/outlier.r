@@ -101,7 +101,7 @@
 		direc6 <- outtemp[[1]] #direc temp
 		files <- list.files(direc6, recursive = TRUE)
 		setwd(direc6)
-		zip(zipfile = direc6, files = files)
+		zip:::zip(zipfile = direc6, files = files)
 		setwd(sessiontemp)  #restores session
 		
 		#Download handler       

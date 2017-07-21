@@ -111,9 +111,7 @@
 
 		files <- list.files(direc, recursive = TRUE)
 		setwd(direc)
-		nooutput <- lapply(files, function(x) {
-			zip(zipfile = direc, files = x)
-		})
+		zip:::zip(zipfile = direc, files = files)
 		setwd(sessiontemp)
 			#Download handler       
 		output$downloadData2D <- downloadHandler(
