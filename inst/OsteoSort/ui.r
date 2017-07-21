@@ -11,7 +11,7 @@ library(shinyRGL)
 library(rgl)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.0.3"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.0.4"),
 	
 	
 		tabPanel("Help",
