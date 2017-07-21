@@ -1193,7 +1193,7 @@ shinyUI(
 							actionButton("proc","Process"),
 							actionButton("settings2","Settings"),
 							downloadButton("downloadData2", "Save results"),
-							width=2
+							width=3
 						
 					),
 					
@@ -1253,7 +1253,7 @@ shinyUI(
 							actionButton("pro","Process"),
 							actionButton("settings1","Settings"),
 							downloadButton("downloadData", "Save results"),
-							width=2
+							width=3
 					),
 					mainPanel(
 						htmlOutput('contents'),
@@ -1471,7 +1471,7 @@ shinyUI(
 							actionButton("settings2D","Settings"),
 							actionButton("pro2D","Process"),
 							downloadButton("downloadData2D", "Save results"),
-							width = 2
+							width = 3
 						),
 						mainPanel(
 							uiOutput("contents2D"),
@@ -1551,7 +1551,7 @@ shinyUI(
 							actionButton("pro3","Process"),
 							actionButton("settings3","Settings"),
 							downloadButton("outlierdownload", "Save results"),
-							width=2
+							width=3
 					),
 					mainPanel(
 					
@@ -1659,7 +1659,7 @@ shinyUI(
 							actionButton("pro4","Process"),
 							actionButton("settings4","Settings"),
 							downloadButton("outlierdownload4", "Save results"),
-							width=2
+							width=3
 					),
 					mainPanel(
 					
