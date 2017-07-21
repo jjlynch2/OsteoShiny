@@ -378,12 +378,9 @@
 			setwd(sessiontemp)
 			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
-print(files)
-print(direc)
-print(sessiontemp)
 
 			nooutput <- lapply(files, function(x) {
-				zip(zipfile = direc, files = 			paste(sessiontemp,"/",direc,"/",x, sep=""))
+				zip(zipfile = direc, files = x)
 			})
 
 
