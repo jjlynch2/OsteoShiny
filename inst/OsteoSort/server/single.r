@@ -375,6 +375,7 @@
 		if(testt != "start" && input$fileoutput3 || testt != "start" && input$fileoutput333) {                       
 			#Zip and download handler
 			direc <- direc2[[1]]
+			setwd(sessiontemp)
 			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
 
