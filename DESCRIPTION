@@ -10,7 +10,8 @@ Depends:
     plyr,
     shinythemes,
     shinyRGL,
-    rgl
+    rgl,
+    DT
 License: GPL-2
 LazyData: false
 Imports:
