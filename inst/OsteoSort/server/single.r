@@ -380,7 +380,7 @@
 			setwd(direc)
 
 
-			zip:::zip(zipfile = direc, files = files)
+			zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
 
 
 			setwd(sessiontemp)  
