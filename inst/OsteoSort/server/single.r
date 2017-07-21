@@ -372,18 +372,23 @@
 
 		for(i in 10) { gc() } #clean up 
 		removeModal()
-		if(testt != "start" && input$fileoutput3) {                       
+		if(testt != "start" && input$fileoutput3 || testt != "start" && input$fileoutput333) {                       
 			#Zip and download handler
 			direc <- direc2[[1]]
 			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
-			zip(zipfile = direc, files = files)
+
+			nooutput <- lapply(files, function(x) {
+				zip(zipfile = direc, files = x)
+			})
+
+
 			setwd(sessiontemp)  
 			output$downloadData2 <- downloadHandler(
-				filename <- function() {
+				filename = function() {
 					paste("results.zip")
 				},      
-				content <- function(file) {
+				content = function(file) {
 					setwd(direc)
 					file.copy(paste(direc,'.zip',sep=''), file)  
 					setwd(sessiontemp)  

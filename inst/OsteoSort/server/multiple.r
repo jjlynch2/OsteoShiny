@@ -376,7 +376,7 @@
 				filename <- function() {
 				paste("results.zip")
 				},      
-				content <- function(file) {
+				content = function(file) {
 					setwd(direc)
 					file.copy(paste(direc,'.zip',sep=''), file)  
 					setwd(sessiontemp)    

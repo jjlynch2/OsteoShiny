@@ -1213,7 +1213,7 @@ shinyUI(
 					 		),
 					 		tabPanel("Statistical Parameters",
 								checkboxInput(inputId = "regtesttypes", label = "PCA-CCA-Regression", value = TRUE),
-								checkboxInput(inputId = "alphapred", label = "Use alpha levels for regression (Only apples to simple regression)", value = FALSE),
+								checkboxInput(inputId = "alphapred", label = "Use alpha levels for regression (Only applies to simple regression)", value = FALSE),
 								sliderInput(inputId = "alphalevels2", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
 								sliderInput(inputId = "alphalevels", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
 								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
