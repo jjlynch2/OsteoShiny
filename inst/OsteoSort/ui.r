@@ -11,11 +11,11 @@ library(shinyRGL)
 library(rgl)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.0.5"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.1.0"),
 	
 	
 		tabPanel("Help",
-					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into three primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting is still under development and research, but will provide single and multiple pairwise comparisons for pair analysis. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p>The input of measurement data for the multiple pairwise comparisons and outlier analyses uses a standardized template in the form of a comma delineated file (.CSV), which can be downloaded below."),
+					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into three primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting provides two-dimensional outline pair-matching analysis from photographs.  Development is underway for three-dimensional methods. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p>The input of measurement data for the multiple pairwise comparisons and outlier analyses uses a standardized template in the form of a comma delineated file (.CSV), which can be downloaded below."),
 					HTML("<h1>Downloads</h1><hr /><p>&nbsp;</p>"),
 					downloadButton('standardtemplate', 'Standard template'),
 					downloadButton('osteoguide', 'Help Guide')
@@ -1201,7 +1201,7 @@ shinyUI(
 					
 					mainPanel(
 						htmlOutput('contents2'),
-						plotOutput('plotsingle', width = 400, height = 400),
+						imageOutput('plotplot', width=400, height=400),
 						DT::dataTableOutput('table2'),
 
 						bsModal("settingssingle", title = "Settings", trigger = "settings2", size = "large", 
@@ -1267,7 +1267,8 @@ shinyUI(
 					 	bsModal("settings", title = "Settings", trigger = "settings1", size = "large", 
 					 		tabsetPanel(id="tabSelected2",
 					 			tabPanel("Output Parameters",
-									checkboxInput(inputId = "fileoutput1", label = "Output excel files", value = TRUE)
+									checkboxInput(inputId = "fileoutput1", label = "Output excel files", value = TRUE),
+									checkboxInput(inputId = "fileoutput1plot", label = "Output plot files (WARNING: This option will generate a plot for every combination of specimens)", value = FALSE)
 					 			),
 					 			tabPanel("Measurements",
 
@@ -1480,7 +1481,7 @@ shinyUI(
 									imageOutput('meanImage')
 								),
 								tabPanel("Registered Graph",
-									plotOutput("regplot", height = 1200, width = 1200)
+									imageOutput('plotplottd')
 								),
 								tabPanel("Results",
 					 				DT::dataTableOutput('table2D')
@@ -1509,6 +1510,7 @@ shinyUI(
 										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff", "Procrustes"), selected = "Segmented-Hausdorff"),
 										
 					 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
+										uiOutput('max_avg_distance'),
 										uiOutput('n_regions')
 									),
 
@@ -1523,11 +1525,7 @@ shinyUI(
 						)
 					)
 			),
-			tabPanel("3D comparison",
-				sidebarLayout(
-					sidebarPanel(width=2),
-					mainPanel(webGLOutput("myWebGL"))
-				)
+			tabPanel("3D comparison"
 
 			)
 			

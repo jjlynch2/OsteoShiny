@@ -319,56 +319,41 @@
 			if(all(is.na(reghum[,4:length(reghum)])) && all(is.na(reguln[,4:length(reguln)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				if(input$prr == "Bone1") { sort1 <- reghum; sort2 <- reguln}
 				if(input$prr == "Bone2") { sort2 <- reghum; sort1 <- reguln}
-				
-				#sort1 <- reghum
-				#sort2 <- reguln
 				sortreg <- rbind.fill(as.data.frame(sort1),as.data.frame(sort2))
 				outputtemp1 <- reg.input(sort = sortreg, bone1 = sort1[3], side1 = sort1[2], bone2 = sort2[3], side2 = sort2[2], measurement_standard = input$a)
-				direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = input$fileoutput3, test = input$regtesttypes, plot = input$fileoutput333)		
-				
-				direc2tab <- rbind(direc2[[2]], direc2[[3]]) #combine exlcuded and not excluded for table display
-				
+				direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput333), test = input$regtesttypes)					
+				direc2tab <- rbind(direc2[[2]], direc2[[3]]) #combine exlcuded and not excluded for table display				
 				output$table2 <- DT::renderDataTable({
 					DT::datatable(direc2tab, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)
 				})   
 				output$contents2 <- renderUI({  HTML(paste(""))})    
-				output$plotsingle <- renderPlot({direc2[[4]]})
 		}
 		if(testt == 'pair') {
 			if(all(is.na(left[,4:length(left)])) && all(is.na(right[,4:length(right)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				dft <- rbind(left,right) 
 				dft <- data.frame(dft)
 				colnames(dft)[1:3] <- c("ID","Side","Element")
-
 				wtf <- pm.input(bone=toString(input$zz), sort=dft, measurement_standard=strsplit(input$a,"_")[[1]][2],threshold=1)                                      
-				direc2 <- pm.ttest(ref = wtf[[2]], sort = wtf[[1]], stdout = FALSE, sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = input$fileoutput3, power = input$power1, plot = input$fileoutput333)  
-				
+				direc2 <- pm.ttest(ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)  
 				tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 				output$table2 <- DT::renderDataTable({
 					DT::datatable(tempDF, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)
 				})  
-				
 				output$contents2 <- renderUI({  HTML(paste(""))})  
-				#output$plotsingle <- renderUI({HTML(paste(""))})
-				output$plotsingle <- renderPlot({direc2[[4]]})
 		}      
 		if(testt == 'art') {
 			if(all(is.na(dft[,7:length(dft)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				dft <- data.frame(dft)
 				wtf <- art.input(bone=toString(input$zz), sort=dft)
-				direc2 <- art.ttest(ref = wtf[[2]], sort = wtf[[1]], stdout = FALSE, sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = input$fileoutput3, power = input$power1, plot = input$fileoutput333)           
-				
+				direc2 <- art.ttest(ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)           
 				tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
-				
-				
-				
 				output$table2 <- DT::renderDataTable({
 					DT::datatable(tempDF, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)
 				})   
-				                      
 				output$contents2 <- renderUI({  HTML(paste(""))})   
-				output$plotsingle <- renderPlot({direc2[[4]]})
 		 }
+
+
 
 
 		removeModal()
@@ -376,14 +361,24 @@
 			#Zip and download handler
 			direc <- direc2[[1]]
 			setwd(sessiontemp)
-			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
+			if(input$fileoutput333) {
+				nimages <- list.files()
+				nimages <- paste(sessiontemp, "/", direc, "/", nimages[grep(".jpg", nimages)], sep="")
 
+				output$plotplot <- renderImage({
+					list(src = nimages,
+						contentType = 'image/jpg',
+						width = 400,
+						height = 400,
+						alt = "A"
+					)
+				}, deleteFile = FALSE)
+			}
 
+			files <- list.files(recursive = TRUE)
 			zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
 
-
-			setwd(sessiontemp)  
 			output$downloadData2 <- downloadHandler(
 				filename = function() {
 					paste("results.zip")
@@ -391,7 +386,6 @@
 				content = function(file) {
 					setwd(direc)
 					file.copy(paste(direc,'.zip',sep=''), file)  
-					setwd(sessiontemp)  
 				},
 				contentType = "application/zip"
 			)

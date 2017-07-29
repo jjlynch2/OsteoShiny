@@ -18,7 +18,7 @@ shinyServer(function(input, output, session) {
 
 	################generates temporary directories for multiuser environment
 	workingdd <- getwd()
-	sessiontempd <- randomstring(n = 1, length = 12)
+	sessiontempd <- OsteoSort:::randomstring(n = 1, length = 12)
 	dir.create('tmp') #new for package
 	setwd('tmp')
 	dir.create(sessiontempd)

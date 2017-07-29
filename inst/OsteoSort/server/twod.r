@@ -34,6 +34,11 @@
 	output$n_regions <- renderUI({			
 		sliderInput(inputId = "n_regions", label = "Number of regions", min = 2, max = input$npoints2D, value = 6, step = 1)										
 	})
+
+	output$max_avg_distance <- renderUI({
+		radioButtons(inputId = "max_avg_distance", label = "Segmented-Hausdorff distance:", choices = c("maximum",  "average"), selected = "average")
+	})
+
 	#renders temporary mean
 	observeEvent(input$rightimages, {
 		output$mspec <- renderUI({
@@ -73,31 +78,43 @@
 			}
 		})
 		 	
+
+#need to add ifstatement to check if images have been uploaded to avoid crashing the app when hitting process without data
+
 		leftimages <- input$leftimages$datapath
 		rightimages <- input$rightimages$datapath
 
 		file.copy(input$leftimages$datapath, input$leftimages$name)
 		file.copy(input$rightimages$datapath, input$rightimages$name)
 
-		
+		if(length(input$leftimages$name) < 2) {}
+		if(length(input$rightimages$name) < 2) {}
 
-		#if(nrow(leftimages) > limit1) {} #Do not run if limit
-		#if(nrow(rightimages) > limit2) {} #Do not run if limit
 
 		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, smooth_iterations = input$nsmooth2D, nharmonics = input$efaH2D)
-		out2 <- match.2d.invariant(outlinedata = out1, hide_distances = input$hidedist, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, stdout = FALSE, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
-		direc <- out2[[3]]
-		jpeg(paste("graph", ".jpeg", sep=""), height = 1200, width = 1200)
-		dev.control('enable')
-		plot(meann, col="white", xlim=c(min(homolog),max(homolog)), ylim=c(max(homolog),min(homolog)), xlab="", ylab="")
-		for(a in 1:dim(homolog)[3]) {
-			points(homolog[,,a], col=a)	
-		}
-		points(meann, col="black", bg="blue", pch=23, cex=2)
-		plotted <- recordPlot()
-		dev.off()
 
-		output$regplot <- renderPlot(plotted)
+		out2 <- match.2d.invariant(outlinedata = out1, hide_distances = input$hidedist, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
+		direc <- out2[[3]]
+		
+
+			setwd(sessiontemp)
+			setwd(direc)
+			if(input$fileoutput2Dplot) {
+				nimages <- list.files()
+				nimages <- paste(sessiontemp, "/", direc, "/", nimages[grep(".png", nimages)], sep="")
+
+				output$plotplottd <- renderImage({
+					list(src = nimages,
+						contentType = 'image/png',
+						alt = "A"
+					)
+				}, deleteFile = FALSE)
+			}
+
+
+
+
+
 		output$table2D <- DT::renderDataTable({
 			DT::datatable(out2[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 		})
@@ -107,12 +124,12 @@
 		output$contents2D <- renderUI({
 			HTML(paste("Potential Matches: ", nrow(as.matrix(out2[[2]][,1]))))
 		})
-		
 
+		setwd(sessiontemp)
 		files <- list.files(direc, recursive = TRUE)
 		setwd(direc)
 		zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
-		setwd(sessiontemp)
+
 			#Download handler       
 		output$downloadData2D <- downloadHandler(
 			filename <- function() {
