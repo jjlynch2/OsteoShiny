@@ -7,8 +7,6 @@ options(warn = -1)
 library(shiny)
 library(shinyBS)
 library(shinythemes)
-library(shinyRGL)
-library(rgl)
 #Navigation bar interface
 shinyUI(
 	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.1.0"),
