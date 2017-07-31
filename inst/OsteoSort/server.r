@@ -22,14 +22,6 @@ shinyServer(function(input, output, session) {
 	dir.create(sessiontempd)
 	setwd(sessiontempd)
 	sessiontemp <- getwd()
-	#####temporary render for 3D page
-
-	g <- read.csv(system.file("extdata", 'clav1.xyz', package = "OsteoShiny"), sep=" ", header = FALSE)
-	output$myWebGL <- renderWebGL ({
-		points3d(g[,1], g[,2], g[,3], col="blue")
-		axes3d()
-	})
-	#####temporary render for 3D page
 
 
 	#defines which modules to include
