@@ -1191,7 +1191,7 @@ shinyUI(
 							actionButton("proc","Process"),
 							actionButton("settings2","Settings"),
 							downloadButton("downloadData2", "Save results"),
-							width=3
+							width=4
 						
 					),
 					
