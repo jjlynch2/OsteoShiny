@@ -63,18 +63,15 @@ shinyServer(function(input, output, session) {
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
 			icon_name <- "OsteoSort.bat"
-               excc <- "R.exe"
+		cat(paste(gsub("/","\\\\", file.path(R.home("bin"), "R.exe")), "-e", "'library(OsteoShiny);OsteoSort()'", sep=" "), file = paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), icon_name, sep = "/"))
 		}
 		if(Sys.info()[['sysname']] != "Windows") {
 			icon_name <- "OsteoSort.sh"
 			excc <- "R"
-		}
-
-		cat(paste(file.path(R.home("bin"), excc), "-e", "'library(OsteoShiny);OsteoSort()'", sep=" "), file = paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), icon_name, sep = "/"))
-
-		if(Sys.info()[['sysname']] != "Windows") {
+			cat(paste(file.path(R.home("bin"), "R"), "-e", "'library(OsteoShiny);OsteoSort()'", sep=" "), file = paste(file.path(path.expand("~"), "Desktop"), icon_name, sep = "/"))
 			Sys.chmod(paste(file.path(path.expand("~"), "Desktop"), icon_name, sep="/"), mode = "0777", use_umask = TRUE)
 		}
+
 	})
 	
 
