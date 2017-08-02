@@ -11,12 +11,11 @@ API changes:
 1. Removed plotme function in favor of generating plots directly in the OsteoSort package.
 
 Document changes:
-1. Updated help guide with grammatical changes and 2D method documentation.
+1. Updated help guide with grammatical changes.
 2. Updated all man pages for argument changes.
 
 Module changes:
 1. Removed 3D demo due to javascript bug with the example.
-2. 2D method is officially released as a method under the osteoshape module.
 
 Other changes:
 1. Added an action button to create desktop icon to start OsteoShiny 
