@@ -53,13 +53,29 @@ shinyServer(function(input, output, session) {
 			
 	output$osteoguide <- downloadHandler(
 		filename <- function() {
-			"OsteoSort_User_Manual_13_July_2017.pdf"
+			"OsteoSort_User_Manual_1AUGUST2017.pdf"
 		},
 		content <- function(file) {
-			file.copy(system.file("extdata", 'OsteoSort_User_Manual_13_July_2017.pdf', package = "OsteoShiny"), file)                  
+			file.copy(system.file("extdata", 'OsteoSort_User_Manual_1AUGUST2017.pdf', package = "OsteoShiny"), file)                  
 		},
 	)  			
-			
+
+	observeEvent(input$Create_Desktop_Icon, {
+		if(Sys.info()[['sysname']] == "Windows") {
+			icon_name <- "OsteoSort.bat"
+               excc <- "R.exe"
+		}
+		if(Sys.info()[['sysname']] != "Windows") {
+			icon_name <- "OsteoSort.sh"
+			excc <- "R"
+		}
+
+		cat(paste(file.path(R.home("bin"), excc), "-e", "'library(OsteoShiny);OsteoSort()'", sep=" "), file = paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), icon_name, sep = "/"))
+
+		if(Sys.info()[['sysname']] != "Windows") {
+			Sys.chmod(paste(file.path(path.expand("~"), "Desktop"), icon_name, sep="/"), mode = "0777", use_umask = TRUE)
+		}
+	})
 	
 
 })

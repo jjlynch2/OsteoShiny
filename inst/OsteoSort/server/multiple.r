@@ -289,22 +289,26 @@
 			files <- list.files(direc, recursive = TRUE)
 			setwd(direc)
 
-			zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
+
+				zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files[1], compression = 1)
+			for(file_na in files[-1]) {
+				zip:::zip_append(zipfile = paste(direc,'.zip',sep=''), files = file_na, compression = 1)
+			}
 
 			setwd(sessiontemp)
 
 			lent <- length(unique(rbind(as.matrix(direc2[[2]][1]),as.matrix(direc2[[2]][4])))) #fix for number of specimens matched
-			if(input$research) { lent <- lent * 2} ################FIX for statistics having same ID.
+			if(input$research) { lent <- lent * 2} ################FIX for statistics having same id.
 		}
 		temp1 <- direc2[[2]][1]
 		temp2 <- direc2[[2]][4]
 		temp3 <- direc2[[3]][1]
 		temp4 <- direc2[[3]][4]
-		#Forces ID name 
-		names(temp1) <- "ID"
-		names(temp2) <- "ID"
-		names(temp3) <- "ID"
-		names(temp4) <- "ID"
+		#Forces id name 
+		names(temp1) <- "id"
+		names(temp2) <- "id"
+		names(temp3) <- "id"
+		names(temp4) <- "id"
 		co <- ""
 
 		
@@ -333,7 +337,7 @@
 
 		
 			co <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+TP), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+FP), digits = 3), "<br/>", sep = "")
-			 
+
 		}
 		
 		#
@@ -354,7 +358,7 @@
 		
 		
 		samplesize <- nrow(unique(rbind(temp1,temp2,temp3,temp4))) 
-		if(input$research) { samplesize <- samplesize * 2} ################FIX for statistics having same ID.
+		if(input$research) { samplesize <- samplesize * 2} ################FIX for statistics having same id.
 
 		#Output results                  
 			output$contents <- renderUI({
