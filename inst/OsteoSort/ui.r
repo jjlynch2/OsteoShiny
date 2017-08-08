@@ -9,7 +9,7 @@ library(shinyBS)
 library(shinythemes)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.1.0"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.1.1"),
 	
 	
 		tabPanel("Help",

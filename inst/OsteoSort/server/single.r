@@ -49,7 +49,7 @@
 			}
 			if(input$zz == 'hufr') {
 				reghum <- cbind(id=input$ID1, Side=input$hufrside1, Element="humerus", Hum_01=input$hufr40, Hum_02= input$hufr41, Hum_03=input$hufr42, Hum_04=input$hufr43, Hum_05=input$hufr44)
-				reguln <- cbind(id=input$ID2, Side=input$hufrside2, Element="femur", Fem_01=input$hufr60,Fem_02=input$hufr61,Fem_03=input$hufr62,Fem_04=input$hufr63,Fem_06=input$hufr64,Fem_05=input$hufr65,Fem_07=input$hufr66)
+				reguln <- cbind(id=input$ID2, Side=input$hufrside2, Element="femur", Fem_01=input$hufr60,Fem_02=input$hufr61,Fem_03=input$hufr62,Fem_04=input$hufr63,Fem_05=input$hufr65,Fem_06=input$hufr64,Fem_07=input$hufr66)
 				testt <- 'reg'
 			}
 			if(input$zz == 'hutr') {
