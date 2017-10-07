@@ -9,11 +9,11 @@ library(shinyBS)
 library(shinythemes)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.1.1"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.2.1"),
 	
 	
 		tabPanel("Help",
-					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into three primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting provides two-dimensional outline pair-matching analysis from photographs.  Development is underway for three-dimensional methods. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p>The input of measurement data for the multiple pairwise comparisons and outlier analyses uses a standardized template in the form of a comma delineated file (.CSV), which can be downloaded below."),
+					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into three primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting provides two-dimensional outline pair-matching analysis from photographs.  Development is underway for three-dimensional methods. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p><p>Antemortem sorting allows statistical testing of the strength of evidence between a known antemortem stature and a potentially associated postmortem element.</p>The input of measurement data for the multiple pairwise comparisons and outlier analyses uses a standardized template in the form of a comma delineated file (.CSV), which can be downloaded below."),
 					HTML("<h1>Downloads</h1><hr /><p>&nbsp;</p>"),
 					downloadButton('standardtemplate', 'Standard template'),
 					downloadButton('osteoguide', 'Help Guide'),
@@ -1641,6 +1641,7 @@ shinyUI(
 				sidebarLayout(
 					sidebarPanel(					
 							selectInput('sep4', 'Separator', c(Comma=',', Semicolon=';', Tab='\t'),','),
+							radioButtons(inputId = 'metric_type2', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'in'),
 							uiOutput("testtype4"),
 							selectInput("outlierside4", "Side", c(Left='Left', Right='Right', Both='Both'), 'Both'),
 							
@@ -1727,7 +1728,86 @@ shinyUI(
 						)
 
 					)
+				))
+		),		
+	
+
+
+
+
+
+
+
+
+		navbarMenu("Antemortem sorting",		
+			tabPanel("Stature",
+				sidebarLayout(
+					sidebarPanel(	
+
+
+							uiOutput("antestat_test"),
+								radioButtons(inputId = 'metric_type', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'in'),
+								selectInput("antestat_population", "Population", c(DPAA_any_male = "DPAA-any-male", DPAA_white_male = "DPAA-white-male", DPAA_black_male = "DPAA-black-male",FDB_20th_FStat_any='20th-FStat-any', FDB_20th_FStat_white_male='20th-FStat-white-male', FDB_20th_FStat_white_female='20th-FStat-white-female', FDB_20th_FStat_black_male='20th-FStat-black-male', FDB_20th_FStat_black_female='20th-FStat-black-female', Trotter_any_male='Trotter-any-male', Trotter_black_male='Trotter-black-male', Trotter_white_male='Trotter-white-male'), 'Trotter-any-male'),
+									fluidRow(
+										column(4,
+											conditionalPanel(condition = "input.antestat == 'humerus'",
+												numericInput(inputId = 'hu_antestat', label = 'Hum_01', value = '')																															
+											),
+											conditionalPanel(condition = "input.antestat == 'radius'",
+												numericInput(inputId = 'ra_antestat', label = 'Rad_01', value = '')																															
+											),
+											conditionalPanel(condition = "input.antestat == 'ulna'",
+												numericInput(inputId = 'ul_antestat', label = 'Uln_01', value = '')																															
+											),
+											conditionalPanel(condition = "input.antestat == 'femur'",
+												numericInput(inputId = 'fe_antestat', label = 'Fem_01', value = '')																															
+											),
+											conditionalPanel(condition = "input.antestat == 'tibia'",
+												numericInput(inputId = 'ti_antestat', label = 'Tib_01', value = '')																															
+											),
+											conditionalPanel(condition = "input.antestat == 'fibula'",
+												numericInput(inputId = 'fi_antestat', label = 'Fib_01', value = '')																															
+											)
+										),
+										column(4,
+											numericInput(inputId = 'antestat_input', label = 'Antemortem stature', value = '')							
+
+										)
+									),
+						
+				
+							actionButton("proantestat","Process"),
+							actionButton("settingsante","Settings"),
+							downloadButton("downloadantestat", "Save results"),
+							width=4
+					),
+					mainPanel(
+					
+						htmlOutput('antestat_output'),
+						plotOutput('antestat_plot', width = 400, height = 400),
+					
+						DT::dataTableOutput('antestat_table'),
+
+					 	bsModal("settingsante2", title = "Settings", trigger = "settingsante", size = "large", 
+					 		tabsetPanel(id="tabSelected2",
+								tabPanel("Output Paramters",
+									checkboxInput(inputId = "fileoutputant1", label = "Output excel file", value = TRUE),
+									checkboxInput(inputId = "fileoutputant2", label = "Output plot", value = TRUE)
+								),	
+
+								tabPanel("Statistical Parameters",
+									sliderInput(inputId = "predlevelantestat", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01)
+								)
+							)
+						)
+
+					)
 				)
-		)		
-		
-)))
+
+			)
+		)
+
+
+
+
+))

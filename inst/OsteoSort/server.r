@@ -31,6 +31,7 @@ shinyServer(function(input, output, session) {
 	source("../../server/outlier.r", local=TRUE) ###imports outlier comparison server code
 	source("../../server/stature.r", local=TRUE) ###imports stature outlier comparison server code
 	source("../../server/twod.r", local=TRUE) ###imports two-dimensional scomparison server code
+	source("../../server/antestat.r", local=TRUE) ###imports two-dimensional scomparison server code
 	################stops the shiny app when closing session
 	session$onSessionEnded(function() { stopApp()})
 
