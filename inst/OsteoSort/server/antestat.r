@@ -20,7 +20,7 @@
 		     
 		     }
 		})
-		
+
 		if(input$antestat == "humerus") {pmm <- input$hu_antestat}
 		if(input$antestat == "radius") {pmm <- input$ra_antestat}
 		if(input$antestat == "ulna") {pmm <- input$ul_antestat}
@@ -28,43 +28,45 @@
 		if(input$antestat == "tibia") {pmm <- input$ti_antestat}
 		if(input$antestat == "fibula") {pmm <- input$fi_antestat}
 
-		#calls sorting function
-		outtemp <- antestat(metric = input$metric_type, antemortem_stature = input$antestat_input, postmortem_measurement = pmm, prediction_interval = input$predlevelantestat, population = input$antestat_population, output_options = c(input$fileoutputant1, input$fileoutputant2), sessiontempdir = sessiontemp)
+		if(is.numeric(input$antestat_input) && is.numeric(pmm)) {
+			#calls sorting function
+			outtemp <- antestat(bone = input$antestat, metric = input$metric_type, antemortem_stature = input$antestat_input, postmortem_measurement = pmm, prediction_interval = input$predlevelantestat, population = input$antestat_population, output_options = c(input$fileoutputant1, input$fileoutputant2), sessiontempdir = sessiontemp)
 
 		
-		#display output
-		output$antestat_output <- renderUI({
-				HTML(paste("Statistical analysis complete.", '<br/>'))
-		})   
+			#display output
+			output$antestat_output <- renderUI({
+					HTML(paste("Statistical analysis complete.", '<br/>'))
+			})   
 
 		
-		output$antestat_table <- DT::renderDataTable({
-			DT::datatable(outtemp[[2]], options = list(lengthMenu = c(1), pageLength = 10), rownames = FALSE)
-		})
+			output$antestat_table <- DT::renderDataTable({
+				DT::datatable(outtemp[[2]], options = list(lengthMenu = c(1), pageLength = 10), rownames = FALSE)
+			})
 
-		output$antestat_plot <- renderPlot({outtemp[[3]]})
-		removeModal() #removes modal
-		
-		#Zip handler       
-		direc6 <- outtemp[[1]] #direc temp
-		files <- list.files(direc6, recursive = TRUE)
-		setwd(direc6)
-		zip:::zip(zipfile = paste(direc6,'.zip',sep=''), files = files)
-
-		setwd(sessiontemp)  #restores session
-		
-		#Download handler       
-		output$downloadantestat <- downloadHandler(
-			filename <- function() {
-				paste("results.zip")
-			},      
-			content <- function(file) {
+			output$antestat_plot <- renderPlot({outtemp[[3]]})
+			if(input$fileoutputant1 || input$fileoutputant2) {
+				#Zip handler       
+				direc6 <- outtemp[[1]] #direc temp
+				files <- list.files(direc6, recursive = TRUE)
 				setwd(direc6)
-				file.copy(paste(direc6,'.zip',sep=''), file) 
-				setwd(sessiontemp)  
-			},
-			contentType = "application/zip"
-		)
+				zip:::zip(zipfile = paste(direc6,'.zip',sep=''), files = files)
 
-		setwd(sessiontemp) #restores session
+				setwd(sessiontemp)  #restores session
+		
+				#Download handler       
+				output$downloadantestat <- downloadHandler(
+					filename <- function() {
+						paste("results.zip")
+					},      
+					content <- function(file) {
+						setwd(direc6)
+						file.copy(paste(direc6,'.zip',sep=''), file) 
+						setwd(sessiontemp)  
+					},
+					contentType = "application/zip"
+				)
+			}
+		}
+			setwd(sessiontemp) #restores session
+			removeModal() #removes modal
 	})
