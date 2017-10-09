@@ -25,13 +25,13 @@ shinyServer(function(input, output, session) {
 
 
 	#defines which modules to include
-	#source("../../server/twod.r", local=TRUE) ###imports two D server code
 	source("../../server/multiple.r", local=TRUE) ###imports multiple comparison server code
 	source("../../server/single.r", local=TRUE) ###imports single comparison server code
 	source("../../server/outlier.r", local=TRUE) ###imports outlier comparison server code
 	source("../../server/stature.r", local=TRUE) ###imports stature outlier comparison server code
 	source("../../server/twod.r", local=TRUE) ###imports two-dimensional scomparison server code
-	source("../../server/antestat.r", local=TRUE) ###imports two-dimensional scomparison server code
+	source("../../server/antestat_single.r", local=TRUE) ###imports two-dimensional scomparison server code
+	source("../../server/antestat_multiple.r", local=TRUE) ###imports two-dimensional scomparison server code
 	################stops the shiny app when closing session
 	session$onSessionEnded(function() { stopApp()})
 

@@ -1739,17 +1739,20 @@ shinyUI(
 
 
 
-		navbarMenu("Antemortem sorting",		
-			tabPanel("Stature",
+		navbarMenu("Antemortem sorting",	
+
+
+			tabPanel("Single stature",
 				sidebarLayout(
 					sidebarPanel(	
 
 
 							uiOutput("antestat_test"),
-								radioButtons(inputId = 'metric_type', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'in'),
+								radioButtons(inputId = 'metric_type', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'cm'),
 								selectInput("antestat_population", "Population", c(DPAA_any_male = "DPAA-any-male", DPAA_white_male = "DPAA-white-male", DPAA_black_male = "DPAA-black-male",FDB_20th_FStat_any='20th-FStat-any', FDB_20th_FStat_white_male='20th-FStat-white-male', FDB_20th_FStat_white_female='20th-FStat-white-female', FDB_20th_FStat_black_male='20th-FStat-black-male', FDB_20th_FStat_black_female='20th-FStat-black-female', Trotter_any_male='Trotter-any-male', Trotter_black_male='Trotter-black-male', Trotter_white_male='Trotter-white-male'), 'Trotter-any-male'),
 									fluidRow(
 										column(4,
+											textInput(inputId = 'Postmortem_ID', label = 'Postmortem ID', value = 'X2'),	
 											conditionalPanel(condition = "input.antestat == 'humerus'",
 												numericInput(inputId = 'hu_antestat', label = 'Hum_01', value = '')																															
 											),
@@ -1767,15 +1770,17 @@ shinyUI(
 											),
 											conditionalPanel(condition = "input.antestat == 'fibula'",
 												numericInput(inputId = 'fi_antestat', label = 'Fib_01', value = '')																															
-											)
+											),
+											selectInput("ante_side", "Side", c(Left='Left', Right='Right'))
 										),
 										column(4,
-											numericInput(inputId = 'antestat_input', label = 'Antemortem stature', value = '')							
+											textInput(inputId = 'Antemortem_ID', label = 'Antemortem ID', value = 'X1'),	
+											numericInput(inputId = 'antestat_input', label = 'Stature', value = '')							
 
 										)
 									),
-						
-				
+		
+
 							actionButton("proantestat","Process"),
 							actionButton("settingsante","Settings"),
 							downloadButton("downloadantestat", "Save results"),
@@ -1784,27 +1789,79 @@ shinyUI(
 					mainPanel(
 					
 						htmlOutput('antestat_output'),
-						plotOutput('antestat_plot', width = 400, height = 400),
+						imageOutput('plotplotante', width=400, height=400),
 					
 						DT::dataTableOutput('antestat_table'),
 
 					 	bsModal("settingsante2", title = "Settings", trigger = "settingsante", size = "large", 
-					 		tabsetPanel(id="tabSelected2",
+					 		tabsetPanel(id="tabSelected2s",
 								tabPanel("Output Paramters",
 									checkboxInput(inputId = "fileoutputant1", label = "Output excel file", value = TRUE),
 									checkboxInput(inputId = "fileoutputant2", label = "Output plot", value = TRUE)
 								),	
 
 								tabPanel("Statistical Parameters",
-									sliderInput(inputId = "predlevelantestat", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01)
+									sliderInput(inputId = "predlevelantestat", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
+									sliderInput(inputId = "alphalevelsantestat", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
+									checkboxInput(inputId = "alphatest1s", label = "Alpha test (uncheck for PI)", value = TRUE)
+								)								
+							)
+						)
+					)
+
+				)	
+			),
+
+
+			tabPanel("Multiple stature",
+				sidebarLayout(
+					sidebarPanel(	
+
+
+							uiOutput("antestat_testm"),
+							radioButtons(inputId = 'metric_typem', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'cm'),
+							selectInput("antestat_populationm", "Population", c(DPAA_any_male = "DPAA-any-male", DPAA_white_male = "DPAA-white-male", DPAA_black_male = "DPAA-black-male",FDB_20th_FStat_any='20th-FStat-any', FDB_20th_FStat_white_male='20th-FStat-white-male', FDB_20th_FStat_white_female='20th-FStat-white-female', FDB_20th_FStat_black_male='20th-FStat-black-male', FDB_20th_FStat_black_female='20th-FStat-black-female', Trotter_any_male='Trotter-any-male', Trotter_black_male='Trotter-black-male', Trotter_white_male='Trotter-white-male'), 'Trotter-any-male'),
+
+							uiOutput('resettableInputante1'),	
+							uiOutput('resettableInputante2'),	
+							actionButton("clearFile1ante", "Clear Data"),
+							actionButton("proantestatm","Process"),
+							actionButton("settingsantem","Settings"),
+							downloadButton("downloadantestatm", "Save results"),
+							width=4
+					),
+					mainPanel(
+					
+						htmlOutput('antestat_outputm'),
+						tabsetPanel(id="tabSelected",
+							tabPanel("Not excluded",
+					 			DT::dataTableOutput('antestat_table1m')),
+					 			
+					 		tabPanel("Excluded",
+					 			DT::dataTableOutput('antestat_table2m'))),
+
+					 	bsModal("settingsante2m", title = "Settings", trigger = "settingsantem", size = "large", 
+					 		tabsetPanel(id="tabSelected2m",
+								tabPanel("Output Paramters",
+									checkboxInput(inputId = "fileoutputant1m", label = "Output excel file", value = TRUE),
+									checkboxInput(inputId = "fileoutputant2m", label = "Output plot", value = FALSE)
+								),	
+
+								tabPanel("Statistical Parameters",
+									sliderInput(inputId = "predlevelantestatm", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
+									sliderInput(inputId = "alphalevelsantestatm", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
+									checkboxInput(inputId = "alphatest1m", label = "Alpha test (uncheck for PI)", value = TRUE)
+								),
+								tabPanel("Computational Parameters",
+									uiOutput('ncoresm')
 								)
 							)
 						)
 
 					)
 				)
-
-			)
+			)#
+				
 		)
 
 
