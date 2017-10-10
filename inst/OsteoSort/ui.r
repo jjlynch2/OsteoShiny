@@ -1850,7 +1850,8 @@ shinyUI(
 								tabPanel("Statistical Parameters",
 									sliderInput(inputId = "predlevelantestatm", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
 									sliderInput(inputId = "alphalevelsantestatm", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-									checkboxInput(inputId = "alphatest1m", label = "Alpha test (uncheck for PI)", value = TRUE)
+									checkboxInput(inputId = "alphatest1m", label = "Alpha test (uncheck for PI)", value = TRUE),
+									checkboxInput(inputId = "research_mm", label = "Calculate research statistics", value = FALSE)
 								),
 								tabPanel("Computational Parameters",
 									uiOutput('ncoresm')
