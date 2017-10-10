@@ -70,7 +70,34 @@
 					HTML(paste("Statistical analysis complete.", '<br/>'))
 			})   
 
+#	if(input$research_mm) {
+			#used to assess accuracy of methodology
+			
+#			globala <- as.matrix(outtemp2m[[3]][1])
+#			globalb <- as.matrix(outtemp2m[[3]][3])
+#			cn <- 0
+#			for(xx in 1:nrow(globala)) {
+#				if(globala[xx] == globalb[xx]) {cn <- cn +1}
+#			}
+			
+#			global1 <- as.matrix(outtemp2m[[2]][1])
+#			global2 <- as.matrix(outtemp2m[[2]][3])
+#			co <- 0
+#			 for(i in 1:nrow(global1)) {
+#			 	if(global1[i] == global2[i]) {co <- co + 1}
+#			 }		
+			#used to assess accuracy of methodology
+#			nmatch <- outtemp2m[[2]]
+#			TP <- (ll - cn) - nmatch
+#			FP <- cn
+#			FN <- nmatch - co
+#			TN <- co
+
 		
+#			co <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+TP), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+FP), digits = 3), "<br/>", sep = "")
+
+#		}
+
 			output$antestat_table1m <- DT::renderDataTable({
 				DT::datatable(outtemp2m[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})

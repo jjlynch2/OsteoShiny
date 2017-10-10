@@ -47,10 +47,13 @@
 			output$antestat_output <- renderUI({
 					HTML(paste("Statistical analysis complete.", '<br/>'))
 			})   
-
 		
+			#Fix for using exclusion in multiple. Switches to which ever has a result for single
+			if(nrow(outtemp2[[2]]) == 0) {table_out_single <- outtemp2[[3]]}
+			if(nrow(outtemp2[[3]]) == 0) {table_out_single <- outtemp2[[2]]}
+
 			output$antestat_table <- DT::renderDataTable({
-				DT::datatable(outtemp2[[2]], options = list(lengthMenu = c(1), pageLength = 10), rownames = FALSE)
+				DT::datatable(table_out_single, options = list(lengthMenu = c(1), pageLength = 10), rownames = FALSE)
 			})
 
 			if(input$fileoutputant1 || input$fileoutputant2) {
