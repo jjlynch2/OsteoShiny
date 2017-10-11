@@ -94,9 +94,18 @@
 			coo <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+TP), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+FP), digits = 3), "<br/>", sep = "")
 
 		}
+
+		temp1 <- outtemp2m[[2]][1]
+		temp2 <- outtemp2m[[3]][1]
+		ante_sample <- nrow(unique(rbind(temp1,temp2))) 
+
+		temp3 <- outtemp2m[[2]][3]
+		temp4 <- outtemp2m[[3]][3]
+		post_sample <- nrow(unique(rbind(temp3,temp4))) 
+
 			#display output
 			output$antestat_outputm <- renderUI({
-					HTML(paste("Statistical analysis complete.", '<br/>',coo))
+					HTML(paste("Statistical analysis complete.", '<br/>',"Number of comparisons conducted: ", TP+FP+TN+FN,"<br/>", "Antemortem specimens: ", ante_sample, "<br/>","Postmortem specimens: ", post_sample, "<br/>", coo))
 			}) 
 
 			output$antestat_table1m <- DT::renderDataTable({

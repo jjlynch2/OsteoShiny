@@ -43,15 +43,25 @@ shinyServer(function(input, output, session) {
 
 
 	#download handlers for files on the help page
-	output$standardtemplate <- downloadHandler(
+	output$postmortem_template <- downloadHandler(
 		filename <- function() {
-			"standardtemplate.csv"
+			"postmortem_template.csv"
 		},
 		content <- function(file) {
-			file.copy(system.file("extdata", 'standardtemplate.csv', package = "OsteoShiny"), file)                  
+			file.copy(system.file("extdata", 'postmortem_template.csv', package = "OsteoShiny"), file)                  
 		},
 	)  
-			
+
+	#download handlers for files on the help page
+	output$antemortem_template <- downloadHandler(
+		filename <- function() {
+			"antemortem_template.csv"
+		},
+		content <- function(file) {
+			file.copy(system.file("extdata", 'antemortem_template.csv', package = "OsteoShiny"), file)                  
+		},
+	)  
+	
 	output$osteoguide <- downloadHandler(
 		filename <- function() {
 			"OsteoSort_User_Manual_1AUGUST2017.pdf"
