@@ -10,3 +10,4 @@ Minor changes:
 Added ability to switch output metric between inches, millimeters, and centimeters for the statsort function.
 
 Bug fixes:
+Fixed error with quotes around desktop icon path creation
