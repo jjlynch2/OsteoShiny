@@ -102,10 +102,11 @@
 		temp3 <- outtemp2m[[2]][3]
 		temp4 <- outtemp2m[[3]][3]
 		post_sample <- nrow(unique(rbind(temp3,temp4))) 
-
+		n_comp <- nrow(outtemp2m[[2]]) + nrow(outtemp2m[[3]])
+		ex_rate <- nrow(outtemp2m[[3]]) / n_comp
 			#display output
 			output$antestat_outputm <- renderUI({
-					HTML(paste("Statistical analysis complete.", '<br/>',"Number of comparisons conducted: ", TP+FP+TN+FN,"<br/>", "Antemortem specimens: ", ante_sample, "<br/>","Postmortem specimens: ", post_sample, "<br/>", coo))
+					HTML(paste("Statistical analysis complete.", '<br/>',"Number of comparisons conducted: ", n_comp,"<br/>", "Antemortem specimens: ", ante_sample, "<br/>","Postmortem specimens: ", post_sample, "<br/>", "Total number of potential matches: ", nrow(outtemp2m[[2]]), "<br/>", "Total number of exclusions: ", nrow(outtemp2m[[3]]), " (", round(nrow(outtemp2m[[3]]) / n_comp, digits = 3) * 100, "%)", "<br/>", coo))
 			}) 
 
 			output$antestat_table1m <- DT::renderDataTable({

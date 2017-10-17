@@ -340,21 +340,7 @@
 
 		}
 		
-		#
-		potential_matches <- rbind(temp1, temp2)
-		potential_matches <- as.data.frame(unlist(potential_matches))
-		colnames(potential_matches) <- "a"
-		
-		#controls for when no matches exist
-		if(nrow(potential_matches) != 0) {
-			mean_potential_matches <- mean(ddply(potential_matches,.(a),nrow)[,2])
-			std_potential_matches <- sd(ddply(potential_matches,.(a),nrow)[,2])
-		}
-		if(nrow(potential_matches) == 0) {
-			mean_potential_matches <- 0
-			std_potential_matches <- 0
-		}
-		#
+	
 		
 		
 		samplesize <- nrow(unique(rbind(temp1,temp2,temp3,temp4))) 
@@ -362,7 +348,7 @@
 
 		#Output results                  
 			output$contents <- renderUI({
-				HTML(paste(co,"Statistical analysis complete.",'<br/>',"Number of comparisons conducted: ",ll, "<br/>", "Total specimens tested: ", samplesize,'<br/>',"Number of specimens with 1 or more potential matches: ",lent, '<br/>', "Total number of potential matches: ", nmatch ,'<br/>', "Mean number of potential matches per specimen: ", round(mean_potential_matches, digits = 1) ,  " (", round(round(mean_potential_matches, digits = 1)/samplesize, digits = 3) * 100, "%)", "<br/>", "Standard deviation of potential matches: ", round(std_potential_matches, digits = 1) ,"<br/>", "Total number of exclusions: ", ll - nmatch, " (", round((ll - nmatch) / ll, digits = 3) * 100, "%)", '<br/><br/>'))
+				HTML(paste(co,"Statistical analysis complete.",'<br/>',"Number of comparisons conducted: ",ll, "<br/>", "Total specimens tested: ", samplesize, '<br/>', "Total number of potential matches: ", nmatch ,'<br/>', "Total number of exclusions: ", ll - nmatch, " (", round((ll - nmatch) / ll, digits = 3) * 100, "%)", '<br/><br/>'))
 			})   
 
 			output$table <- DT::renderDataTable({

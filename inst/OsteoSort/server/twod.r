@@ -1,6 +1,6 @@
 
 	output$contents2D <- renderUI({
-	   HTML(paste("Select the parameters and upload images to begin"))
+	   HTML(paste("Select the parameters and upload images to begin."))
 	})	
 
 	output$resettableInput2D <- renderUI({

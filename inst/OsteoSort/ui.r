@@ -1253,7 +1253,7 @@ shinyUI(
 							actionButton("pro","Process"),
 							actionButton("settings1","Settings"),
 							downloadButton("downloadData", "Save results"),
-							width=3
+							width=4
 					),
 					mainPanel(
 						htmlOutput('contents'),
@@ -1268,7 +1268,7 @@ shinyUI(
 					 		tabsetPanel(id="tabSelected2",
 					 			tabPanel("Output Parameters",
 									checkboxInput(inputId = "fileoutput1", label = "Output excel files", value = TRUE),
-									checkboxInput(inputId = "fileoutput1plot", label = "Output plot files (WARNING: This option will generate a plot for every combination of specimens)", value = FALSE)
+									checkboxInput(inputId = "fileoutput1plot", label = "Output plot files (WARNING: This option will generate a plot for every comparison)", value = FALSE)
 					 			),
 					 			tabPanel("Measurements",
 
@@ -1459,82 +1459,7 @@ shinyUI(
 
 
 
-	navbarMenu("Osteoshape sorting",		
-			tabPanel("2D comparison",
 
-				titlePanel("2D pairwise comparison"),
-					sidebarLayout(
-						sidebarPanel(
-							uiOutput('resettableInput2D'),	
-							uiOutput('resettableInput2DD'),	
-							uiOutput('mspec'),
-							actionButton("clearFile2D", "Clear Data"),
-							actionButton("settings2D","Settings"),
-							actionButton("pro2D","Process"),
-							downloadButton("downloadData2D", "Save results"),
-							width = 4
-						),
-						mainPanel(
-							uiOutput("contents2D"),
-							tabsetPanel(id="tabSelected",
-								tabPanel("Starting Mean",
-									imageOutput('meanImage')
-								),
-								tabPanel("Registered Graph",
-									imageOutput('plotplottd')
-								),
-								tabPanel("Results",
-					 				DT::dataTableOutput('table2D')
-								)
-							),
-			
-
-							bsModal("settings2DD", title = "Settings", trigger = "settings2D", size = "large", 
-								tabsetPanel(id="tabSelected2",
-									tabPanel("Output Parameters",
-										checkboxInput(inputId = "fileoutput2Dexcel", label = "Output excel files ", value = TRUE),
-										checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot ", value = TRUE),
-										checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)						 			
-									),
-						 			
-									tabPanel("Statistical Parameters",
-										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1),
-										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
-										sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1),
-										sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1),
-										sliderInput(inputId = "nsmooth2D", label = "Number of smoothing iterations in Elliptical Fourier Analysis", min=1, max=100, value=1, step=1),
-										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
-										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
-										checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE),
-										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
-										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff", "Procrustes"), selected = "Segmented-Hausdorff"),
-										
-					 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
-										uiOutput('max_avg_distance'),
-										uiOutput('n_regions')
-									),
-
-										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 1, step = 1),
-										checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)
-									),
-									tabPanel("Computational Parameters",
-										uiOutput('ncores2D')
-									)
-								)		
-							)
-						)
-					)
-			),
-			tabPanel("3D comparison"
-
-			)
-			
-			
-			
-			
-			
-		
-		),
 		
 		
 		navbarMenu("Outlier sorting",		
@@ -1737,7 +1662,82 @@ shinyUI(
 
 
 
+	navbarMenu("Osteoshape sorting",		
+			tabPanel("2D comparison",
 
+				titlePanel("2D pairwise comparison"),
+					sidebarLayout(
+						sidebarPanel(
+							uiOutput('resettableInput2D'),	
+							uiOutput('resettableInput2DD'),	
+							uiOutput('mspec'),
+							actionButton("clearFile2D", "Clear Data"),
+							actionButton("settings2D","Settings"),
+							actionButton("pro2D","Process"),
+							downloadButton("downloadData2D", "Save results"),
+							width = 4
+						),
+						mainPanel(
+							uiOutput("contents2D"),
+							tabsetPanel(id="tabSelected",
+								tabPanel("Starting Mean",
+									imageOutput('meanImage')
+								),
+								tabPanel("Registered Graph",
+									imageOutput('plotplottd')
+								),
+								tabPanel("Results",
+					 				DT::dataTableOutput('table2D')
+								)
+							),
+			
+
+							bsModal("settings2DD", title = "Settings", trigger = "settings2D", size = "large", 
+								tabsetPanel(id="tabSelected2",
+									tabPanel("Output Parameters",
+										checkboxInput(inputId = "fileoutput2Dexcel", label = "Output excel files ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)						 			
+									),
+						 			
+									tabPanel("Statistical Parameters",
+										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1),
+										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
+										sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1),
+										sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1),
+										sliderInput(inputId = "nsmooth2D", label = "Number of smoothing iterations in Elliptical Fourier Analysis", min=1, max=100, value=1, step=1),
+										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
+										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
+										checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE),
+										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
+										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff", "Procrustes"), selected = "Segmented-Hausdorff"),
+										
+					 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
+										uiOutput('max_avg_distance'),
+										uiOutput('n_regions')
+									),
+
+										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 1, step = 1),
+										checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)
+									),
+									tabPanel("Computational Parameters",
+										uiOutput('ncores2D')
+									)
+								)		
+							)
+						)
+					)
+			),
+			tabPanel("3D comparison"
+
+			)
+			
+			
+			
+			
+			
+		
+		),
 
 
 		navbarMenu("Antemortem sorting",	
@@ -1845,7 +1845,7 @@ shinyUI(
 					 		tabsetPanel(id="tabSelected2m",
 								tabPanel("Output Paramters",
 									checkboxInput(inputId = "fileoutputant1m", label = "Output excel file", value = TRUE),
-									checkboxInput(inputId = "fileoutputant2m", label = "Output plot", value = FALSE)
+									checkboxInput(inputId = "fileoutputant2m", label = "Output plot (WARNING: This option will generate a plot for every comparison)", value = FALSE)
 								),	
 
 								tabPanel("Statistical Parameters",
