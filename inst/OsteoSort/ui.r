@@ -9,7 +9,7 @@ library(shinyBS)
 library(shinythemes)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoShiny 1.2.1"),
+	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.1"),
 	
 	
 		tabPanel("Help",
@@ -1712,10 +1712,12 @@ shinyUI(
 										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
 										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff", "Procrustes"), selected = "Segmented-Hausdorff"),
 										
-					 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
-										uiOutput('max_avg_distance'),
-										uiOutput('n_regions')
-									),
+						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Hausdorff'",
+											uiOutput('max_avg_distance')
+										),
+						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
+											uiOutput('n_regions')
+										),
 
 										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 1, step = 1),
 										checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)

@@ -12,3 +12,4 @@ Adjusted the descriptive statistic outputs to be more generalized.
 
 Bug fixes:
 Fixed error with quotes around desktop icon path creation for Windows.
+Fixed the settings interface for 2D so max and average are available for Hausdorff rather than just Segmented-Hausdorff.
