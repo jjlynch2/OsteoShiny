@@ -1527,7 +1527,7 @@ shinyUI(
 											),
 					 						fluidRow(
 												column(12,
-													radioButtons(inputId = 'os_coxameasurements', 'Os_coxa', c('Osc_01','Osc_02','Osc_14','Osc_15','Osc_16','Osc_05','Osc_17'), inline = TRUE, selected = 'Osc_01')
+													radioButtons(inputId = 'os_coxameasurements', 'Os_coxa', c('Osc_01','Osc_02', 'Osc_05', 'Osc_14','Osc_15','Osc_16','Osc_05','Osc_17'), inline = TRUE, selected = 'Osc_01')
 												)
 											),
 					 						fluidRow(
