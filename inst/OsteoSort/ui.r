@@ -9,8 +9,13 @@ library(shinyBS)
 library(shinythemes)
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("flatly"), title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.1"),
-	
+
+
+
+
+	navbarPage(theme = shinytheme("flatly"), 
+			windowTitle = "OsteoSort 1.2.1",
+			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.1"),
 	
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into three primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting provides two-dimensional outline pair-matching analysis from photographs.  Development is underway for three-dimensional methods. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p><p>Antemortem sorting allows statistical testing of the strength of evidence between a known antemortem stature and a potentially associated postmortem element.</p>The input of postmortem measurement and antemortem data requires standardized templates, both of which can be downloaded below."),
@@ -1193,7 +1198,7 @@ shinyUI(
 							actionButton("proc","Process"),
 							actionButton("settings2","Settings"),
 							downloadButton("downloadData2", "Save results"),
-							width=4
+							width=3
 						
 					),
 					
@@ -1253,7 +1258,7 @@ shinyUI(
 							actionButton("pro","Process"),
 							actionButton("settings1","Settings"),
 							downloadButton("downloadData", "Save results"),
-							width=4
+							width=3
 					),
 					mainPanel(
 						htmlOutput('contents'),
@@ -1474,7 +1479,7 @@ shinyUI(
 							actionButton("pro3","Process"),
 							actionButton("settings3","Settings"),
 							downloadButton("outlierdownload", "Save results"),
-							width=4
+							width=3
 					),
 					mainPanel(
 					
@@ -1583,7 +1588,7 @@ shinyUI(
 							actionButton("pro4","Process"),
 							actionButton("settings4","Settings"),
 							downloadButton("outlierdownload4", "Save results"),
-							width=4
+							width=3
 					),
 					mainPanel(
 					
@@ -1675,7 +1680,7 @@ shinyUI(
 							actionButton("settings2D","Settings"),
 							actionButton("pro2D","Process"),
 							downloadButton("downloadData2D", "Save results"),
-							width = 4
+							width = 3
 						),
 						mainPanel(
 							uiOutput("contents2D"),
@@ -1787,7 +1792,7 @@ shinyUI(
 							actionButton("proantestat","Process"),
 							actionButton("settingsante","Settings"),
 							downloadButton("downloadantestat", "Save results"),
-							width=4
+							width=3
 					),
 					mainPanel(
 					
@@ -1831,7 +1836,7 @@ shinyUI(
 							actionButton("proantestatm","Process"),
 							actionButton("settingsantem","Settings"),
 							downloadButton("downloadantestatm", "Save results"),
-							width=4
+							width=3
 					),
 					mainPanel(
 					

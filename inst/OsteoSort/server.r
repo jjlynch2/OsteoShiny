@@ -67,7 +67,7 @@ shinyServer(function(input, output, session) {
 			"OsteoSort_User_Manual_1AUGUST2017.pdf"
 		},
 		content <- function(file) {
-			file.copy(system.file("extdata", 'OsteoSort_User_Manual_1AUGUST2017.pdf', package = "OsteoShiny"), file)                  
+			file.copy(system.file("extdata", 'OsteoSort_User_Manual.pdf', package = "OsteoShiny"), file)                  
 		},
 	)  			
 
