@@ -20,6 +20,8 @@ Re-ran roxygenize for man pages.
 
 Adjusted width of left sidebar.
 
+Updated text on help page.
+
 
 Bug fixes:
 
