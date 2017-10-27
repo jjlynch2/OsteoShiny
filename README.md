@@ -22,6 +22,8 @@ Adjusted width of left sidebar.
 
 Updated text on help page.
 
+Added example data for all methods. 
+
 
 Bug fixes:
 

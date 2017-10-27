@@ -23,7 +23,8 @@ shinyUI(
 					downloadButton('postmortem_template', 'Postmortem Standard template'),
 					downloadButton('antemortem_template', 'Antemortem Standard template'),
 					downloadButton('osteoguide', 'Help Guide'),
-					actionButton('Create_Desktop_Icon', 'Create Desktop Icon')
+					actionButton('Create_Desktop_Icon', 'Create Desktop Icon'),
+					downloadButton('example_data', "Example Data")
 		),
 		
 		navbarMenu("Osteometric sorting",

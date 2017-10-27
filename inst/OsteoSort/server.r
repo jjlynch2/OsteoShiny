@@ -71,6 +71,16 @@ shinyServer(function(input, output, session) {
 		},
 	)  			
 
+
+	output$example_data <- downloadHandler(
+		filename <- function() {
+			"Example_Data.zip"
+		},
+		content <- function(file) {
+			file.copy(system.file("extdata", 'Example_Data.zip', package = "OsteoShiny"), file)                  
+		},
+	)  	
+
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
 			icon_name <- "OsteoSort.bat"
