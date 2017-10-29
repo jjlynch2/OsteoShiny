@@ -91,7 +91,7 @@
 		if(length(input$rightimages$name) < 2) {}
 
 
-		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, smooth_iterations = input$nsmooth2D, nharmonics = input$efaH2D)
+		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, nharmonics = input$efaH2D)
 
 		out2 <- match.2d.invariant(outlinedata = out1, hide_distances = input$hidedist, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
 		direc <- out2[[3]]

@@ -1711,7 +1711,6 @@ shinyUI(
 										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
 										sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1),
 										sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1),
-										sliderInput(inputId = "nsmooth2D", label = "Number of smoothing iterations in Elliptical Fourier Analysis", min=1, max=100, value=1, step=1),
 										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
 										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
 										checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE),
