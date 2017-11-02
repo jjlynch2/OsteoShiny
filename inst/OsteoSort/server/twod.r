@@ -26,6 +26,22 @@
 	observeEvent(input$ncores2D, {
 		ncores2D$ncores2D <- input$ncores2D
 	})
+
+	output$fragment_options1 <- renderUI({
+		sliderInput(inputId = "nnb", label = "Number of K-nearest neighbors for mean estimation", min=1, max=1000, value=40, step=1)
+	})
+
+	output$efa_options1 <- renderUI({
+		sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1)
+	})
+
+	output$efa_options2 <- renderUI({
+		sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1)
+	})
+	output$efa_options2 <- renderUI({
+		checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE)
+	})
+
 	output$ncores2D <- renderUI({
 		sliderInput(inputId = "ncores2D", label = "Number of cores", min=1, max=detectCores(), value=1, step =1)
 	})
@@ -90,10 +106,13 @@
 		if(length(input$leftimages$name) < 2) {}
 		if(length(input$rightimages$name) < 2) {}
 
+		if(input$fragcomp == "Complete") {fragment <- FALSE}
+		if(input$fragcomp == "Fragmented") {fragment <- TRUE}
 
-		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, nharmonics = input$efaH2D)
 
-		out2 <- match.2d.invariant(outlinedata = out1, hide_distances = input$hidedist, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
+		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, fragment = fragment, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, nharmonics = input$efaH2D)
+
+		out2 <- match.2d(outlinedata = out1, hide_distances = input$hidedist, nnb = input$nnb, fragment = fragment, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
 		direc <- out2[[3]]
 		
 

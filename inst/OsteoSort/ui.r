@@ -15,7 +15,7 @@ shinyUI(
 
 	navbarPage(theme = shinytheme("flatly"), 
 			windowTitle = "OsteoSort 1.2.1",
-			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.1"),
+			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
 	
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages. This package provides a framework to incorporate metric, two-dimensional, and three-dimensional data using established methods and ongoing research in the field of anthropology. The methods are split into four primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p><p>Osteometric sorting provides single and multiple pairwise commparisons for pair, articulation, and association analyses using the methods following Lynch et al. (2017) and Byrd and LeGarde (2014). Standard and supplemental measurements are supported. The CoRA measurement numbering system is used in place of the original standard numbers to aid in standardizing the numbering system across multiple measurement guides. A copy of the CoRA measurement system is provided in the help guide below.</p><p>&nbsp;</p><p>Osteoshape sorting provides two-dimensional outline pair-matching analysis from photographs.  Development is underway for three-dimensional methods. </p><p>&nbsp;</p><p>Outlier sorting identifies individual skeletal elements within an assemblage that are a metric measurement outlier. This is useful for identifying individuals who may have larger or smaller limb proportions than the average of the assemblage. This is further extended using the Trotter and Gleser, Genoves, and the Forensic Data Bank data to provide stature outlier identification based on maximum length measurements. This allows identification of which individuals are taller and shorter to aid in comparison with existing antemortem data.</p><p>&nbsp;</p><p>Antemortem sorting allows statistical testing of the strength of evidence between a known antemortem stature and a potentially associated postmortem element.</p>The input of postmortem measurement and antemortem data requires standardized templates, both of which can be downloaded below."),
@@ -1707,17 +1707,28 @@ shinyUI(
 									),
 						 			
 									tabPanel("Statistical Parameters",
-										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1),
-										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
-										sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1),
-										sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1),
+										radioButtons(inputId ="fragcomp", label = "Analysis type:", choices = c("Complete", "Fragmented"), selected = "Complete"),
+
 										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
 										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
-										checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE),
+
+										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1),
+										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
 										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
-										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Hausdorff", "Procrustes"), selected = "Segmented-Hausdorff"),
+
+						 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
+											uiOutput('efa_options1'),
+											uiOutput('efa_options2'),
+											uiOutput('efa_options3')
+										),
+
+						 				conditionalPanel(condition = "input.fragcomp == 'Fragmented'",
+											uiOutput('fragment_options1')
+										),
+
+										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Uni-Hausdorff", "Hausdorff"), selected = "Segmented-Hausdorff"),
 										
-						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Hausdorff'",
+						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Hausdorff' || input.distance2D == 'Uni-Hausdorff'",
 											uiOutput('max_avg_distance')
 										),
 						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
