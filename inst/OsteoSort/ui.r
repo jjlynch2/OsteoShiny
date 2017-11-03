@@ -14,7 +14,7 @@ shinyUI(
 
 
 	navbarPage(theme = shinytheme("flatly"), 
-			windowTitle = "OsteoSort 1.2.1",
+			windowTitle = "OsteoSort 1.2.2",
 			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
 	
 		tabPanel("Help",
@@ -1485,7 +1485,7 @@ shinyUI(
 					mainPanel(
 					
 						htmlOutput('outliercontent'),
-						plotOutput('plotoutlier', width = 400, height = 400),
+						imageOutput('plotoutlier', width=400, height=400),
 						tabsetPanel(id="tabSelectedoutlier",
 							tabPanel("Upper outliers",
 								DT::dataTableOutput('tablejustfuckingworka')
@@ -1594,7 +1594,7 @@ shinyUI(
 					mainPanel(
 					
 						htmlOutput('outliercontent4'),
-						plotOutput('plotoutlier4', width = 400, height = 400),
+						imageOutput('plotoutlier4', width=400, height=400),
 						tabsetPanel(id="tabSelectedoutlier",
 							tabPanel("Upper outliers",
 								DT::dataTableOutput('tablejustfuckingworka4')
@@ -1674,9 +1674,12 @@ shinyUI(
 				titlePanel("2D pairwise comparison"),
 					sidebarLayout(
 						sidebarPanel(
+							radioButtons(inputId ="fragcomp", label = "Analysis type:", choices = c("Complete", "Fragmented"), selected = "Complete"),
 							uiOutput('resettableInput2D'),	
-							uiOutput('resettableInput2DD'),	
-							uiOutput('mspec'),
+							uiOutput('resettableInput2DD'),
+							conditionalPanel(condition = "input.fragcomp == 'Complete'",
+								uiOutput('mspec')
+							),
 							actionButton("clearFile2D", "Clear Data"),
 							actionButton("settings2D","Settings"),
 							actionButton("pro2D","Process"),
@@ -1685,50 +1688,53 @@ shinyUI(
 						),
 						mainPanel(
 							uiOutput("contents2D"),
-							tabsetPanel(id="tabSelected",
-								tabPanel("Starting Mean",
-									imageOutput('meanImage')
-								),
-								tabPanel("Registered Graph",
-									imageOutput('plotplottd')
-								),
-								tabPanel("Results",
-					 				DT::dataTableOutput('table2D')
-								)
-							),
-			
+
+									tabsetPanel(id="tabSelected",
+										tabPanel("Results",
+							 				DT::dataTableOutput('table2D')
+										),
+										tabPanel("Starting Mean",
+											conditionalPanel(condition = "input.fragcomp == 'Complete'",
+												imageOutput('meanImage')
+											)
+										),
+										tabPanel("Registration",
+											conditionalPanel(condition = "input.fragcomp == 'Complete'",
+												imageOutput('plotplottd')
+											)
+										)
+									),
+
 
 							bsModal("settings2DD", title = "Settings", trigger = "settings2D", size = "large", 
 								tabsetPanel(id="tabSelected2",
 									tabPanel("Output Parameters",
-										checkboxInput(inputId = "fileoutput2Dexcel", label = "Output excel files ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dexcel1", label = "Output match distances to excel file ", value = TRUE),
+										checkboxInput(inputId = "fileoutput2Dexcel2", label = "Output all distances to excel file ", value = TRUE),
 										checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot ", value = TRUE),
 										checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)						 			
 									),
 						 			
 									tabPanel("Statistical Parameters",
-										radioButtons(inputId ="fragcomp", label = "Analysis type:", choices = c("Complete", "Fragmented"), selected = "Complete"),
 
 										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
 										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
 
-										sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1),
-										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=10, step=1),
-										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
 
 						 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
 											uiOutput('efa_options1'),
 											uiOutput('efa_options2'),
-											uiOutput('efa_options3')
+											uiOutput('efa_options3'),
+											uiOutput('comp_options')
 										),
 
-						 				conditionalPanel(condition = "input.fragcomp == 'Fragmented'",
-											uiOutput('fragment_options1')
-										),
+										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=20, step=1),
+										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
 
-										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Uni-Hausdorff", "Hausdorff"), selected = "Segmented-Hausdorff"),
+										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Uni-Hausdorff", "Hausdorff"), selected = "Hausdorff"),
 										
-						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Hausdorff' || input.distance2D == 'Uni-Hausdorff'",
+
+						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Uni-Hausdorff' || input.distance2D == 'Hausdorff'",
 											uiOutput('max_avg_distance')
 										),
 						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",

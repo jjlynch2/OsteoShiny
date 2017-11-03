@@ -27,9 +27,10 @@
 		ncores2D$ncores2D <- input$ncores2D
 	})
 
-	output$fragment_options1 <- renderUI({
-		sliderInput(inputId = "nnb", label = "Number of K-nearest neighbors for mean estimation", min=1, max=1000, value=40, step=1)
+	output$comp_options <- renderUI({
+		sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1)
 	})
+
 
 	output$efa_options1 <- renderUI({
 		sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1)
@@ -38,7 +39,7 @@
 	output$efa_options2 <- renderUI({
 		sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1)
 	})
-	output$efa_options2 <- renderUI({
+	output$efa_options3 <- renderUI({
 		checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE)
 	})
 
@@ -77,6 +78,8 @@
 	#renders temporary mean
 
 
+	
+
 	observeEvent(input$pro2D, {
 		output$contents2D <- renderUI({
 		   HTML(paste(""))
@@ -94,76 +97,72 @@
 			}
 		})
 		 	
+		if(!is.null(input$leftimages$datapath) && !is.null(input$leftimages$datapath)) { #prevents crashing
+		
+			leftimages <- input$leftimages$datapath
+			rightimages <- input$rightimages$datapath
 
-#need to add ifstatement to check if images have been uploaded to avoid crashing the app when hitting process without data
-
-		leftimages <- input$leftimages$datapath
-		rightimages <- input$rightimages$datapath
-
-		file.copy(input$leftimages$datapath, input$leftimages$name)
-		file.copy(input$rightimages$datapath, input$rightimages$name)
-
-		if(length(input$leftimages$name) < 2) {}
-		if(length(input$rightimages$name) < 2) {}
-
-		if(input$fragcomp == "Complete") {fragment <- FALSE}
-		if(input$fragcomp == "Fragmented") {fragment <- TRUE}
+			file.copy(input$leftimages$datapath, input$leftimages$name)
+			file.copy(input$rightimages$datapath, input$rightimages$name)
 
 
-		out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, fragment = fragment, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, nharmonics = input$efaH2D)
+			if(input$fragcomp == "Complete") {fragment <- FALSE}
+			if(input$fragcomp == "Fragmented") {fragment <- TRUE}
 
-		out2 <- match.2d(outlinedata = out1, hide_distances = input$hidedist, nnb = input$nnb, fragment = fragment, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
-		direc <- out2[[3]]
+
+			out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, fragment = fragment, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, nharmonics = input$efaH2D)
+
+			out2 <- match.2d(outlinedata = out1, hide_distances = input$hidedist, iteration = input$icp2D, fragment = fragment, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel1, input$fileoutput2Dexcel2, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
+			direc <- out2[[3]]
 		
 
-			setwd(sessiontemp)
-			setwd(direc)
-			if(input$fileoutput2Dplot) {
-				nimages <- list.files()
-				nimages <- paste(sessiontemp, "/", direc, "/", nimages[grep(".png", nimages)], sep="")
-
-				output$plotplottd <- renderImage({
-					list(src = nimages,
-						contentType = 'image/png',
-						alt = "A"
-					)
-				}, deleteFile = FALSE)
-			}
-
-
-
-
-
-		output$table2D <- DT::renderDataTable({
-			DT::datatable(out2[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
-		})
-
-
-
-		output$contents2D <- renderUI({
-			HTML(paste("Potential Matches: ", nrow(as.matrix(out2[[2]][,1]))))
-		})
-
-		setwd(sessiontemp)
-		files <- list.files(direc, recursive = TRUE)
-		setwd(direc)
-		zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
-
-			#Download handler       
-		output$downloadData2D <- downloadHandler(
-			filename <- function() {
-				paste("results.zip")
-			},      
-			content <- function(file) {
+				setwd(sessiontemp)
 				setwd(direc)
-				file.copy(paste(direc,'.zip',sep=''), file)  
-				setwd(sessiontemp)    
-			},
-			contentType = "application/zip"
-		)
-		setwd(sessiontemp)
+				if(input$fileoutput2Dplot && input$fragcomp == "Complete") {
+					nimages <- list.files()
+					nimages <- paste(sessiontemp, "/", direc, "/", nimages[grep(".jpg", nimages)], sep="")
+
+					output$plotplottd <- renderImage({
+						list(src = nimages,
+							contentType = 'image/jpg',
+							alt = "A"
+						)
+					}, deleteFile = FALSE)
+				}
 
 
+			output$table2D <- DT::renderDataTable({
+				DT::datatable(out2[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
+			})
+
+
+
+			output$contents2D <- renderUI({
+				HTML(paste("Potential Matches: ", nrow(as.matrix(out2[[2]][,1]))))
+			})
+
+			setwd(sessiontemp)
+			files <- list.files(direc, recursive = TRUE)
+			setwd(direc)
+			zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
+
+				#Download handler       
+			output$downloadData2D <- downloadHandler(
+				filename <- function() {
+					paste("results.zip")
+				},      
+				content <- function(file) {
+					setwd(direc)
+					file.copy(paste(direc,'.zip',sep=''), file)  
+					setwd(sessiontemp)    
+				},
+				contentType = "application/zip"
+			)
+			setwd(sessiontemp)
+			output$rspec <- renderUI({
+				sliderInput(inputId = "rspec", label = "Choose number for registration", min=1, max=nrow(paste(sessiontemp, "/", direc, "/", list.files()[grep(".png", list.files())], sep="")) + nrow(paste(sessiontemp, "/", direc, "/", list.files()[grep(".png", list.files())], sep="")), value = 1, step = 1)
+			})
+		}
 
 		for(i in 10) { gc() } #clean up 
 		removeModal()  

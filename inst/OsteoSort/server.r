@@ -27,7 +27,7 @@ shinyServer(function(input, output, session) {
 	#defines which modules to include
 	source("../../server/multiple.r", local=TRUE) ###imports multiple comparison server code
 	source("../../server/single.r", local=TRUE) ###imports single comparison server code
-	source("../../server/outlier.r", local=TRUE) ###imports outlier comparison server code
+	source("../../server/metric.r", local=TRUE) ###imports metric comparison server code
 	source("../../server/stature.r", local=TRUE) ###imports stature outlier comparison server code
 	source("../../server/twod.r", local=TRUE) ###imports two-dimensional scomparison server code
 	source("../../server/antestat_single.r", local=TRUE) ###imports two-dimensional scomparison server code

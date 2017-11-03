@@ -1,26 +1,26 @@
     ####This is the outlier server side code made for local import into server.r
-	output$testtype4 <- renderUI({
-		selectInput('zz4', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula'),'humerus')
+	output$testtype3 <- renderUI({
+		selectInput('zz3', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula', Scapula='scapula', Os_coxa='os_coxa', Clavicle='clavicle'),'humerus')
 	})
 	
 	#upload GUI for resettable input
-	output$resettableInput4 <- renderUI({
-		input$clearFile4
-		input$uploadFormat
-		fileInput('file4', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))  
+	output$resettableInput3 <- renderUI({
+		            input$clearFile3
+		            input$uploadFormat
+		            fileInput('file3', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))  
 	})
 	
-	output$outliercontent4 <- renderUI({
-	   HTML(paste("Select the parameters and upload the file to begin.</br></br>"))
+	output$outliercontent <- renderUI({
+		HTML(paste("Select the parameters and upload the file to begin.</br></br>"))
 	})	
 	
 	#clears session for multiple comparison
-	observeEvent(input$clearFile4, {
-		fileInput('file4', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))  
+	observeEvent(input$clearFile3, {
+		fileInput('file3', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))  
 	})
 
 
-	observeEvent(input$pro4, {
+	observeEvent(input$pro3, {
 		showModal(modalDialog(title = "Calculation has started...Window will update when finished.", easyClose = FALSE, footer = NULL))
 		
 		withProgress(message = 'Calculation has started',
@@ -33,20 +33,20 @@
 		})
 		
 		#Upload CSV file
-		inFile4 <- input$file4
+		inFile3 <- input$file3
 	   
 		 #return null if not uploaded
-		if (is.null(inFile4)){
+		if (is.null(inFile3)){
 			removeModal()                             
 			return(NULL) 
 		}
 		#return null if empty file
-		if (!file.size(inFile4$datapath) > 1)
+		if (!file.size(inFile3$datapath) > 1)
 			{
 			removeModal()                             
 			return(NULL)
 		}
-		tempdata3 <- read.csv(inFile4$datapath, header=TRUE, sep=input$sep4, na.strings=c("", " ", "NA", "-","*"))## see na.strings forces NA for blanks, spaces, etc
+		tempdata3 <- read.csv(inFile3$datapath, header=TRUE, sep=input$sep3, na.strings=c("", " ", "NA", "-","*"))## see na.strings forces NA for blanks, spaces, etc
 
 		#checks if measurements are numeric and converts alpha characters to numeric   
 		tempdataaa <- tempdata3[,1:4]
@@ -56,17 +56,20 @@
 		tempdata3 <- as.data.frame(tempdata3) #combines first four columns with now numeric measurements
 		
 		#defines measurements and methods from user input
-		if(input$zz4 == "humerus") {outliermeasurements <- input$humerusmeasurements4; poppop <- input$population4}
-		if(input$zz4 == "radius") {outliermeasurements <- input$radiusmeasurements4; poppop <- input$population4}
-		if(input$zz4 == "ulna") {outliermeasurements <- input$ulnameasurements4; poppop <- input$population4}
-		if(input$zz4 == "femur") {outliermeasurements <- input$femurmeasurements4; poppop <- input$population5G}
-		if(input$zz4 == "tibia") {outliermeasurements <- input$tibiameasurements4; poppop <- input$population5G}
-		if(input$zz4 == "fibula") {outliermeasurements <- input$fibulameasurements4; poppop <- input$population4}
-		if(input$method4 == "Standard_deviation") {cutoffvalue <- input$standard_dev4}
-		if(input$method4 == "Quartiles") {cutoffvalue <- input$Quartiles4}
+		if(input$zz3 == "scapula") {outliermeasurements <- input$scapulameasurements}
+		if(input$zz3 == "clavicle") {outliermeasurements <- input$claviclemeasurements}
+		if(input$zz3 == "humerus") {outliermeasurements <- input$humerusmeasurements}
+		if(input$zz3 == "radius") {outliermeasurements <- input$radiusmeasurements}
+		if(input$zz3 == "ulna") {outliermeasurements <- input$ulnameasurements}
+		if(input$zz3 == "os_coxa") {outliermeasurements <- input$os_coxameasurements}
+		if(input$zz3 == "femur") {outliermeasurements <- input$femurmeasurements}
+		if(input$zz3 == "tibia") {outliermeasurements <- input$tibiameasurements}
+		if(input$zz3 == "fibula") {outliermeasurements <- input$fibulameasurements}
+		if(input$method == "Standard_deviation") {cutoffvalue <- input$standard_dev}
+		if(input$method == "Quartiles") {cutoffvalue <- input$Quartiles}
 		
 		#calls sorting function
-		outtemp <- statsort(metric = input$metric_type2, sort = tempdata3, side = input$outlierside4, bone = input$zz4, method = input$method4, measurements = outliermeasurements, cutoff = cutoffvalue, sessiontempdir = sessiontemp, population = poppop, output_options = c(input$fileoutputstature1, input$fileoutputstature2))
+		outtemp <- metricsort(sort = tempdata3, side = input$outlierside, bone = input$zz3, method = input$method, measurements = outliermeasurements, cutoff = cutoffvalue, sessiontempdir = sessiontemp, output_options = c(input$fileoutputl1, input$fileoutputl2))
 		
 		
 		#counts number of outliers discovered
@@ -76,33 +79,32 @@
 		
 		
 		#display output
-		output$outliercontent4 <- renderUI({
+		output$outliercontent <- renderUI({
 				HTML(paste("Statistical analysis complete.", '<br/>',"Number of outliers: ",outliercount,'<br/>',"Mean: ", outtemp[[5]], "<br/>", "Standard Deviation: ", outtemp[[6]], "<br/>", "Median: ", outtemp[[7]], "<br/>", "Interquartile: ", outtemp[[8]]))
 		})   
-
 		
-			output$tablejustfuckingworkb4 <- DT::renderDataTable({
+		
+			output$tablejustfuckingworkb <- DT::renderDataTable({
 				DT::datatable(outtemp[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
-			output$tablejustfuckingworka4 <- DT::renderDataTable({
+			output$tablejustfuckingworka <- DT::renderDataTable({
 				DT::datatable(outtemp[[3]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
-			output$tablejustfuckingworkc4 <- DT::renderDataTable({
+			output$tablejustfuckingworkc <- DT::renderDataTable({
 				DT::datatable(outtemp[[4]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
-
-				if(input$fileoutputstature2) {
+		
+				if(input$fileoutputl2) {
 					nimages <- list.files(outtemp[[1]])
 					nimages <- paste(sessiontemp, "/", outtemp[[1]], "/", nimages[grep(".jpg", nimages)], sep="")
 
-					output$plotoutlier4 <- renderImage({
+					output$plotoutlier <- renderImage({
 						list(src = nimages,
 							contentType = 'image/jpg',
 							alt = "A"
 						)
 					}, deleteFile = FALSE)
 				}
-
 
 		removeModal() #removes modal
 		
@@ -111,11 +113,10 @@
 		files <- list.files(direc6, recursive = TRUE)
 		setwd(direc6)
 		zip:::zip(zipfile = paste(direc6,'.zip',sep=''), files = files)
-
 		setwd(sessiontemp)  #restores session
 		
 		#Download handler       
-		output$outlierdownload4 <- downloadHandler(
+		output$outlierdownload <- downloadHandler(
 			filename <- function() {
 				paste("results.zip")
 			},      
