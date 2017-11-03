@@ -319,9 +319,13 @@
 			if(all(is.na(reghum[,4:length(reghum)])) && all(is.na(reguln[,4:length(reguln)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				if(input$prr == "Bone1") { sort1 <- reghum; sort2 <- reguln}
 				if(input$prr == "Bone2") { sort2 <- reghum; sort1 <- reguln}
+				
+				if(input$regtesttypes == "PCA-CCA") {regtypee <- TRUE}
+				if(input$regtesttypes == "Simple") {regtypee <- FALSE}
+
 				sortreg <- rbind.fill(as.data.frame(sort1),as.data.frame(sort2))
 				outputtemp1 <- reg.input(sort = sortreg, bone1 = sort1[3], side1 = sort1[2], bone2 = sort2[3], side2 = sort2[2], measurement_standard = input$a)
-				direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput333), test = input$regtesttypes)					
+				direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput333), test = regtypee)					
 				direc2tab <- rbind(direc2[[2]], direc2[[3]]) #combine exlcuded and not excluded for table display				
 				output$table2 <- DT::renderDataTable({
 					DT::datatable(direc2tab, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)

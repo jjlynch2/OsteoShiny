@@ -1218,12 +1218,22 @@ shinyUI(
 								checkboxInput(inputId = "fileoutput333", label = "Output plot", value = TRUE)
 					 		),
 					 		tabPanel("Statistical Parameters",
-								checkboxInput(inputId = "regtesttypes", label = "PCA-CCA-Regression", value = TRUE),
-								checkboxInput(inputId = "alphapred", label = "Use alpha levels for regression (Only applies to simple regression)", value = FALSE),
+
+								radioButtons(inputId ="regtesttypes", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
+	
+								conditionalPanel(condition = "input.regtesttypes == 'Simple'",
+									checkboxInput(inputId = "alphapred", label = "Use alpha levels for regression", value = FALSE)
+								),
+
+
 								sliderInput(inputId = "alphalevels2", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
 								sliderInput(inputId = "alphalevels", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
+
+
 								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
-								checkboxInput(inputId = "power1", label = "Half-normalization transformation (Only applies to absolute value models)", value = TRUE),
+								conditionalPanel(condition = "input.absolutevalues",
+									checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
+								),
 								checkboxInput(inputId = "testagainstsingle", label = "Zero reference sample mean", value = FALSE)
 							)
 							)	
@@ -1435,12 +1445,20 @@ shinyUI(
 									
 								),
 								tabPanel("Statistical Parameters",
-									checkboxInput(inputId = "regtesttypem", label = "PCA-CCA-Regression", value = TRUE),
-									checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression (Only apples to simple regression)", value = FALSE),
+
+									radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
+
+									conditionalPanel(condition = "input.regtesttypem == 'Simple'",
+										checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = FALSE)
+									),
+
 									sliderInput(inputId = "asspredlevel", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step=0.01),
 									sliderInput(inputId = "alphalevel", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
 									checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
-									checkboxInput(inputId = "power2", label = "Half-normalization transformation (Only applies to absolute value models)", value = TRUE),
+									conditionalPanel(condition = "input.absolutevalue",
+										checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
+									),
+
 									checkboxInput(inputId = "testagainst", label = "Zero reference sample mean", value = FALSE),
 									checkboxInput(inputId = "research", label = "Calculate research statistics", value = FALSE)
 								),
@@ -1674,7 +1692,7 @@ shinyUI(
 				titlePanel("2D pairwise comparison"),
 					sidebarLayout(
 						sidebarPanel(
-							radioButtons(inputId ="fragcomp", label = "Analysis type:", choices = c("Complete", "Fragmented"), selected = "Complete"),
+							radioButtons(inputId ="fragcomp", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
 							uiOutput('resettableInput2D'),	
 							uiOutput('resettableInput2DD'),
 							conditionalPanel(condition = "input.fragcomp == 'Complete'",
@@ -1688,37 +1706,21 @@ shinyUI(
 						),
 						mainPanel(
 							uiOutput("contents2D"),
-
-									tabsetPanel(id="tabSelected",
-										tabPanel("Results",
-							 				DT::dataTableOutput('table2D')
-										),
-										tabPanel("Starting Mean",
-											conditionalPanel(condition = "input.fragcomp == 'Complete'",
-												imageOutput('meanImage')
-											)
-										),
-										tabPanel("Registration",
-											conditionalPanel(condition = "input.fragcomp == 'Complete'",
-												imageOutput('plotplottd')
-											)
-										)
-									),
-
+							uiOutput("tabpanpan"),
 
 							bsModal("settings2DD", title = "Settings", trigger = "settings2D", size = "large", 
 								tabsetPanel(id="tabSelected2",
 									tabPanel("Output Parameters",
-										checkboxInput(inputId = "fileoutput2Dexcel1", label = "Output match distances to excel file ", value = TRUE),
-										checkboxInput(inputId = "fileoutput2Dexcel2", label = "Output all distances to excel file ", value = TRUE),
-										checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot ", value = TRUE),
-										checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)						 			
+										uiOutput('fileoutput2Dexcel1'),
+										uiOutput('fileoutput2Dexcel2'),
+										uiOutput('fileoutput2Dplot'),
+										uiOutput('fileoutput2Dtps')
 									),
 						 			
 									tabPanel("Statistical Parameters",
 
-										sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01),
-										checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE),
+										uiOutput('nthreshold'),
+										uiOutput('mirror2D'),
 
 
 						 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
@@ -1728,12 +1730,13 @@ shinyUI(
 											uiOutput('comp_options')
 										),
 
-										sliderInput(inputId = "icp2D", label = "Number of Iterative Closest Point iterations", min=1, max=1000, value=20, step=1),
-										radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid"),
+										uiOutput('icp2D'),
+										uiOutput('trans2D'),
+										uiOutput('distance2D'),
 
-										radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Uni-Hausdorff", "Hausdorff"), selected = "Hausdorff"),
-										
 
+
+								
 						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Uni-Hausdorff' || input.distance2D == 'Hausdorff'",
 											uiOutput('max_avg_distance')
 										),

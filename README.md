@@ -24,6 +24,6 @@ Moderate changes:
 
 Added options for fragmented 2D analysis to the 2D module.
 
-
+Redesigned the 2D interface and fixed several minor bugs resulting in shiny crashes.
 
 Bug fixes:

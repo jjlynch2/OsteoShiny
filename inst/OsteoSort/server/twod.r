@@ -1,3 +1,16 @@
+	output$tabpanpan <- renderUI({
+		panels1 <- list(
+			tabPanel("Starting Mean",imageOutput('meanImage')),
+			tabPanel("Registration",imageOutput('plotplottd')),
+			tabPanel("Results",DT::dataTableOutput('table2D'))
+		)
+		panels2 <- list(
+			tabPanel("Results ",DT::dataTableOutput('table2D'))
+		)
+		if(input$fragcomp == "Complete") {panel <- panels1}
+		if(input$fragcomp == "Fragmented") {panel <- panels2}
+		do.call(tabsetPanel, panel)
+	})
 
 	output$contents2D <- renderUI({
 	   HTML(paste("Select the parameters and upload images to begin."))
@@ -20,41 +33,164 @@
 		fileInput('rightimages', 'Upload second image set', accept=c('jpeg', "jpg"), multiple = TRUE)
 	})
 
-	
+	fileoutput2Dexcel1 <- reactiveValues(fileoutput2Dexcel1 = TRUE)
+	observeEvent(input$fileoutput2Dexcel1, {
+		fileoutput2Dexcel1$fileoutput2Dexcel1 <- input$fileoutput2Dexcel1
+	})
+	output$fileoutput2Dexcel1 <- renderUI({
+		checkboxInput(inputId = "fileoutput2Dexcel1", label = "Output match distances to excel file ", value = TRUE)
+	})
+
+	fileoutput2Dexcel2 <- reactiveValues(fileoutput2Dexcel2 = TRUE)
+	observeEvent(input$fileoutput2Dexcel2, {
+		fileoutput2Dexcel2$fileoutput2Dexcel2 <- input$fileoutput2Dexcel2
+	})
+	output$fileoutput2Dexcel2 <- renderUI({
+		checkboxInput(inputId = "fileoutput2Dexcel2", label = "Output all distances to excel file ", value = TRUE)
+	})
+
+	fileoutput2Dplot <- reactiveValues(fileoutput2Dplot = TRUE)
+	observeEvent(input$fileoutput2Dplot, {
+		fileoutput2Dplot$fileoutput2Dplot <- input$fileoutput2Dplot
+	})
+	output$fileoutput2Dplot <- renderUI({
+		checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot (WARNING: Fragmented analysis will generate a plot for every comparison)", value = TRUE)
+	})
+
+	fileoutput2Dtps <- reactiveValues(fileoutput2Dtps = TRUE)
+	observeEvent(input$fileoutput2Dtps, {
+		fileoutput2Dtps$fileoutput2Dtps <- input$fileoutput2Dtps
+	})
+	output$fileoutput2Dtps <- renderUI({
+		checkboxInput(inputId = "fileoutput2Dtps", label = "Output TPS registered coordinates", value = TRUE)
+	})						 			
+									
+
+
+	nthreshold <- reactiveValues(nthreshold = 0.8)
+	observeEvent(input$nthreshold, {
+		nthreshold$nthreshold <- input$nthreshold
+	})
+	output$nthreshold <- renderUI({
+		sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01)
+	})
+
+	mirror2D <- reactiveValues(mirror2D = TRUE)
+	observeEvent(input$mirror2D, {
+		mirror2D$mirror2D <- input$mirror2D
+	})
+	output$nthreshold <- renderUI({
+		checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE)
+	})
+
+
 	ncores2D <- reactiveValues(ncores2D = 1)
-	
 	observeEvent(input$ncores2D, {
 		ncores2D$ncores2D <- input$ncores2D
 	})
-
-	output$comp_options <- renderUI({
-		sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=20, step=1)
-	})
-
-
-	output$efa_options1 <- renderUI({
-		sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1)
-	})
-
-	output$efa_options2 <- renderUI({
-		sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1)
-	})
-	output$efa_options3 <- renderUI({
-		checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE)
-	})
-
 	output$ncores2D <- renderUI({
 		sliderInput(inputId = "ncores2D", label = "Number of cores", min=1, max=detectCores(), value=1, step =1)
 	})
 
 
+	meanit2D <- reactiveValues(meanit2D = 4)
+	observeEvent(input$meanit2D, {
+		meanit2D$meanit2D <- input$meanit2D
+	})
+	output$comp_options <- renderUI({
+		sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=4, step=1)
+	})
+
+
+	efaH2D <- reactiveValues(efaH2D = 40)
+	observeEvent(input$efaH2D, {
+		efaH2D$efaH2D <- input$efaH2D
+	})
+	output$efa_options1 <- renderUI({
+		sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1)
+	})
+
+
+	npoints2D <- reactiveValues(npoints2D = 200)
+	observeEvent(input$npoints2D, {
+		npoints2D$npoints2D <- input$npoints2D
+	})
+	output$efa_options2 <- renderUI({
+		sliderInput(inputId = "npoints2D", label = "Number of landmarks during inverse Elliptical Fourier Analysis transformation", min=20, max=1000, value=200, step=1)
+	})
+
+
+
+	scale2D <- reactiveValues(scale2D = TRUE)
+	observeEvent(input$scale2D, {
+		scale2D$scale2D <- input$scale2D
+	})
+	output$efa_options3 <- renderUI({
+		checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE)
+	})
+
+
+	n_regions <- reactiveValues(n_regions = 6)
+	observeEvent(input$n_regions, {
+		n_regions$n_regions <- input$n_regions
+	})
 	output$n_regions <- renderUI({			
 		sliderInput(inputId = "n_regions", label = "Number of regions", min = 2, max = input$npoints2D, value = 6, step = 1)										
 	})
 
+
+	max_avg_distance <- reactiveValues(max_avg_distance = "average")
+	observeEvent(input$max_avg_distance, {
+		max_avg_distance$max_avg_distance <- input$max_avg_distance
+	})
 	output$max_avg_distance <- renderUI({
 		radioButtons(inputId = "max_avg_distance", label = "Segmented-Hausdorff distance:", choices = c("maximum",  "average"), selected = "average")
 	})
+
+
+	icp2D <- reactiveValues(icp2D = "20")
+	observeEvent(input$icp2D, {
+		icp2D$icp2D <- input$icp2D
+	})
+	output$icp2D <- renderUI({
+		sliderInput(inputId = "icp2D", label = "Number of iterative closest point iterations", min=1, max=1000, value=20, step=1)
+	})
+
+
+	trans2D <- reactiveValues(trans2D = "rigid")
+	observeEvent(input$trans2D, {
+		trans2D$trans2D <- input$trans2D
+	})
+	output$trans2D <- renderUI({
+		radioButtons(inputId = "trans2D", label = "Transformation type:", choices = c("rigid", "similarity", "affine"), selected = "rigid")
+	})
+
+
+	distance2D <- reactiveValues(distance2D = "Hausdorff")
+	observeEvent(input$distance2D, {
+		distance2D$distance2D <- input$distance2D
+	})
+	output$distance2D <- renderUI({
+		radioButtons(inputId = "distance2D", label = "Distance calculation:", choices = c("Segmented-Hausdorff",  "Uni-Hausdorff", "Hausdorff"), selected = "Hausdorff")
+	})
+	
+	shortlistn <- reactiveValues(shortlistn = "1")
+	observeEvent(input$shortlistn, {
+		shortlistn$shortlistn <- input$shortlistn
+	})							
+	output$shortlistn <- renderUI({
+		sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 1, step = 1)
+	})
+
+	hidedist <- reactiveValues(hidedist = FALSE)
+	observeEvent(input$hidedist, {
+		hidedist$hidedist <- input$hidedist
+	})	
+	output$hidedist <- renderUI({
+		checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)
+	})
+									
+
 
 	#renders temporary mean
 	observeEvent(input$rightimages, {
@@ -69,8 +205,8 @@
 		output$meanImage <- renderImage({
 			list(src = nimages,
 				contentType = 'image/jpg',
-				width = 600,
-				height = 600,
+				width = 400,
+				height = 400,
 				alt = "A"
 			)
 		}, deleteFile = FALSE)
@@ -110,25 +246,26 @@
 			if(input$fragcomp == "Fragmented") {fragment <- TRUE}
 
 
-			out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, fragment = fragment, threshold =input$nthreshold, scale = input$scale2D, mirror = input$mirror2D, npoints = input$npoints2D, nharmonics = input$efaH2D)
+			out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, fragment = fragment, threshold =nthreshold$nthreshold, scale = scale2D$scale2D, mirror = mirror2D$mirror2D, npoints = npoints2D$npoints2D, nharmonics = efaH2D$efaH2D)
 
-			out2 <- match.2d(outlinedata = out1, hide_distances = input$hidedist, iteration = input$icp2D, fragment = fragment, dist = input$max_avg_distance, n_regions = input$n_regions, n_lowest_distances = input$shortlistn, output_options = c(input$fileoutput2Dexcel1, input$fileoutput2Dexcel2, input$fileoutput2Dplot, input$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = input$trans2D, cores = ncores2D$ncores2D, test = input$distance2D, temporary_mean_specimen =, mean_iterations = input$meanit2D)
+			out2 <- match.2d(outlinedata = out1, hide_distances = hidedist$hidedist, iteration = icp2D$icp2D, fragment = fragment, dist = max_avg_distance$max_avg_distance, n_regions = n_regions$n_regions, n_lowest_distances = shortlistn$shortlistn, output_options = c(fileoutput2Dexcel1$fileoutput2Dexcel1, fileoutput2Dexcel2$fileoutput2Dexcel2, fileoutput2Dplot$fileoutput2Dplot, fileoutput2Dtps$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = trans2D$trans2D, cores = ncores2D$ncores2D, test = distance2D$distance2D, temporary_mean_specimen = input$mspec, mean_iterations = meanit2D$meanit2D)
 			direc <- out2[[3]]
 		
 
+
+			if(fileoutput2Dplot$fileoutput2Dplot && input$fragcomp == "Complete") {
 				setwd(sessiontemp)
 				setwd(direc)
-				if(input$fileoutput2Dplot && input$fragcomp == "Complete") {
-					nimages <- list.files()
-					nimages <- paste(sessiontemp, "/", direc, "/", nimages[grep(".jpg", nimages)], sep="")
+				nimages <- list.files()
+				nimages <- paste(sessiontemp, "/", direc, "/", nimages[grep(".jpg", nimages)], sep="")
 
-					output$plotplottd <- renderImage({
-						list(src = nimages,
-							contentType = 'image/jpg',
-							alt = "A"
-						)
-					}, deleteFile = FALSE)
-				}
+				output$plotplottd <- renderImage({
+					list(src = nimages,
+						contentType = 'image/jpg',
+						alt = "A"
+					)
+				}, deleteFile = FALSE)
+			}
 
 
 			output$table2D <- DT::renderDataTable({
@@ -141,27 +278,26 @@
 				HTML(paste("Potential Matches: ", nrow(as.matrix(out2[[2]][,1]))))
 			})
 
-			setwd(sessiontemp)
-			files <- list.files(direc, recursive = TRUE)
-			setwd(direc)
-			zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
+			if(fileoutput2Dexcel1$fileoutput2Dexcel1 || fileoutput2Dexcel2$fileoutput2Dexcel2 || fileoutput2Dplot$fileoutput2Dplot || fileoutput2Dtps$fileoutput2Dtps) {
+				setwd(sessiontemp)
+				files <- list.files(direc, recursive = TRUE)
+				setwd(direc)
+				zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files)
 
-				#Download handler       
-			output$downloadData2D <- downloadHandler(
-				filename <- function() {
-					paste("results.zip")
-				},      
-				content <- function(file) {
-					setwd(direc)
-					file.copy(paste(direc,'.zip',sep=''), file)  
-					setwd(sessiontemp)    
-				},
-				contentType = "application/zip"
-			)
-			setwd(sessiontemp)
-			output$rspec <- renderUI({
-				sliderInput(inputId = "rspec", label = "Choose number for registration", min=1, max=nrow(paste(sessiontemp, "/", direc, "/", list.files()[grep(".png", list.files())], sep="")) + nrow(paste(sessiontemp, "/", direc, "/", list.files()[grep(".png", list.files())], sep="")), value = 1, step = 1)
-			})
+					#Download handler       
+				output$downloadData2D <- downloadHandler(
+					filename <- function() {
+						paste("results.zip")
+					},      
+					content <- function(file) {
+						setwd(direc)
+						file.copy(paste(direc,'.zip',sep=''), file)  
+						setwd(sessiontemp)    
+					},
+					contentType = "application/zip"
+				)
+				setwd(sessiontemp)
+			}
 		}
 
 		for(i in 10) { gc() } #clean up 

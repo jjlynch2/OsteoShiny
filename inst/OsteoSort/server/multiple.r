@@ -271,10 +271,16 @@
 				if(input$assbone2 == 'Tibia') {threshold2 <- input$tibiah; measurements2 <- input$MeasurementsUsedh} 
 				if(input$assbone2 == 'Fibula') {threshold2 <- input$fibulai; measurements2 <- input$MeasurementsUsedi}              
 				if(is.null(threshold)) {threshold <- 1}   
-				if(is.null(threshold2)) {threshold2 <- 1}             
+				if(is.null(threshold2)) {threshold2 <- 1}
+
+
+				if(input$regtesttypem == "PCA-CCA") {regtypee <- TRUE}
+				if(input$regtesttypem == "Simple") {regtypee <- FALSE}
+
+             
 			}
 			wtf <- reg.input(threshold=c(threshold, threshold2),sort = tempdata1, bone1 = input$assbone1, side1 = input$assside1, bone2 = input$assbone2, side2 = input$assside2, measurement_standard = input$standard, measurements1 = measurements, measurements2 = measurements2)
-			direc2 <- reg.multitest(sort = wtf[[1]], ref = wtf[[2]], splitn = wtf[[3]], prediction_interval = input$asspredlevel, alphatest = input$alphapred2, output_options = c(input$fileoutput1, input$fileoutput1plot), cores = numbercoresglobal$ncore, test = input$regtesttypem, alphalevel = input$alphalevel)
+			direc2 <- reg.multitest(sort = wtf[[1]], ref = wtf[[2]], splitn = wtf[[3]], prediction_interval = input$asspredlevel, alphatest = input$alphapred2, output_options = c(input$fileoutput1, input$fileoutput1plot), cores = numbercoresglobal$ncore, test = regtypee, alphalevel = input$alphalevel)
 			ll <- nrow(direc2[[2]]) + nrow(direc2[[3]])
 		}
 		#changes results to 0 if no possible combinations
