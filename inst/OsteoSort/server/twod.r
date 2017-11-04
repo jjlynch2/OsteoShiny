@@ -54,7 +54,7 @@
 		fileoutput2Dplot$fileoutput2Dplot <- input$fileoutput2Dplot
 	})
 	output$fileoutput2Dplot <- renderUI({
-		checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot (WARNING: Fragmented analysis will generate a plot for every comparison)", value = TRUE)
+		checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot (WARNING: fragmented analysis will generate a plot for every comparison)", value = TRUE)
 	})
 
 	fileoutput2Dtps <- reactiveValues(fileoutput2Dtps = TRUE)
@@ -72,14 +72,16 @@
 		nthreshold$nthreshold <- input$nthreshold
 	})
 	output$nthreshold <- renderUI({
-		sliderInput(inputId = "nthreshold", label = "Black and white threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01)
+		sliderInput(inputId = "nthreshold", label = "Threshold level for converting images to binary matrices", min=0.01, max=1, value=0.8, step=0.01)
 	})
+
+
 
 	mirror2D <- reactiveValues(mirror2D = TRUE)
 	observeEvent(input$mirror2D, {
 		mirror2D$mirror2D <- input$mirror2D
 	})
-	output$nthreshold <- renderUI({
+	output$mirror2D <- renderUI({
 		checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE)
 	})
 
@@ -107,7 +109,7 @@
 		efaH2D$efaH2D <- input$efaH2D
 	})
 	output$efa_options1 <- renderUI({
-		sliderInput(inputId = "efaH2D", label = "Number of Elliptical Fourier Analysis Harmonics", min=1, max=1000, value=40, step=1)
+		sliderInput(inputId = "efaH2D", label = "Number of elliptical Fourier analysis harmonics", min=1, max=1000, value=40, step=1)
 	})
 
 
@@ -126,7 +128,7 @@
 		scale2D$scale2D <- input$scale2D
 	})
 	output$efa_options3 <- renderUI({
-		checkboxInput(inputId = "scale2D", label = "Scale to centroid size after inverse Elliptical Fourier Analysis transformation", value = TRUE)
+		checkboxInput(inputId = "scale2D", label = "Scale to centroid size", value = TRUE)
 	})
 
 
@@ -135,7 +137,7 @@
 		n_regions$n_regions <- input$n_regions
 	})
 	output$n_regions <- renderUI({			
-		sliderInput(inputId = "n_regions", label = "Number of regions", min = 2, max = input$npoints2D, value = 6, step = 1)										
+		sliderInput(inputId = "n_regions", label = "Number of segmented regions", min = 2, max = input$npoints2D, value = 6, step = 1)										
 	})
 
 
@@ -144,7 +146,7 @@
 		max_avg_distance$max_avg_distance <- input$max_avg_distance
 	})
 	output$max_avg_distance <- renderUI({
-		radioButtons(inputId = "max_avg_distance", label = "Segmented-Hausdorff distance:", choices = c("maximum",  "average"), selected = "average")
+		radioButtons(inputId = "max_avg_distance", label = "Distance type:", choices = c("maximum",  "average"), selected = "average")
 	})
 
 
