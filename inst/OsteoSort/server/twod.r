@@ -268,16 +268,16 @@
 					)
 				}, deleteFile = FALSE)
 			}
-
+			if(is.null(nrow(out2[[2]]))) {pm <- 1; out2[[2]] <- rbind(out2[[2]],c(NA,NA,NA)) }
+			if(!is.null(nrow(out2[[2]]))) {pm <- nrow(as.matrix(out2[[2]][,1]))}
 
 			output$table2D <- DT::renderDataTable({
 				DT::datatable(out2[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
 
 
-
 			output$contents2D <- renderUI({
-				HTML(paste("Potential Matches: ", nrow(as.matrix(out2[[2]][,1]))))
+				HTML(paste("Potential Matches: ", pm))
 			})
 
 			if(fileoutput2Dexcel1$fileoutput2Dexcel1 || fileoutput2Dexcel2$fileoutput2Dexcel2 || fileoutput2Dplot$fileoutput2Dplot || fileoutput2Dtps$fileoutput2Dtps) {
