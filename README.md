@@ -31,3 +31,5 @@ Redesigned the 2D interface and fixed several minor bugs resulting in shiny cras
 
 
 Bug fixes:
+
+Fixed issue with returning a single match for 2D not being a data.frame.
