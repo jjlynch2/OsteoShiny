@@ -146,7 +146,7 @@
 		max_avg_distance$max_avg_distance <- input$max_avg_distance
 	})
 	output$max_avg_distance <- renderUI({
-		radioButtons(inputId = "max_avg_distance", label = "Distance type:", choices = c("maximum",  "average"), selected = "average")
+		radioButtons(inputId = "max_avg_distance", label = "Distance type:", choices = c("maximum",  "average", "dilated"), selected = "average")
 	})
 
 
