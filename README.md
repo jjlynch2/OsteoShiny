@@ -20,6 +20,7 @@ Changed function call for match.2d.invariant to match.2d
 
 Updated Help page information.
 
+Updated user manual (15.NOVEMBER.2017).
 
 
 Moderate changes:
