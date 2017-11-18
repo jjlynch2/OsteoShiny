@@ -29,7 +29,7 @@ shinyUI(
 		
 		navbarMenu("Osteometric sorting",
 			tabPanel("Single comparison",
-				titlePanel("Single pairwise comparison"),
+				titlePanel(""),
 				sidebarLayout(
 					sidebarPanel(
 						radioButtons('testtype', '', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
@@ -1250,7 +1250,7 @@ shinyUI(
 		
 
 		tabPanel("Multiple comparison",
-			titlePanel("Multiple pairwise comparison"),
+			titlePanel(""),
 				sidebarLayout(
 					sidebarPanel(
 					
@@ -1689,7 +1689,7 @@ shinyUI(
 	navbarMenu("Osteoshape sorting",		
 			tabPanel("2D comparison",
 
-				titlePanel("2D pairwise comparison"),
+				titlePanel(""),
 					sidebarLayout(
 						sidebarPanel(
 							radioButtons(inputId ="fragcomp", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
