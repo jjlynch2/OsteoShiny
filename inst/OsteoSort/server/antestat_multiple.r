@@ -10,7 +10,9 @@
 
 	 ####This is the antemortem - postmortem comparison server side code made for local import into server.r
 	output$antestat_testm <- renderUI({
-		selectInput('antestatm', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula'),'humerus')
+
+			selectInput('antestatm', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula'),'humerus')
+
 	})
 	
 	
@@ -58,8 +60,8 @@
 		}
 
 
-		tempdata1m <- read.csv(inFile1$datapath, header=TRUE, sep=input$sep, na.strings=c("", " ", "NA"))## see na.strings forces NA for blanks, spaces, etc
-		tempdata2m <- read.csv(inFile2$datapath, header=TRUE, sep=input$sep, na.strings=c("", " ", "NA"))## see na.strings forces NA for blanks, spaces, etc		
+		tempdata1m <- read.csv(inFile1$datapath, header=TRUE, sep=",", na.strings=c("", " ", "NA"))## see na.strings forces NA for blanks, spaces, etc
+		tempdata2m <- read.csv(inFile2$datapath, header=TRUE, sep=",", na.strings=c("", " ", "NA"))## see na.strings forces NA for blanks, spaces, etc		
 
 			#calls sorting function
 			outtemp1m <- antestat.input(bone = input$antestatm, metric = input$metric_typem, antemortem_stature = tempdata1m, postmortem_measurement = tempdata2m, population = input$antestat_populationm)

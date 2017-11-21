@@ -1,6 +1,8 @@
     ####This is the outlier server side code made for local import into server.r
 	output$testtype3 <- renderUI({
+
 		selectInput('zz3', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula', Scapula='scapula', Os_coxa='os_coxa', Clavicle='clavicle'),'humerus')
+
 	})
 	
 	#upload GUI for resettable input
@@ -46,7 +48,7 @@
 			removeModal()                             
 			return(NULL)
 		}
-		tempdata3 <- read.csv(inFile3$datapath, header=TRUE, sep=input$sep3, na.strings=c("", " ", "NA", "-","*"))## see na.strings forces NA for blanks, spaces, etc
+		tempdata3 <- read.csv(inFile3$datapath, header=TRUE, sep=",", na.strings=c("", " ", "NA", "-","*"))## see na.strings forces NA for blanks, spaces, etc
 
 		#checks if measurements are numeric and converts alpha characters to numeric   
 		tempdataaa <- tempdata3[,1:4]

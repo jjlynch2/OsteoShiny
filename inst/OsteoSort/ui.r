@@ -7,6 +7,7 @@ options(warn = -1)
 library(shiny)
 library(shinyBS)
 library(shinythemes)
+
 #Navigation bar interface
 shinyUI(
 
@@ -16,14 +17,14 @@ shinyUI(
 	navbarPage(theme = shinytheme("flatly"), 
 			windowTitle = "OsteoSort 1.2.2",
 			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
-	
+				useShinyjs(),
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages.</p><p>&nbsp;</p> <p>The methods are split into four primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p><p>The input of postmortem measurement and antemortem data requires standardized templates, both of which can be accessed below."),
 					HTML("<h1>Files</h1><hr /><p>&nbsp;</p>"),
-					downloadButton('postmortem_template', 'Postmortem Standard template'),
-					downloadButton('antemortem_template', 'Antemortem Standard template'),
+					downloadButton('postmortem_template', 'Postmortem template'),
+					downloadButton('antemortem_template', 'Antemortem template'),
 					downloadButton('osteoguide', 'Help Guide'),
-					actionButton('Create_Desktop_Icon', 'Create Desktop Icon'),
+					actionButton('Create_Desktop_Icon', 'Create Desktop Icon', icon = icon("gears")),
 					downloadButton('example_data', "Example Data")
 		),
 		
@@ -31,11 +32,14 @@ shinyUI(
 			tabPanel("Single comparison",
 				titlePanel(""),
 				sidebarLayout(
+
 					sidebarPanel(
-						radioButtons('testtype', '', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
+						selectInput('testtype', 'Analysis', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
 						uiOutput("testtype"),
 							conditionalPanel(condition = "input.zz == 'huur' || input.zz == 'hurr' || input.zz == 'hufr' || input.zz == 'hutr' || input.zz == 'hufir' || input.zz == 'ulrr' || input.zz == 'ulfr' || input.zz == 'ultr' || input.zz == 'ulfir' || input.zz == 'rafr' || input.zz == 'ratr' || input.zz == 'rafir' || input.zz == 'fetr' || input.zz == 'fefir' || input.zz == 'tifir' || input.zz == 'humerus' || input.zz == 'ulna' || input.zz == 'radius' || input.zz == 'femur' || input.zz == 'tibia' || input.zz == 'fibula' || input.zz == 'scapula' || input.zz == 'os_coxa' || input.zz == 'clavicle' ",
-								selectInput("a", "Measurements", c(Standard='single_standard', Supplemental='single_supplemental'))
+
+									selectInput("a", "Measurements", c(Standard='single_standard', Supplemental='single_supplemental'))
+
 							),		
 ################std						
 						conditionalPanel(condition = "input.testtype == 'Regression_match'",
@@ -47,7 +51,7 @@ shinyUI(
 							
 								conditionalPanel(condition = "input.zz == 'huur'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("huurside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'huur40', label = 'Hum_01', value = ''),								
@@ -56,7 +60,7 @@ shinyUI(
 											numericInput(inputId = 'huur43', label = 'Hum_04', value = ''),	
 											numericInput(inputId = 'huur44', label = 'Hum_05', value =  '')																								
 										),
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("huurside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'huur48', label = 'Uln_01', value = ''),							
@@ -71,7 +75,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hurr'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("hurrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hurr40', label = 'Hum_01', value = ''),								
@@ -80,7 +84,7 @@ shinyUI(
 											numericInput(inputId = 'hurr43', label = 'Hum_04', value = ''),	
 											numericInput(inputId = 'hurr44', label = 'Hum_05', value =  '')																								
 										),
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("hurrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hurr45', label = 'Rad_01', value = ''),								
@@ -93,7 +97,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hufr'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("hufrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hufr40', label = 'Hum_01', value = ''),								
@@ -102,7 +106,7 @@ shinyUI(
 											numericInput(inputId = 'hufr43', label = 'Hum_04', value = ''),	
 											numericInput(inputId = 'hufr44', label = 'Hum_05', value =  '')																								
 										),
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("hufrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hufr60', label = 'Fem_01', value = ''),								
@@ -121,7 +125,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hutr'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("hutrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hutr40', label = 'Hum_01', value = ''),								
@@ -130,7 +134,7 @@ shinyUI(
 											numericInput(inputId = 'hutr43', label = 'Hum_04', value = ''),	
 											numericInput(inputId = 'hutr44', label = 'Hum_05', value =  '')																								
 										),
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("hutrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hutr69', label = 'Tib_01', value = ''),								
@@ -146,7 +150,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hufir'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("hufirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hufir40', label = 'Hum_01', value = ''),								
@@ -155,7 +159,7 @@ shinyUI(
 											numericInput(inputId = 'hufir43', label = 'Hum_04', value = ''),	
 											numericInput(inputId = 'hufir44', label = 'Hum_05', value =  '')																								
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("hufirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'hufir75', label = 'Fib_01', value = ''),								
@@ -166,7 +170,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'ulrr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("ulrrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ulrr48', label = 'Uln_01', value = ''),							
@@ -175,7 +179,7 @@ shinyUI(
 											numericInput(inputId = 'ulrr51', label = 'Uln_06', value = '')
 											#numericInput(inputId = 'ulrr52', label = '52', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("ulrrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ulrr45', label = 'Rad_01', value = ''),								
@@ -187,7 +191,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'ulfr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("ulfrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ulfr48', label = 'Uln_01', value = ''),							
@@ -196,7 +200,7 @@ shinyUI(
 											numericInput(inputId = 'ulfr51', label = 'Uln_06', value = '')
 											#numericInput(inputId = 'ulfr52', label = '52', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("ulfrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ulfr60', label = 'Fem_01', value = ''),								
@@ -216,7 +220,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'ultr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("ultrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ultr48', label = 'Uln_01', value = ''),							
@@ -226,7 +230,7 @@ shinyUI(
 											#numericInput(inputId = 'ultr52', label = '52', value = '')
 										),
 										
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("ultrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ultr69', label = 'Tib_01', value = ''),								
@@ -241,7 +245,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'ulfir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("ulfirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ulfir48', label = 'Uln_01', value = ''),							
@@ -250,7 +254,7 @@ shinyUI(
 											numericInput(inputId = 'ulfir51', label = 'Uln_06', value = '')
 											#numericInput(inputId = 'ulfir52', label = '52', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("ulfirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ulfir75', label = 'Fib_01', value = ''),								
@@ -261,14 +265,14 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'rafr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("rafrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'rafr45', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'rafr46', label = 'Rad_05', value = ''),	
 											numericInput(inputId = 'rafr47', label = 'Rad_06', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("rafrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'rafr60', label = 'Fem_01', value = ''),								
@@ -286,14 +290,14 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'ratr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("ratrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ratr45', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'ratr46', label = 'Rad_05', value = ''),	
 											numericInput(inputId = 'ratr47', label = 'Rad_06', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("ratrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'ratr69', label = 'Tib_01', value = ''),								
@@ -309,14 +313,14 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'rafir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("rafirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'rafir45', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'rafir46', label = 'Rad_05', value = ''),	
 											numericInput(inputId = 'rafir47', label = 'Rad_06', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("rafirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'rafir75', label = 'Fib_01', value = ''),								
@@ -328,7 +332,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'fetr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("fetrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'fetr60', label = 'Fem_01', value = ''),								
@@ -340,7 +344,7 @@ shinyUI(
 											numericInput(inputId = 'fetr66', label = 'Fem_07', value = '')
 											#numericInput(inputId = 'fetr67', label = 'Fem_08', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("fetrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'fetr69', label = 'Tib_01', value = ''),								
@@ -354,7 +358,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'fefir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("fefirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'fefir60', label = 'Fem_01', value = ''),								
@@ -366,7 +370,7 @@ shinyUI(
 											numericInput(inputId = 'fefir66', label = 'Fem_07', value = '')
 											#numericInput(inputId = 'fefir67', label = 'Fem_08', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("fefirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'fefir75', label = 'Fib_01', value = ''),								
@@ -377,7 +381,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'tifir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("tifirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'tifir69', label = 'Tib_01', value = ''),								
@@ -386,7 +390,7 @@ shinyUI(
 											numericInput(inputId = 'tifir72', label = 'Tib_04', value = ''),
 											numericInput(inputId = 'tifir73', label = 'Tib_05', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("tifirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'tifir75', label = 'Fib_01', value = ''),								
@@ -400,7 +404,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'humerus'",
 									fluidRow(
 										h3("Humeri"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a401', label = 'Hum_01', value = ''),								
 											numericInput(inputId = 'a411', label = 'Hum_02', value = ''),		
@@ -408,7 +412,7 @@ shinyUI(
 											numericInput(inputId = 'a431', label = 'Hum_04', value = ''),	
 											numericInput(inputId = 'a441', label = 'Hum_05', value = '')																								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a402', label = 'Hum_01', value = ''),								
 											numericInput(inputId = 'a412', label = 'Hum_02', value = ''),		
@@ -423,7 +427,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'ulna'",
 									fluidRow(
 										h3("Ulnae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a481', label = 'Uln_01', value = ''),							
 											numericInput(inputId = 'a491', label = 'Uln_04', value = ''),	
@@ -431,7 +435,7 @@ shinyUI(
 											numericInput(inputId = 'a511', label = 'Uln_06', value = '')
 											#numericInput(inputId = 'a521', label = '52', value = '')																																																						
 										),
-										column(4,
+										column(6,
 										   h4("Right"),
 											numericInput(inputId = 'a482', label = 'Uln_01', value = ''),							
 											numericInput(inputId = 'a492', label = 'Uln_04', value = ''),	
@@ -446,13 +450,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'radius'",
 									fluidRow(
 										h3("Radii"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a451', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'a461', label = 'Rad_05', value = ''),	
 											numericInput(inputId = 'a471', label = 'Rad_06', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a452', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'a462', label = 'Rad_05', value = ''),	
@@ -464,7 +468,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'femur'",
 									fluidRow(
 										h3("Femora"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a601', label = 'Fem_01', value = ''),								
 											numericInput(inputId = 'a611', label = 'Fem_02', value = ''),
@@ -476,7 +480,7 @@ shinyUI(
 											#numericInput(inputId = 'a671', label = 'Fem_08', value = ''),
 											#numericInput(inputId = 'a681', label = '68', value = '')														
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a602', label = 'Fem_01', value = ''),								
 											numericInput(inputId = 'a612', label = 'Fem_02', value = ''),
@@ -495,7 +499,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'tibia'",
 									fluidRow(
 										h3("Tibiae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a691', label = 'Tib_01', value = ''),								
 											numericInput(inputId = 'a701', label = 'Tib_02', value = ''),
@@ -504,7 +508,7 @@ shinyUI(
 											numericInput(inputId = 'a731', label = 'Tib_05', value = '')	
 											#numericInput(inputId = 'a741', label = 'Tib_06', value = '')													
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a692', label = 'Tib_01', value = ''),								
 											numericInput(inputId = 'a702', label = 'Tib_02', value = ''),
@@ -520,12 +524,12 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'fibula'",
 									fluidRow(
 										h3("Fibulae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a751', label = 'Fib_01', value = ''),								
 											numericInput(inputId = 'a761', label = 'Fib_02', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a752', label = 'Fib_01', value = ''),								
 											numericInput(inputId = 'a762', label = 'Fib_02', value = '')	
@@ -537,12 +541,12 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'os_coxa'",
 									fluidRow(
 										h3("Os_coxae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a561', label = 'Osc_01', value = ''),								
 											numericInput(inputId = 'a571', label = 'Osc_02', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a562', label = 'Osc_01', value = ''),								
 											numericInput(inputId = 'a572', label = 'Osc_02', value = '')	
@@ -554,12 +558,12 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'scapula'",
 									fluidRow(
 										h3("Scapulae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a381', label = 'Sca_01', value = ''),								
 											numericInput(inputId = 'a391', label = 'Sca_02', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a382', label = 'Sca_01', value = ''),								
 											numericInput(inputId = 'a392', label = 'Sca_02', value = '')	
@@ -571,13 +575,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'clavicle'",
 									fluidRow(
 										h3("Clavicles"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a351', label = 'Cla_01', value = ''),								
 											numericInput(inputId = 'a361', label = 'Cla_04', value = ''),
 											numericInput(inputId = 'a371', label = 'Cla_05', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a352', label = 'Cla_01', value = ''),								
 											numericInput(inputId = 'a362', label = 'Cla_04', value = ''),
@@ -593,14 +597,14 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'humerus'",
 									fluidRow(
 										h3("Humeri"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a41A1', label = 'Hum_06', value = ''),								
 											numericInput(inputId = 'a42A1', label = 'Hum_07', value = ''),
 											numericInput(inputId = 'a44B1', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'a44D1', label = 'Hum_09', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a41A2', label = 'Hum_06', value = ''),								
 											numericInput(inputId = 'a42A2', label = 'Hum_07', value = ''),
@@ -614,13 +618,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'ulna'",
 									fluidRow(
 										h3("Ulnae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a51A1', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'a51B1', label = 'Uln_10', value = ''),
 											numericInput(inputId = 'a51C1', label = 'Uln_11', value = '')							
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a51A2', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'a51B2', label = 'Uln_10', value = ''),
@@ -633,7 +637,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'radius'",
 									fluidRow(
 										h3("Radii"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a47A1', label = 'Rad_07', value = ''),								
 											numericInput(inputId = 'a47B1', label = 'Rad_08', value = ''),
@@ -641,7 +645,7 @@ shinyUI(
 											numericInput(inputId = 'a47D1', label = 'Rad_04', value = ''),
 											numericInput(inputId = 'a47E1', label = 'Rad_10', value = '')							
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a47A2', label = 'Rad_07', value = ''),								
 											numericInput(inputId = 'a47B2', label = 'Rad_08', value = ''),
@@ -655,14 +659,14 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'femur'",
 									fluidRow(
 										h3("Femora"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a68A1', label = 'Fem_14', value = ''),								
 											numericInput(inputId = 'a68B1', label = 'Fem_15', value = ''),
 											numericInput(inputId = 'a68D1', label = 'Fem_16', value = ''),
 											numericInput(inputId = 'a68E1', label = 'Fem_17', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a68A2', label = 'Fem_14', value = ''),								
 											numericInput(inputId = 'a68B2', label = 'Fem_15', value = ''),
@@ -676,13 +680,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'tibia'",
 									fluidRow(
 										h3("Tibiae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a74A1', label = 'Tib_10', value = ''),								
 											numericInput(inputId = 'a74B1', label = 'Tib_11', value = ''),
 											numericInput(inputId = 'a74F1', label = 'Tib_12', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a74A2', label = 'Tib_10', value = ''),								
 											numericInput(inputId = 'a74B2', label = 'Tib_11', value = ''),
@@ -695,13 +699,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'fibula'",
 									fluidRow(
 										h3("Fibulae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a76A1', label = 'Fib_03', value = ''),								
 											numericInput(inputId = 'a76B1', label = 'Fib_04', value = ''),
 											numericInput(inputId = 'a76C1', label = 'Fib_05', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a76A2', label = 'Fib_03', value = ''),								
 											numericInput(inputId = 'a76B2', label = 'Fib_04', value = ''),
@@ -714,7 +718,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'os_coxa'",
 									fluidRow(
 										h3("Os_coxae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a59A1', label = 'Osc_14', value = ''),								
 											numericInput(inputId = 'a59B1', label = 'Osc_15', value = ''),
@@ -722,7 +726,7 @@ shinyUI(
 											numericInput(inputId = 'a59D1', label = 'Osc_05', value = ''),
 											numericInput(inputId = 'a59E1', label = 'Osc_17', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a59A2', label = 'Osc_14', value = ''),								
 											numericInput(inputId = 'a59B2', label = 'Osc_15', value = ''),
@@ -737,13 +741,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'scapula'",
 									fluidRow(
 										h3("Scapulae"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a39A1', label = 'Sca_03', value = ''),								
 											numericInput(inputId = 'a39B1', label = 'Sca_04', value = ''),
 											numericInput(inputId = 'a39D1', label = 'Sca_05', value = '')								
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a39A2', label = 'Sca_03', value = ''),								
 											numericInput(inputId = 'a39B2', label = 'Sca_04', value = ''),
@@ -756,14 +760,14 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'clavicle'",
 									fluidRow(
 										h3("Clavicles"),
-										column(4,
+										column(6,
 											h4("Left"),
 											numericInput(inputId = 'a37A1', label = 'Cla_06', value = ''),								
 											numericInput(inputId = 'a37B1', label = 'Cla_07', value = ''),
 											numericInput(inputId = 'a37E1', label = 'Cla_08', value = ''),
 											numericInput(inputId = 'a37D1', label = 'Cla_09', value = '')							
 										),
-										column(4,
+										column(6,
 											h4("Right"),
 											numericInput(inputId = 'a37A2', label = 'Cla_06', value = ''),								
 											numericInput(inputId = 'a37B2', label = 'Cla_07', value = ''),
@@ -776,7 +780,7 @@ shinyUI(
 											
 								conditionalPanel(condition = "input.zz == 'huur'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("shuurside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shuur41A', label = 'Hum_06', value = ''),								
@@ -784,7 +788,7 @@ shinyUI(
 											numericInput(inputId = 'shuur44B', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'shuur44D', label = 'Hum_09', value = '')																								
 										),
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("shuurside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shuur51A', label = 'Uln_09', value = ''),							
@@ -797,7 +801,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hurr'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("shurrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shurr41A', label = 'Hum_06', value = ''),								
@@ -805,7 +809,7 @@ shinyUI(
 											numericInput(inputId = 'shurr44B', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'shurr44D', label = 'Hum_09', value = '')																								
 										),
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("shurrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shurr47A', label = 'Rad_07', value = ''),								
@@ -820,7 +824,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hufr'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("shufrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shufr41A', label = 'Hum_06', value = ''),								
@@ -828,7 +832,7 @@ shinyUI(
 											numericInput(inputId = 'shufr44B', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'shufr44D', label = 'Hum_09', value = '')																							
 										),
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("shufrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shufr68A', label = 'Fem_14', value = ''),								
@@ -842,7 +846,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hutr'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("shutrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shutr41A', label = 'Hum_06', value = ''),								
@@ -850,7 +854,7 @@ shinyUI(
 											numericInput(inputId = 'shutr44B', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'shutr44D', label = 'Hum_09', value = '')																							
 										),
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("shutrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shutr74A', label = 'Tib_10', value = ''),								
@@ -863,7 +867,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'hufir'",
 									fluidRow(
-											column(4,
+											column(6,
 											h4("Humerus"),
 											selectInput("shufirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shufir41A', label = 'Hum_06', value = ''),								
@@ -871,7 +875,7 @@ shinyUI(
 											numericInput(inputId = 'shufir44B', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'shufir44D', label = 'Hum_09', value = '')																							
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("shufirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'shufir76A', label = 'Fib_03', value = ''),								
@@ -883,14 +887,14 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'ulrr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("sulrrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sulrr51A', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'sulrr51B', label = 'Uln_10', value = ''),
 											numericInput(inputId = 'sulrr51C', label = 'Uln_11', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("sulrrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sulrr47A', label = 'Rad_07', value = ''),								
@@ -904,14 +908,14 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'ulfr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("sulfrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sulfr51A', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'sulfr51B', label = 'Uln_10', value = ''),
 											numericInput(inputId = 'sulfr51C', label = 'Uln_11', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("sulfrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sulfr68A', label = 'Fem_14', value = ''),								
@@ -926,7 +930,7 @@ shinyUI(
 								
 								conditionalPanel(condition = "input.zz == 'ultr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("sultrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sultr51A', label = 'Uln_09', value = ''),							
@@ -934,7 +938,7 @@ shinyUI(
 											numericInput(inputId = 'sultr51C', label = 'Uln_11', value = '')
 										),
 										
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("sultrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sultr74A', label = 'Tib_10', value = ''),								
@@ -946,14 +950,14 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'ulfir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Ulna"),
 											selectInput("sulfirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sulfir51A', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'sulfir51B', label = 'Uln_10', value = ''),
 											numericInput(inputId = 'sulfir51C', label = 'Uln_11', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("sulfirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sulfir76A', label = 'Fib_03', value = ''),								
@@ -965,7 +969,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'rafr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("srafrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'srafr47A', label = 'Rad_07', value = ''),								
@@ -974,7 +978,7 @@ shinyUI(
 											numericInput(inputId = 'srafr47D', label = 'Rad_04', value = ''),
 											numericInput(inputId = 'srafr47E', label = 'Rad_10', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("srafrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'srafr68A', label = 'Fem_14', value = ''),								
@@ -987,7 +991,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'ratr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("sratrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sratr47A', label = 'Rad_07', value = ''),								
@@ -996,7 +1000,7 @@ shinyUI(
 											numericInput(inputId = 'sratr47D', label = 'Rad_04', value = ''),
 											numericInput(inputId = 'sratr47E', label = 'Rad_10', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("sratrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sratr74A', label = 'Tib_10', value = ''),								
@@ -1009,7 +1013,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'rafir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Radius"),
 											selectInput("srafirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'srafir47A', label = 'Rad_07', value = ''),								
@@ -1018,7 +1022,7 @@ shinyUI(
 											numericInput(inputId = 'srafir47D', label = 'Rad_04', value = ''),
 											numericInput(inputId = 'srafir47E', label = 'Rad_10', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("srafirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'srafir76A', label = 'Fib_03', value = ''),								
@@ -1031,7 +1035,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'fetr'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("sfetrside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sfetr68A', label = 'Fem_14', value = ''),								
@@ -1039,7 +1043,7 @@ shinyUI(
 											numericInput(inputId = 'sfetr68D', label = 'Fem_16', value = ''),
 											numericInput(inputId = 'sfetr68E', label = 'Fem_17', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("sfetrside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sfetr74A', label = 'Tib_10', value = ''),								
@@ -1051,7 +1055,7 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'fefir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Femur"),
 											selectInput("sfefirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sfefir68A', label = 'Fem_14', value = ''),								
@@ -1059,7 +1063,7 @@ shinyUI(
 											numericInput(inputId = 'sfefir68D', label = 'Fem_16', value = ''),
 											numericInput(inputId = 'sfefir68E', label = 'Fem_17', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("sfefirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'sfefir76A', label = 'Fib_03', value = ''),								
@@ -1071,14 +1075,14 @@ shinyUI(
 								),
 								conditionalPanel(condition = "input.zz == 'tifir'",
 									fluidRow(
-										column(4,
+										column(6,
 											h4("Tibia"),
 											selectInput("stifirside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'stifir74A', label = 'Tib_10', value = ''),								
 											numericInput(inputId = 'stifir74B', label = 'Tib_11', value = ''),
 											numericInput(inputId = 'stifir74F', label = 'Tib_12', value = '')
 										),
-										column(4,
+										column(6,
 											h4("Fibula"),
 											selectInput("stifirside2", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'stifir76A', label = 'Fib_03', value = ''),								
@@ -1093,20 +1097,20 @@ shinyUI(
 														
 						conditionalPanel(condition = "input.zz == 'hu' | input.zz == 'hr' | input.zz == 'hs' | input.zz == 'hss' | input.zz == 'fi' | input.zz == 'ft' | input.zz == 'ftt'",
 							fluidRow(
-									column(5,
+								column(12,
 										selectInput("side1", "Side", c(Left='Left', Right='Right'))
-									)							
-								)
+
+								))
 						),
 
 						conditionalPanel(condition = "input.zz == 'hu'",								
 								
 								fluidRow(
 								h4("Humerus_Ulna"),
-									column(4,
+									column(6,
 										numericInput(inputId = 'b41A1', label = 'Hum_06', value = '')
 									),
-									column(4,							
+									column(6,							
 										numericInput(inputId = 'b51C1', label = 'Uln_11', value = '')								
 									)
 								)
@@ -1116,10 +1120,10 @@ shinyUI(
 						conditionalPanel(condition = "input.zz == 'hr'",
 								fluidRow(
 								h4("Humerus_Radius"),
-									column(4,
+									column(6,
 										numericInput(inputId = 'b41A12', label = 'Hum_06', value = '')								
 									),
-									column(4,							
+									column(6,							
 										numericInput(inputId = 'b47D1', label = 'Rad_04', value = '')	
 									)
 								)							
@@ -1128,11 +1132,11 @@ shinyUI(
 						conditionalPanel(condition = "input.zz == 'hs'",
 								fluidRow(
 								h4("Humerus_Scapula1"),
-									column(4,
+									column(6,
 										numericInput(inputId = 'b421', label = 'Hum_07', value = '')
 
 									),
-									column(4,							
+									column(6,							
 										numericInput(inputId = 'b39A1', label = 'Sca_03', value = '')
 
 									)
@@ -1141,11 +1145,11 @@ shinyUI(
 						conditionalPanel(condition = "input.zz == 'hss'",
 								fluidRow(
 								h4("Humerus_Scapula2"),
-									column(4,
+									column(6,
 
 										numericInput(inputId = 'b42A1', label = 'Hum_07', value = '')							
 									),
-									column(4,							
+									column(6,							
 
 										numericInput(inputId = 'b39B1', label = 'Sca_04', value = '')	
 									)
@@ -1154,10 +1158,10 @@ shinyUI(
 						conditionalPanel(condition = "input.zz == 'fi'",
 								fluidRow(
 								h4("Femur_Os_coxa"),
-									column(4,
+									column(6,
 										numericInput(inputId = 'b631', label = 'Fem_04', value = '')								
 									),
-									column(4,							
+									column(6,							
 										numericInput(inputId = 'b59E1', label = 'Osc_17', value = '')	
 									)
 								)							
@@ -1166,10 +1170,10 @@ shinyUI(
 						conditionalPanel(condition = "input.zz == 'ft'",
 								fluidRow(
 								h4("Femur_Tibia"),
-									column(4,
+									column(6,
 										numericInput(inputId = 'b6311', label = 'Fem_03', value = '')								
 									),
-									column(4,							
+									column(6,							
 										numericInput(inputId = 'b701', label = 'Tib_02', value = '')	
 									)
 								)							
@@ -1178,28 +1182,40 @@ shinyUI(
 						conditionalPanel(condition = "input.zz == 'ftt'",
 								fluidRow(
 								h4("Fibula_Tibia"),
-									column(4,
+									column(6,
 										numericInput(inputId = 'b76C1', label = 'Fib_05', value = '')								
 									),
-									column(4,							
+									column(6,							
 										numericInput(inputId = 'b74F1', label = 'Tib_12', value = '')	
 									)
 								)							
 						),
 							fluidRow(
-							column(4,
+							column(6,
 							textInput(inputId = 'ID1', label = '1st ID #', value = 'X1')	
 							),
-							column(4,
+							column(6,
 							textInput(inputId = 'ID2', label = '2nd ID #', value = 'X2')		
 							)
 							),
 		
-
-							actionButton("proc","Process"),
-							actionButton("settings2","Settings"),
-							downloadButton("downloadData2", "Save results"),
-							width=3
+							fluidRow(
+								column(6,
+									actionButton("settings2","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("proc","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6),
+								column(6,
+									downloadButton("downloadData2", "save    ")
+								)
+							),
+							
+							width=2
 						
 					),
 					
@@ -1255,21 +1271,37 @@ shinyUI(
 					sidebarPanel(
 					
 					
-						radioButtons('testtype2', '', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
+						selectInput('testtype2', 'Analysis', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
 
 					
-							selectInput('sep', 'Separator', c(Comma=',', Semicolon=';', Tab='\t'),','),
+
 							uiOutput("testtype2"),
 							
 							conditionalPanel(condition = "input.testtype2 == 'Regression_match' || input.bone == 'alttp' || input.bone == 'altt' || input.bone == 'humerus' || input.bone == 'ulna' || input.bone == 'radius' || input.bone == 'femur' || input.bone == 'tibia' || input.bone == 'fibula' || input.bone == 'scapula' || input.bone == 'os_coxa' || input.bone == 'clavicle' ",
 								selectInput('standard', 'Measurements', c(Standard='Standard', Supplemental='Supplemental'),'Standard')		
 							),		
 							uiOutput('resettableInput'),	
-							actionButton("clearFile1", "Clear Data"),
-							actionButton("pro","Process"),
-							actionButton("settings1","Settings"),
-							downloadButton("downloadData", "Save results"),
-							width=3
+
+
+							fluidRow(
+								column(6,
+									actionButton("settings1","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("pro","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile1", "clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("downloadData", "save    ")
+								)
+							),
+
+							width=2
 					),
 					mainPanel(
 						htmlOutput('contents'),
@@ -1486,19 +1518,34 @@ shinyUI(
 
 		
 		
-		navbarMenu("Outlier sorting",		
+		navbarMenu("Outlier sorting", 		
 			tabPanel("Metric",
 				sidebarLayout(
 					sidebarPanel(					
-							selectInput('sep3', 'Separator', c(Comma=',', Semicolon=';', Tab='\t'),','),
+
 							uiOutput("testtype3"),
 							selectInput("outlierside", "Side", c(Left='Left', Right='Right', Both='Both'), 'Both'),
 							uiOutput('resettableInput3'),	
-							actionButton("clearFile3", "Clear Data"),
-							actionButton("pro3","Process"),
-							actionButton("settings3","Settings"),
-							downloadButton("outlierdownload", "Save results"),
-							width=3
+
+							fluidRow(
+								column(6,
+									actionButton("settings3","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("pro3","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile3", "clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("outlierdownload", "save    ")
+								)
+							),
+
+							width=2
 					),
 					mainPanel(
 					
@@ -1590,7 +1637,7 @@ shinyUI(
 			tabPanel("Stature",
 				sidebarLayout(
 					sidebarPanel(					
-							selectInput('sep4', 'Separator', c(Comma=',', Semicolon=';', Tab='\t'),','),
+
 							radioButtons(inputId = 'metric_type2', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'in'),
 							uiOutput("testtype4"),
 							selectInput("outlierside4", "Side", c(Left='Left', Right='Right', Both='Both'), 'Both'),
@@ -1603,11 +1650,25 @@ shinyUI(
 							),
 							
 							uiOutput('resettableInput4'),	
-							actionButton("clearFile4", "Clear Data"),
-							actionButton("pro4","Process"),
-							actionButton("settings4","Settings"),
-							downloadButton("outlierdownload4", "Save results"),
-							width=3
+
+							fluidRow(
+								column(6,
+									actionButton("settings4","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("pro4","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile4", "clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("outlierdownload4", "save    ")
+								)
+							),
+							width=2
 					),
 					mainPanel(
 					
@@ -1692,17 +1753,32 @@ shinyUI(
 				titlePanel(""),
 					sidebarLayout(
 						sidebarPanel(
-							radioButtons(inputId ="fragcomp", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
+							selectInput(inputId ="fragcomp", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
 							uiOutput('resettableInput2D'),	
 							uiOutput('resettableInput2DD'),
 							conditionalPanel(condition = "input.fragcomp == 'Complete'",
 								uiOutput('mspec')
 							),
-							actionButton("clearFile2D", "Clear Data"),
-							actionButton("settings2D","Settings"),
-							actionButton("pro2D","Process"),
-							downloadButton("downloadData2D", "Save results"),
-							width = 3
+
+
+							fluidRow(
+								column(6,
+									actionButton("settings2D","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("pro2D","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile2D", "clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("downloadData2D", "save    ")
+								)
+							),
+							width = 2
 						),
 						mainPanel(
 							uiOutput("contents2D"),
@@ -1775,11 +1851,12 @@ shinyUI(
 					sidebarPanel(	
 
 
-							uiOutput("antestat_test"),
+
 								radioButtons(inputId = 'metric_type', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'cm'),
+							uiOutput("antestat_test"),
 								selectInput("antestat_population", "Population", c(DPAA_any_male = "DPAA-any-male", DPAA_white_male = "DPAA-white-male", DPAA_black_male = "DPAA-black-male",FDB_20th_FStat_any='20th-FStat-any', FDB_20th_FStat_white_male='20th-FStat-white-male', FDB_20th_FStat_white_female='20th-FStat-white-female', FDB_20th_FStat_black_male='20th-FStat-black-male', FDB_20th_FStat_black_female='20th-FStat-black-female', Trotter_any_male='Trotter-any-male', Trotter_black_male='Trotter-black-male', Trotter_white_male='Trotter-white-male'), 'Trotter-any-male'),
 									fluidRow(
-										column(4,
+										column(6,
 											textInput(inputId = 'Postmortem_ID', label = 'Postmortem ID', value = 'X2'),	
 											conditionalPanel(condition = "input.antestat == 'humerus'",
 												numericInput(inputId = 'hu_antestat', label = 'Hum_01', value = '')																															
@@ -1801,18 +1878,33 @@ shinyUI(
 											),
 											selectInput("ante_side", "Side", c(Left='Left', Right='Right'))
 										),
-										column(4,
+										column(6,
 											textInput(inputId = 'Antemortem_ID', label = 'Antemortem ID', value = 'X1'),	
 											numericInput(inputId = 'antestat_input', label = 'Stature', value = '')							
 
 										)
 									),
 		
+							fluidRow(
+								column(6,
+									actionButton("settingsante","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("proantestat","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6
 
-							actionButton("proantestat","Process"),
-							actionButton("settingsante","Settings"),
-							downloadButton("downloadantestat", "Save results"),
-							width=3
+								),
+								column(6,
+									downloadButton("downloadantestat", "save    ")
+								)
+							),
+
+
+							width=2
 					),
 					mainPanel(
 					
@@ -1846,17 +1938,34 @@ shinyUI(
 					sidebarPanel(	
 
 
-							uiOutput("antestat_testm"),
+
 							radioButtons(inputId = 'metric_typem', 'Stature metric', c("mm", "cm", "in"), inline = TRUE, selected = 'cm'),
+							uiOutput("antestat_testm"),
 							selectInput("antestat_populationm", "Population", c(DPAA_any_male = "DPAA-any-male", DPAA_white_male = "DPAA-white-male", DPAA_black_male = "DPAA-black-male",FDB_20th_FStat_any='20th-FStat-any', FDB_20th_FStat_white_male='20th-FStat-white-male', FDB_20th_FStat_white_female='20th-FStat-white-female', FDB_20th_FStat_black_male='20th-FStat-black-male', FDB_20th_FStat_black_female='20th-FStat-black-female', Trotter_any_male='Trotter-any-male', Trotter_black_male='Trotter-black-male', Trotter_white_male='Trotter-white-male'), 'Trotter-any-male'),
 
 							uiOutput('resettableInputante1'),	
 							uiOutput('resettableInputante2'),	
-							actionButton("clearFile1ante", "Clear Data"),
-							actionButton("proantestatm","Process"),
-							actionButton("settingsantem","Settings"),
-							downloadButton("downloadantestatm", "Save results"),
-							width=3
+
+							fluidRow(
+								column(6,
+									actionButton("settingsantem","Settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("proantestatm","Process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile1ante", "clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("downloadantestatm", "save    ")
+								)
+							),
+
+
+							width=2
 					),
 					mainPanel(
 					

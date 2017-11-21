@@ -1,4 +1,12 @@
 	################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison 
+
+
+
+
+
+
+
+
 	output$contents2 <- renderUI({
 	   HTML(paste("Select the parameters and enter measurements to begin."))
 	})
@@ -9,17 +17,23 @@
 	observeEvent(input$testtype, {
 		if(input$testtype == 'Pair_match') {
 			output$testtype <- renderUI({
-				selectInput('zz', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula', Scapula='scapula', Os_coxa='os_coxa', Clavicle='clavicle'),'humerus')
+
+					selectInput('zz', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula', Scapula='scapula', Os_coxa='os_coxa', Clavicle='clavicle'),'humerus')
+
 			})
 		}
 		if(input$testtype == 'Articulation_match') {
 			output$testtype <- renderUI({
-				selectInput('zz', 'Elements', c(Humerus_Ulna='hu',Humerus_Radius='hr', Humerus_Scapula1='hs', Humerus_Scapula2='hss', Femur_Os_coxa='fi', Femur_Tibia='ft', Fibula_Tibia='ftt'))
+
+					selectInput('zz', 'Elements', c(Humerus_Ulna='hu',Humerus_Radius='hr', Humerus_Scapula1='hs', Humerus_Scapula2='hss', Femur_Os_coxa='fi', Femur_Tibia='ft', Fibula_Tibia='ftt'))
+
 			})
 		}
 		if(input$testtype == 'Regression_match') {
 			output$testtype <- renderUI({
-				selectInput('zz', 'Elements', c(Humerus_Ulna = 'huur', Humerus_Radius = 'hurr', Humerus_Femur = 'hufr', Humerus_Tibia = 'hutr', Humerus_Fibula = 'hufir', Ulna_Radius = 'ulrr', Ulna_Femur = 'ulfr', Ulna_Tibia = 'ultr', Ulna_Fibula = 'ulfir', Radius_Femur = 'rafr', Radius_Tibia = 'ratr', Radius_Fibula = 'rafir', Femur_Tibia = 'fetr', Femur_Fibula = 'fefir', Tibia_Fibula = 'tifir'))
+
+					selectInput('zz', 'Elements', c(Humerus_Ulna = 'huur', Humerus_Radius = 'hurr', Humerus_Femur = 'hufr', Humerus_Tibia = 'hutr', Humerus_Fibula = 'hufir', Ulna_Radius = 'ulrr', Ulna_Femur = 'ulfr', Ulna_Tibia = 'ultr', Ulna_Fibula = 'ulfir', Radius_Femur = 'rafr', Radius_Tibia = 'ratr', Radius_Fibula = 'rafir', Femur_Tibia = 'fetr', Femur_Fibula = 'fefir', Tibia_Fibula = 'tifir'))
+
 			})
 		}
 	})

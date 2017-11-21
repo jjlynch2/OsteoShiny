@@ -174,7 +174,7 @@
 			return(NULL)
 		}
 
-		tempdata1 <- read.csv(inFile$datapath, header=TRUE, sep=input$sep, na.strings=c("", " ", "NA"))## see na.strings forces NA for blanks, spaces, etc
+		tempdata1 <- read.csv(inFile$datapath, header=TRUE, sep=",", na.strings=c("", " ", "NA"))## see na.strings forces NA for blanks, spaces, etc
 
 		#checks if measurements are numeric and converts alpha characters to numeric   
 		tempdataa <- tempdata1[,1:3]
@@ -405,12 +405,12 @@
 				output$testtype2 <- renderUI({
 					#bone and side predictor predicted
 					fluidRow(
-						column(4,
+						column(6,
 							h4("Predictor"),
 							selectInput("assside1", "Side", c(Left='Left', Right='Right')),
 							selectInput("assbone1", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"))
 						),
-						column(4,
+						column(6,
 							h4("Predicted"),
 							selectInput("assside2", "Side", c(Left='Left', Right='Right')),
 							selectInput("assbone2", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"))

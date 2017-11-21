@@ -1,6 +1,8 @@
     ####This is the antemortem - postmortem comparison server side code made for local import into server.r
 	output$antestat_test <- renderUI({
+
 		selectInput('antestat', 'Elements', c(Humerus='humerus', Ulna='ulna', Radius='radius', Femur='femur', Tibia='tibia', Fibula='fibula'),'humerus')
+
 	})
 	
 	
