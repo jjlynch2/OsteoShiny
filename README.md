@@ -22,6 +22,8 @@ Updated Help page information.
 
 Updated user manual (15.NOVEMBER.2017).
 
+Overhaul of UI to simplify
+
 
 Moderate changes:
 
