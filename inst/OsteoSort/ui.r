@@ -17,7 +17,7 @@ shinyUI(
 	navbarPage(theme = shinytheme("flatly"), 
 			windowTitle = "OsteoSort 1.2.2",
 			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
-				useShinyjs(),
+
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages.</p><p>&nbsp;</p> <p>The methods are split into four primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p><p>The input of postmortem measurement and antemortem data requires standardized templates, both of which can be accessed below."),
 					HTML("<h1>Files</h1><hr /><p>&nbsp;</p>"),
