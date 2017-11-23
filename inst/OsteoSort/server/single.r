@@ -352,7 +352,7 @@
 				dft <- data.frame(dft)
 				colnames(dft)[1:3] <- c("ID","Side","Element")
 				wtf <- pm.input(bone=toString(input$zz), sort=dft, measurement_standard=strsplit(input$a,"_")[[1]][2],threshold=1)                                      
-				direc2 <- pm.ttest(ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)  
+				direc2 <- pm.ttest(tails = input$tails1, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)  
 				tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 				output$table2 <- DT::renderDataTable({
 					DT::datatable(tempDF, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)
@@ -363,7 +363,7 @@
 			if(all(is.na(dft[,7:length(dft)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				dft <- data.frame(dft)
 				wtf <- art.input(bone=toString(input$zz), sort=dft)
-				direc2 <- art.ttest(ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)           
+				direc2 <- art.ttest(tails = input$tails1, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)           
 				tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 				output$table2 <- DT::renderDataTable({
 					DT::datatable(tempDF, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)

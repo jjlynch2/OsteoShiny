@@ -33,6 +33,8 @@ Redesigned the 2D interface and fixed several minor bugs resulting in shiny cras
 
 Added dilated hausdorff distance to 2D settings.
 
+Added statistical option to change from 1 to 2 tail t-tests
+
 
 Bug fixes:
 

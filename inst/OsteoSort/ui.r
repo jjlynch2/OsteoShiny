@@ -1210,10 +1210,12 @@ shinyUI(
 							fluidRow(
 								column(6),
 								column(6,
-									downloadButton("downloadData2", "save    ")
+									downloadButton("downloadData2", "save")
 								)
 							),
-							
+							tags$style(type = "text/css", "#downloadData2 { width:110% }"),
+							tags$style(type = "text/css", "#settings2 { width:110% }"),
+							tags$style(type = "text/css", "#proc { width:110% }"),
 							width=2
 						
 					),
@@ -1245,10 +1247,12 @@ shinyUI(
 								sliderInput(inputId = "alphalevels", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
 
 
-								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
+
+								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = FALSE),
 								conditionalPanel(condition = "input.absolutevalues",
-									checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
+									checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = FALSE)
 								),
+								sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=2, step=1),
 								checkboxInput(inputId = "testagainstsingle", label = "Zero reference sample mean", value = FALSE)
 							)
 							)	
@@ -1299,7 +1303,10 @@ shinyUI(
 									downloadButton("downloadData", "save    ")
 								)
 							),
-
+							tags$style(type = "text/css", "#settings1 { width:110% }"),
+							tags$style(type = "text/css", "#pro { width:110% }"),
+							tags$style(type = "text/css", "#clearFile1 { width:110% }"),
+							tags$style(type = "text/css", "#downloadData { width:110% }"),
 							width=2
 					),
 					mainPanel(
@@ -1485,11 +1492,11 @@ shinyUI(
 
 									sliderInput(inputId = "asspredlevel", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step=0.01),
 									sliderInput(inputId = "alphalevel", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-									checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
+									checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = FALSE),
 									conditionalPanel(condition = "input.absolutevalue",
-										checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
+										checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = FALSE)
 									),
-
+								sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=2, step=1),
 									checkboxInput(inputId = "testagainst", label = "Zero reference sample mean", value = FALSE),
 									checkboxInput(inputId = "research", label = "Calculate research statistics", value = FALSE)
 								),
@@ -1543,7 +1550,10 @@ shinyUI(
 									downloadButton("outlierdownload", "save    ")
 								)
 							),
-
+							tags$style(type = "text/css", "#settings3 { width:110% }"),
+							tags$style(type = "text/css", "#pro3 { width:110% }"),
+							tags$style(type = "text/css", "#clearFile3 { width:110% }"),
+							tags$style(type = "text/css", "#outlierdownload { width:110% }"),
 							width=2
 					),
 					mainPanel(
@@ -1667,6 +1677,10 @@ shinyUI(
 									downloadButton("outlierdownload4", "save    ")
 								)
 							),
+							tags$style(type = "text/css", "#settings4 { width:110% }"),
+							tags$style(type = "text/css", "#pro4 { width:110% }"),
+							tags$style(type = "text/css", "#clearFile4 { width:110% }"),
+							tags$style(type = "text/css", "#outlierdownload4 { width:110% }"),
 							width=2
 					),
 					mainPanel(
@@ -1777,6 +1791,10 @@ shinyUI(
 									downloadButton("downloadData2D", "save    ")
 								)
 							),
+							tags$style(type = "text/css", "#settings2D { width:110% }"),
+							tags$style(type = "text/css", "#pro2D { width:110% }"),
+							tags$style(type = "text/css", "#clearFile2D { width:110% }"),
+							tags$style(type = "text/css", "#downloadData2D { width:110% }"),
 							width = 2
 						),
 						mainPanel(
@@ -1903,7 +1921,9 @@ shinyUI(
 								)
 							),
 
-
+							tags$style(type = "text/css", "#settingsante { width:110% }"),
+							tags$style(type = "text/css", "#proantestat { width:110% }"),
+							tags$style(type = "text/css", "#downloadantestat { width:110% }"),
 							width=2
 					),
 					mainPanel(
@@ -1964,7 +1984,10 @@ shinyUI(
 								)
 							),
 
-
+							tags$style(type = "text/css", "#settingsantem { width:110% }"),
+							tags$style(type = "text/css", "#proantestatm { width:110% }"),
+							tags$style(type = "text/css", "#clearFile1ante { width:110% }"),
+							tags$style(type = "text/css", "#downloadantestatm { width:110% }"),
 							width=2
 					),
 					mainPanel(
