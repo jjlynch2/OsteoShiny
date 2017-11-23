@@ -1199,10 +1199,10 @@ shinyUI(
 		
 							fluidRow(
 								column(6,
-									actionButton("settings2","Settings", icon=icon("keyboard-o"))
+									actionButton("settings2","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("proc","Process ", icon = icon("cog"))
+									actionButton("proc","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
@@ -1247,11 +1247,11 @@ shinyUI(
 
 
 
-								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = FALSE),
+								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
 								conditionalPanel(condition = "input.absolutevalues",
-									checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = FALSE)
+									checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
 								),
-								sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=2, step=1),
+								sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=1, step=1),
 								checkboxInput(inputId = "testagainstsingle", label = "Zero reference sample mean", value = FALSE)
 							)
 							)	
@@ -1287,10 +1287,10 @@ shinyUI(
 
 							fluidRow(
 								column(6,
-									actionButton("settings1","Settings", icon=icon("keyboard-o"))
+									actionButton("settings1","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("pro","Process ", icon = icon("cog"))
+									actionButton("pro","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
@@ -1491,11 +1491,11 @@ shinyUI(
 
 									sliderInput(inputId = "asspredlevel", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step=0.01),
 									sliderInput(inputId = "alphalevel", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-									checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = FALSE),
+									checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
 									conditionalPanel(condition = "input.absolutevalue",
-										checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = FALSE)
+										checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
 									),
-								sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=2, step=1),
+								sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=1, step=1),
 									checkboxInput(inputId = "testagainst", label = "Zero reference sample mean", value = FALSE),
 									checkboxInput(inputId = "research", label = "Calculate research statistics", value = FALSE)
 								),
@@ -1534,10 +1534,10 @@ shinyUI(
 
 							fluidRow(
 								column(6,
-									actionButton("settings3","Settings", icon=icon("keyboard-o"))
+									actionButton("settings3","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("pro3","Process ", icon = icon("cog"))
+									actionButton("pro3","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
@@ -1661,10 +1661,10 @@ shinyUI(
 
 							fluidRow(
 								column(6,
-									actionButton("settings4","Settings", icon=icon("keyboard-o"))
+									actionButton("settings4","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("pro4","Process ", icon = icon("cog"))
+									actionButton("pro4","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
@@ -1775,10 +1775,10 @@ shinyUI(
 
 							fluidRow(
 								column(6,
-									actionButton("settings2D","Settings", icon=icon("keyboard-o"))
+									actionButton("settings2D","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("pro2D","Process ", icon = icon("cog"))
+									actionButton("pro2D","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
@@ -1904,10 +1904,10 @@ shinyUI(
 		
 							fluidRow(
 								column(6,
-									actionButton("settingsante","Settings", icon=icon("keyboard-o"))
+									actionButton("settingsante","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("proantestat","Process ", icon = icon("cog"))
+									actionButton("proantestat","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
@@ -1967,10 +1967,10 @@ shinyUI(
 
 							fluidRow(
 								column(6,
-									actionButton("settingsantem","Settings", icon=icon("keyboard-o"))
+									actionButton("settingsantem","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("proantestatm","Process ", icon = icon("cog"))
+									actionButton("proantestatm","process ", icon = icon("cog"))
 								)
 							),
 							fluidRow(br()),
