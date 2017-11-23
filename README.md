@@ -35,6 +35,9 @@ Added dilated hausdorff distance to 2D settings.
 
 Added statistical option to change from 1 to 2 tail t-tests
 
+Removed shinyBS dep for bsModals
+
+Switched terminology from cores to threads for functions
 
 Bug fixes:
 

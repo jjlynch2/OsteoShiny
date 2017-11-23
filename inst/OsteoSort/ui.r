@@ -5,7 +5,6 @@
 options(warn = -1)
 
 library(shiny)
-library(shinyBS)
 library(shinythemes)
 
 #Navigation bar interface

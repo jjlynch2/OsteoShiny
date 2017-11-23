@@ -91,7 +91,7 @@
 		ncores2D$ncores2D <- input$ncores2D
 	})
 	output$ncores2D <- renderUI({
-		sliderInput(inputId = "ncores2D", label = "Number of cores", min=1, max=detectCores(), value=1, step =1)
+		sliderInput(inputId = "ncores2D", label = "Number of threads", min=1, max=detectCores(), value=1, step =1)
 	})
 
 
@@ -250,7 +250,7 @@
 
 			out1 <- outline.images(imagelist1 = input$rightimages$name, imagelist2 = input$leftimages$name, fragment = fragment, threshold =nthreshold$nthreshold, scale = scale2D$scale2D, mirror = mirror2D$mirror2D, npoints = npoints2D$npoints2D, nharmonics = efaH2D$efaH2D)
 
-			out2 <- match.2d(outlinedata = out1, hide_distances = hidedist$hidedist, iteration = icp2D$icp2D, fragment = fragment, dist = max_avg_distance$max_avg_distance, n_regions = n_regions$n_regions, n_lowest_distances = shortlistn$shortlistn, output_options = c(fileoutput2Dexcel1$fileoutput2Dexcel1, fileoutput2Dexcel2$fileoutput2Dexcel2, fileoutput2Dplot$fileoutput2Dplot, fileoutput2Dtps$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = trans2D$trans2D, cores = ncores2D$ncores2D, test = distance2D$distance2D, temporary_mean_specimen = input$mspec, mean_iterations = meanit2D$meanit2D)
+			out2 <- match.2d(outlinedata = out1, hide_distances = hidedist$hidedist, iteration = icp2D$icp2D, fragment = fragment, dist = max_avg_distance$max_avg_distance, n_regions = n_regions$n_regions, n_lowest_distances = shortlistn$shortlistn, output_options = c(fileoutput2Dexcel1$fileoutput2Dexcel1, fileoutput2Dexcel2$fileoutput2Dexcel2, fileoutput2Dplot$fileoutput2Dplot, fileoutput2Dtps$fileoutput2Dtps), sessiontempdir = sessiontemp, transformation = trans2D$trans2D, threads = ncores2D$ncores2D, test = distance2D$distance2D, temporary_mean_specimen = input$mspec, mean_iterations = meanit2D$meanit2D)
 			direc <- out2[[3]]
 		
 

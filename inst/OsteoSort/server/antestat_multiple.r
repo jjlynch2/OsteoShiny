@@ -5,7 +5,7 @@
 		numbercoresglobalm$ncorem <- input$numbercoresm
 	})
 	output$ncoresm <- renderUI({
-		sliderInput(inputId = "numbercoresm", label = "Number of cores", min=1, max=detectCores(), value=1, step =1)
+		sliderInput(inputId = "numbercoresm", label = "Number of threads", min=1, max=detectCores(), value=1, step =1)
 	})
 
 	 ####This is the antemortem - postmortem comparison server side code made for local import into server.r
@@ -65,7 +65,7 @@
 
 			#calls sorting function
 			outtemp1m <- antestat.input(bone = input$antestatm, metric = input$metric_typem, antemortem_stature = tempdata1m, postmortem_measurement = tempdata2m, population = input$antestat_populationm)
-			outtemp2m <- antestat.regtest(cores = numbercoresglobalm$ncorem, sort = outtemp1m[[1]], ref = outtemp1m[[2]], prediction_interval = input$predlevelantestatm, alphalevel = input$alphalevelsantestatm, alphatest = input$alphatest1m, output_options = c(input$fileoutputant1m, input$fileoutputant2m), sessiontempdir = sessiontemp)
+			outtemp2m <- antestat.regtest(threads = numbercoresglobalm$ncorem, sort = outtemp1m[[1]], ref = outtemp1m[[2]], prediction_interval = input$predlevelantestatm, alphalevel = input$alphalevelsantestatm, alphatest = input$alphatest1m, output_options = c(input$fileoutputant1m, input$fileoutputant2m), sessiontempdir = sessiontemp)
 		  
 	coo <- ""
 	if(input$research_mm) {

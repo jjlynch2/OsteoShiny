@@ -6,17 +6,17 @@ Description: This package allows the statistical osteological sorting of comming
     human skeletal remains using metric, 2D, and 3D data in a shiny GUI. http://osteosort.net
 Depends:
     OsteoSort,
-    shinyBS,
     plyr,
     shinythemes,
+    htmltools,
     zip,
     DT
 License: GPL-2
 LazyData: false
 Imports:
     shiny,
-    shinyBS,
     shinythemes,
+    htmltools,
     zip,
     OsteoSort
 RoxygenNote: 6.0.1

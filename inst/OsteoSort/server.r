@@ -5,7 +5,6 @@
 #' shinyServer()
 
 library(shiny)
-library(shinyBS)
 library(plyr)	#loaded for multiple.r
 
 options(shiny.maxRequestSize=30*1024^2) #increased file upload size to 30MB
