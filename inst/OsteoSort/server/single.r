@@ -333,7 +333,7 @@
 			if(all(is.na(reghum[,4:length(reghum)])) && all(is.na(reguln[,4:length(reguln)]))) {removeModal(); return(NULL)}###stops crashing if empty
 				if(input$prr == "Bone1") { sort1 <- reghum; sort2 <- reguln}
 				if(input$prr == "Bone2") { sort2 <- reghum; sort1 <- reguln}
-				
+
 				if(input$regtesttypes == "PCA-CCA") {regtypee <- TRUE}
 				if(input$regtesttypes == "Simple") {regtypee <- FALSE}
 

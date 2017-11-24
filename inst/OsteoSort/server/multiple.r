@@ -274,11 +274,13 @@
 				if(is.null(threshold2)) {threshold2 <- 1}
 
 
-				if(input$regtesttypem == "PCA-CCA") {regtypee <- TRUE}
-				if(input$regtesttypem == "Simple") {regtypee <- FALSE}
+
 
              
 			}
+				if(input$regtesttypem == "PCA-CCA") {regtypee <- TRUE}
+				if(input$regtesttypem == "Simple") {regtypee <- FALSE}
+
 			wtf <- reg.input(threshold=c(threshold, threshold2),sort = tempdata1, bone1 = input$assbone1, side1 = input$assside1, bone2 = input$assbone2, side2 = input$assside2, measurement_standard = input$standard, measurements1 = measurements, measurements2 = measurements2)
 			direc2 <- reg.multitest(sort = wtf[[1]], ref = wtf[[2]], splitn = wtf[[3]], prediction_interval = input$asspredlevel, alphatest = input$alphapred2, output_options = c(input$fileoutput1, input$fileoutput1plot), threads = numbercoresglobal$ncore, test = regtypee, alphalevel = input$alphalevel)
 			ll <- nrow(direc2[[2]]) + nrow(direc2[[3]])
@@ -287,24 +289,24 @@
 		if(all(is.na(direc2[[2]])) && all(is.na(direc2[[3]]))) {ll <- 0; nmatch <- 0; lent <- 0}
 		
 		#if combinations exist, produces output
-		if(!all(is.na(direc2[[2]])) || !all(is.na(direc2[[3]])) && input$fileoutput1) {
+		if(!all(is.na(direc2[[2]])) || !all(is.na(direc2[[3]]))) {
 
-			direc <- direc2[[1]]
-			nmatch <- nrow(direc2[[2]])
+				direc <- direc2[[1]]
+				nmatch <- nrow(direc2[[2]])
+				if(input$fileoutput1 || input$fileoutput1plot) {
+					files <- list.files(direc, recursive = TRUE)
+					setwd(direc)
 
-			files <- list.files(direc, recursive = TRUE)
-			setwd(direc)
 
+						zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files[1], compression = 1)
+					for(file_na in files[-1]) {
+						zip:::zip_append(zipfile = paste(direc,'.zip',sep=''), files = file_na, compression = 1)
+					}
 
-				zip:::zip(zipfile = paste(direc,'.zip',sep=''), files = files[1], compression = 1)
-			for(file_na in files[-1]) {
-				zip:::zip_append(zipfile = paste(direc,'.zip',sep=''), files = file_na, compression = 1)
-			}
-
-			setwd(sessiontemp)
-
-			lent <- length(unique(rbind(as.matrix(direc2[[2]][1]),as.matrix(direc2[[2]][4])))) #fix for number of specimens matched
-			if(input$research) { lent <- lent * 2} ################FIX for statistics having same id.
+					setwd(sessiontemp)
+				}
+				lent <- length(unique(rbind(as.matrix(direc2[[2]][1]),as.matrix(direc2[[2]][4])))) #fix for number of specimens matched
+				if(input$research) { lent <- lent * 2} ################FIX for statistics having same id.
 		}
 		temp1 <- direc2[[2]][1]
 		temp2 <- direc2[[2]][4]
@@ -366,20 +368,21 @@
 
 		#Output results                  
 
-
-		#Download handler       
-			output$downloadData <- downloadHandler(
-				filename <- function() {
-				paste("results.zip")
-				},      
-				content = function(file) {
-					setwd(direc)
-					file.copy(paste(direc,'.zip',sep=''), file)  
-					setwd(sessiontemp)    
-				},
-				contentType = "application/zip"
-			)
-			setwd(sessiontemp)
+			if(input$fileoutput1 || input$fileoutput1plot) {
+			#Download handler       
+				output$downloadData <- downloadHandler(
+					filename <- function() {
+					paste("results.zip")
+					},      
+					content = function(file) {
+						setwd(direc)
+						file.copy(paste(direc,'.zip',sep=''), file)  
+						setwd(sessiontemp)    
+					},
+					contentType = "application/zip"
+				)
+				setwd(sessiontemp)
+			}
 
 			for(i in 10) { gc() } #clean up 
 			removeModal()                             	
