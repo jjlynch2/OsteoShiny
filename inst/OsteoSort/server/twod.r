@@ -54,7 +54,7 @@
 		fileoutput2Dplot$fileoutput2Dplot <- input$fileoutput2Dplot
 	})
 	output$fileoutput2Dplot <- renderUI({
-		checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot (WARNING: fragmented analysis will generate a plot for every comparison)", value = TRUE)
+		checkboxInput(inputId = "fileoutput2Dplot", label = "Output registered plot (WARNING: fragmented analysis will generate a plot for every comparison)", value = FALSE)
 	})
 
 	fileoutput2Dtps <- reactiveValues(fileoutput2Dtps = TRUE)

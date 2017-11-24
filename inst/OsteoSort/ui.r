@@ -1234,26 +1234,33 @@ shinyUI(
 								checkboxInput(inputId = "fileoutput333", label = "Output plot", value = TRUE)
 					 		),
 					 		tabPanel("Statistical Parameters",
-
-								radioButtons(inputId ="regtesttypes", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
-	
-								conditionalPanel(condition = "input.regtesttypes == 'Simple'",
-									checkboxInput(inputId = "alphapred", label = "Use alpha levels for regression", value = FALSE)
+							
+							fluidRow(
+								column(4, 
+									h4("Association"),
+										radioButtons(inputId ="regtesttypes", label = "Regression type", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
+			
+										conditionalPanel(condition = "input.regtesttypes == 'Simple'",
+											checkboxInput(inputId = "alphapred", label = "Use alpha level hypothesis", value = FALSE)
+										),
+								sliderInput(inputId = "alphalevels2", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01)
 								),
-
-
-								sliderInput(inputId = "alphalevels2", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
-								sliderInput(inputId = "alphalevels", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-
-
-
-								checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
-								conditionalPanel(condition = "input.absolutevalues",
-									checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
+								column(4,
+									h4("Common"),
+										sliderInput(inputId = "alphalevels", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
 								),
-								sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=1, step=1),
-								checkboxInput(inputId = "testagainstsingle", label = "Zero reference sample mean", value = FALSE)
+								column(4,
+									h4("Pair & Articulation"),
+									checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
+									conditionalPanel(condition = "input.absolutevalues",
+										checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
+									),
+									sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=1, step=1),
+									checkboxInput(inputId = "testagainstsingle", label = "Zero sample mean", value = FALSE)
+								)
 							)
+
+								)
 							)	
 						)
 						
@@ -1482,22 +1489,34 @@ shinyUI(
 									
 								),
 								tabPanel("Statistical Parameters",
+								fluidRow(
+									column(4,
+										h4("Association"),
 
-									radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
+										radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 
-									conditionalPanel(condition = "input.regtesttypem == 'Simple'",
-										checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = FALSE)
+										conditionalPanel(condition = "input.regtesttypem == 'Simple'",
+											checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = FALSE)
+										),
+
+										sliderInput(inputId = "asspredlevel", label = "Prediction interval level", min=0.01, max=1, value=0.95, step=0.01)
 									),
-
-									sliderInput(inputId = "asspredlevel", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step=0.01),
-									sliderInput(inputId = "alphalevel", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-									checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
-									conditionalPanel(condition = "input.absolutevalue",
-										checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
+									column(4,
+										h4("Common"),
+										sliderInput(inputId = "alphalevel", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01),
+										checkboxInput(inputId = "research", label = "Calculate research statistics", value = FALSE)								
 									),
-								sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=1, step=1),
-									checkboxInput(inputId = "testagainst", label = "Zero reference sample mean", value = FALSE),
-									checkboxInput(inputId = "research", label = "Calculate research statistics", value = FALSE)
+									column(4,
+										h4("Pair & Articulation"),
+	
+										checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
+										conditionalPanel(condition = "input.absolutevalue",
+											checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
+										),
+										sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=1, step=1),
+										checkboxInput(inputId = "testagainst", label = "Zero sample mean", value = FALSE)
+									)
+								)								
 								),
 								tabPanel("Computational Parameters",
 									uiOutput('ncores')
@@ -1626,14 +1645,19 @@ shinyUI(
 											)					
 								),
 								tabPanel("Statistical Parameters",
-
-									radioButtons('method', '', c(standard_deviation='Standard_deviation', quartiles='Quartiles'),'Standard_deviation'),
-									conditionalPanel(condition = "input.method == 'Standard_deviation'",
-										sliderInput(inputId = "standard_dev", label = "Standard Deviation Cutoff", min=0.5, max=10, value=c(2.0,2), step = 0.1)
+								fluidRow(
+									column(6,
+										radioButtons('method', '', c(standard_deviation='Standard_deviation', quartiles='Quartiles'),'Standard_deviation')
 									),
-									conditionalPanel(condition = "input.method == 'Quartiles'",
-										sliderInput(inputId = "Quartiles", label = "Interquartile Cutoff", min=0.5, max=10, value=c(1.5,1.5), step = 0.1)
+									column(6,									
+										conditionalPanel(condition = "input.method == 'Standard_deviation'",
+											sliderInput(inputId = "standard_dev", label = "Standard Deviation Cutoff", min=0.5, max=10, value=c(2.0,2), step = 0.1)
+										),
+										conditionalPanel(condition = "input.method == 'Quartiles'",
+											sliderInput(inputId = "Quartiles", label = "Interquartile Cutoff", min=0.5, max=10, value=c(1.5,1.5), step = 0.1)
+										)
 									)
+								)
 								)
 							)
 						)
@@ -1738,13 +1762,18 @@ shinyUI(
 											)					
 								),
 								tabPanel("Statistical Parameters",
-
-									radioButtons('method4', '', c(standard_deviation='Standard_deviation', quartiles='Quartiles'),'Standard_deviation'),
-									conditionalPanel(condition = "input.method4 == 'Standard_deviation'",
-										sliderInput(inputId = "standard_dev4", label = "Standard Deviation Cutoff", min=0.5, max=10, value=c(2,2), step = 0.1)
-									),
-									conditionalPanel(condition = "input.method4 == 'Quartiles'",
-										sliderInput(inputId = "Quartiles4", label = "Interquartile Cutoff", min=0.5, max=10, value=c(1.5,1.5), step = 0.1)
+									fluidRow(
+										column(6,
+											radioButtons('method4', '', c(standard_deviation='Standard_deviation', quartiles='Quartiles'),'Standard_deviation')
+										),
+										column(6,
+											conditionalPanel(condition = "input.method4 == 'Standard_deviation'",
+												sliderInput(inputId = "standard_dev4", label = "Standard Deviation Cutoff", min=0.5, max=10, value=c(2,2), step = 0.1)
+											),
+											conditionalPanel(condition = "input.method4 == 'Quartiles'",
+												sliderInput(inputId = "Quartiles4", label = "Interquartile Cutoff", min=0.5, max=10, value=c(1.5,1.5), step = 0.1)
+											)
+										)	
 									)
 								)
 							)
@@ -1810,34 +1839,39 @@ shinyUI(
 									),
 						 			
 									tabPanel("Statistical Parameters",
+										fluidRow(
+											column(4,
+												h4("Outline"),
+												uiOutput('nthreshold'),
+												uiOutput('mirror2D'),
+								 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
+													uiOutput('efa_options1'),
+													uiOutput('efa_options2'),
+													uiOutput('efa_options3')
+												)
+											),
 
-										uiOutput('nthreshold'),
-										uiOutput('mirror2D'),
-
-
-						 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
-											uiOutput('efa_options1'),
-											uiOutput('efa_options2'),
-											uiOutput('efa_options3'),
-											uiOutput('comp_options')
-										),
-
-										uiOutput('icp2D'),
-										uiOutput('trans2D'),
-										uiOutput('distance2D'),
-
-
-
-								
-						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Uni-Hausdorff' || input.distance2D == 'Hausdorff'",
-											uiOutput('max_avg_distance')
-										),
-						 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
-											uiOutput('n_regions')
-										),
-
-										sliderInput(inputId = "shortlistn", label = "Number of shorest distance matches", min = 1, max = 100, value = 1, step = 1),
-										checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)
+											column(4, 
+												h4("Registration"),
+												conditionalPanel(condition = "input.fragcomp == 'Complete'",
+														uiOutput('comp_options')
+												),
+												uiOutput('icp2D'),
+												uiOutput('trans2D')
+											),
+											column(4,
+												h4("Distance"),
+												uiOutput('distance2D'),
+								 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Uni-Hausdorff' || input.distance2D == 'Hausdorff'",
+													uiOutput('max_avg_distance')
+												),
+								 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff'",
+													uiOutput('n_regions')
+												),
+												sliderInput(inputId = "shortlistn", label = "Number of shortest distance matches", min = 1, max = 100, value = 1, step = 1),
+												checkboxInput(inputId = "hidedist", label = "Hide distance from results", value = FALSE)
+											)
+										)
 									),
 									tabPanel("Computational Parameters",
 										uiOutput('ncores2D')
@@ -1940,10 +1974,13 @@ shinyUI(
 								),	
 
 								tabPanel("Statistical Parameters",
-									sliderInput(inputId = "predlevelantestat", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
-									sliderInput(inputId = "alphalevelsantestat", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-									checkboxInput(inputId = "alphatest1s", label = "Alpha test (uncheck for PI)", value = TRUE)
-								)								
+									fluidRow(column(6,
+									sliderInput(inputId = "predlevelantestat", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
+									sliderInput(inputId = "alphalevelsantestat", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
+									),
+									column(6,									
+									radioButtons(inputId = "alphatest1s", label = "Test type", choices = c(Alpha = "Alpha", PI = "PI"),"Alpha")
+								)))								
 							)
 						)
 					)
@@ -2007,11 +2044,13 @@ shinyUI(
 								),	
 
 								tabPanel("Statistical Parameters",
-									sliderInput(inputId = "predlevelantestatm", label = "Prediction Interval Level", min=0.01, max=1, value=0.95, step = 0.01),
-									sliderInput(inputId = "alphalevelsantestatm", label = "Alpha Level", min=0.01, max=1, value=0.05, step = 0.01),
-									checkboxInput(inputId = "alphatest1m", label = "Alpha test (uncheck for PI)", value = TRUE),
+									fluidRow(column(6,
+									sliderInput(inputId = "predlevelantestatm", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
+									sliderInput(inputId = "alphalevelsantestatm", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
+									),column(6,									
+									radioButtons(inputId = "alphatest1m", label = "Test type", choices = c(Alpha = "Alpha", PI = "PI"), "Alpha"),								
 									checkboxInput(inputId = "research_mm", label = "Calculate research statistics", value = FALSE)
-								),
+								))),
 								tabPanel("Computational Parameters",
 									uiOutput('ncoresm')
 								)
