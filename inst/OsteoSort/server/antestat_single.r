@@ -44,7 +44,7 @@
 			if(input$alphatest1s == "Alpha") {temptest = TRUE}
 			if(input$alphatest1s == "PI") {temptest = FALSE}
 			outtemp1 <- antestat.input(bone = input$antestat, metric = input$metric_type, antemortem_stature = antemortem_data_frame, postmortem_measurement = postmortem_data_frame, population = input$antestat_population)
-			outtemp2 <- antestat.regtest(tails = input$tailsaa, sort = outtemp1[[1]], ref = outtemp1[[2]], prediction_interval = input$predlevelantestat, alphalevel = input$alphalevelsantestat, alphatest = temptest, output_options = c(input$fileoutputant1, input$fileoutputant2), sessiontempdir = sessiontemp)
+			outtemp2 <- antestat.regtest(sort = outtemp1[[1]], ref = outtemp1[[2]], prediction_interval = input$predlevelantestat, alphalevel = input$alphalevelsantestat, alphatest = temptest, output_options = c(input$fileoutputant1, input$fileoutputant2), sessiontempdir = sessiontemp)
 		
 		
 			#display output
