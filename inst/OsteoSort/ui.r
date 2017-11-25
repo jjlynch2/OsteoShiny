@@ -1975,12 +1975,17 @@ shinyUI(
 
 								tabPanel("Statistical Parameters",
 									fluidRow(column(6,
-									sliderInput(inputId = "predlevelantestat", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
-									sliderInput(inputId = "alphalevelsantestat", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
-									),
-									column(6,									
-									radioButtons(inputId = "alphatest1s", label = "Test type", choices = c(Alpha = "Alpha", PI = "PI"),"Alpha")
-								)))								
+											sliderInput(inputId = "predlevelantestat", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
+											sliderInput(inputId = "alphalevelsantestat", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
+										),
+										column(6,									
+											radioButtons(inputId = "alphatest1s", label = "Test type", choices = c(Alpha = "Alpha", PI = "PI"),"Alpha"),
+											conditionalPanel(condition = "input.alphatest1s == 'Alpha'",
+												sliderInput(inputId = "tailsaa", label = "Tails", min=1, max=2, value=1, step=1)
+											)
+										)
+									)
+								)								
 							)
 						)
 					)
@@ -2045,12 +2050,19 @@ shinyUI(
 
 								tabPanel("Statistical Parameters",
 									fluidRow(column(6,
-									sliderInput(inputId = "predlevelantestatm", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
-									sliderInput(inputId = "alphalevelsantestatm", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
-									),column(6,									
-									radioButtons(inputId = "alphatest1m", label = "Test type", choices = c(Alpha = "Alpha", PI = "PI"), "Alpha"),								
-									checkboxInput(inputId = "research_mm", label = "Calculate research statistics", value = FALSE)
-								))),
+										sliderInput(inputId = "predlevelantestatm", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
+										sliderInput(inputId = "alphalevelsantestatm", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
+										),
+										column(6,									
+											radioButtons(inputId = "alphatest1m", label = "Test type", choices = c(Alpha = "Alpha", PI = "PI"), "Alpha"),								
+											conditionalPanel(condition = "input.alphatest1m == 'Alpha'",
+												sliderInput(inputId = "tailsbb", label = "Tails", min=1, max=2, value=1, step=1)
+											),
+											checkboxInput(inputId = "research_mm", label = "Calculate research statistics", value = FALSE)
+										)
+									)
+
+								),
 								tabPanel("Computational Parameters",
 									uiOutput('ncoresm')
 								)

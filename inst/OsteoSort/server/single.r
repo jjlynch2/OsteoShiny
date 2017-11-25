@@ -43,11 +43,14 @@
 		showModal(modalDialog(title = "Calculation has started...Window will update when finished.", easyClose = FALSE, footer = NULL))
 	
 		#Start display
-		withProgress(message = 'Calculation has started', detail = 'This may take a while...', value = 0, {       
-			for (i in 1:25) {
-				incProgress(1/25)
-				Sys.sleep(0.10)
-			}
+		
+		withProgress(message = 'Calculation has started',
+		            detail = '', value = 0, {       
+		            for (i in 1:10) {
+		       incProgress(1/10)
+		       Sys.sleep(0.05)
+		     
+		     }
 		})
 		testt <- 'start'
 		if(input$a == 'single_standard') {

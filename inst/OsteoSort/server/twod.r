@@ -225,14 +225,14 @@
 
 		showModal(modalDialog(title = "Calculation has started...Window will update when finished.", easyClose = FALSE, footer = NULL))
 	
-	
+		
 		withProgress(message = 'Calculation has started',
-			detail = 'This may take a while...', value = 0, {       
-				for (i in 1:25) {
-				incProgress(1/25)
-				Sys.sleep(0.10)
+		            detail = '', value = 0, {       
+		            for (i in 1:10) {
+		       incProgress(1/10)
+		       Sys.sleep(0.05)
 		     
-			}
+		     }
 		})
 		 	
 		if(!is.null(input$leftimages$datapath) && !is.null(input$leftimages$datapath)) { #prevents crashing

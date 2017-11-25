@@ -5,7 +5,7 @@ Authors@R: person("Jeff", "Lynch", email = "jjlynch@bioarch.net", role = c("aut"
 Description: This package allows the statistical osteological sorting of commingled
     human skeletal remains using metric, 2D, and 3D data in a shiny GUI. http://osteosort.net
 Depends:
-    OsteoSort,
+    OsteoSort (>= 1.2.2),
     plyr,
     shinythemes,
     htmltools,

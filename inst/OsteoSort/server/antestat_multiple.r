@@ -42,10 +42,10 @@
 		showModal(modalDialog(title = "Calculation has started...Window will update when finished.", easyClose = FALSE, footer = NULL))
 		
 		withProgress(message = 'Calculation has started',
-		            detail = 'This may take a while...', value = 0, {       
-		            for (i in 1:15) {
-		       incProgress(1/15)
-		       Sys.sleep(0.10)
+		            detail = '', value = 0, {       
+		            for (i in 1:10) {
+		       incProgress(1/10)
+		       Sys.sleep(0.05)
 		     
 		     }
 		})
@@ -67,7 +67,7 @@
 			if(input$alphatest1m == "Alpha") {temptest = TRUE}
 			if(input$alphatest1m == "PI") {temptest = FALSE}
 			outtemp1m <- antestat.input(bone = input$antestatm, metric = input$metric_typem, antemortem_stature = tempdata1m, postmortem_measurement = tempdata2m, population = input$antestat_populationm)
-			outtemp2m <- antestat.regtest(threads = numbercoresglobalm$ncorem, sort = outtemp1m[[1]], ref = outtemp1m[[2]], prediction_interval = input$predlevelantestatm, alphalevel = input$alphalevelsantestatm, alphatest = temptest, output_options = c(input$fileoutputant1m, input$fileoutputant2m), sessiontempdir = sessiontemp)
+			outtemp2m <- antestat.regtest(tails = input$tailsbb, threads = numbercoresglobalm$ncorem, sort = outtemp1m[[1]], ref = outtemp1m[[2]], prediction_interval = input$predlevelantestatm, alphalevel = input$alphalevelsantestatm, alphatest = temptest, output_options = c(input$fileoutputant1m, input$fileoutputant2m), sessiontempdir = sessiontemp)
 		  
 	coo <- ""
 	if(input$research_mm) {
