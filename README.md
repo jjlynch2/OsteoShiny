@@ -47,3 +47,5 @@ Switched terminology from cores to threads for functions.
 Bug fixes:
 
 Fixed issue with returning a single match for 2D not being a data.frame.
+
+Fixed outlier modules crashing when no output options are selected.
