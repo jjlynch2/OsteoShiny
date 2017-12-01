@@ -87,13 +87,13 @@
 		})   
 		
 		
-			output$tablejustfuckingworkb <- DT::renderDataTable({
+			output$tjbingworkb <- DT::renderDataTable({
 				DT::datatable(outtemp[[2]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
-			output$tablejustfuckingworka <- DT::renderDataTable({
+			output$tjbingworka <- DT::renderDataTable({
 				DT::datatable(outtemp[[3]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
-			output$tablejustfuckingworkc <- DT::renderDataTable({
+			output$tjbingworkc <- DT::renderDataTable({
 				DT::datatable(outtemp[[4]], options = list(lengthMenu = c(5,10,15,20,25,30), pageLength = 10), rownames = FALSE)
 			})
 		
@@ -110,26 +110,27 @@
 				}
 
 		removeModal() #removes modal
-		
-		#Zip handler       
-		direc6 <- outtemp[[1]] #direc temp
-		files <- list.files(direc6, recursive = TRUE)
-		setwd(direc6)
-		zip:::zip(zipfile = paste(direc6,'.zip',sep=''), files = files)
-		setwd(sessiontemp)  #restores session
-		
-		#Download handler       
-		output$outlierdownload <- downloadHandler(
-			filename <- function() {
-				paste("results.zip")
-			},      
-			content <- function(file) {
-				setwd(direc6)
-				file.copy(paste(direc6,'.zip',sep=''), file) 
-				setwd(sessiontemp)  
-			},
-			contentType = "application/zip"
-		)
+		if(input$fileoutputl1 || input$fileoutputl2) {
+			#Zip handler       
+			direc6 <- outtemp[[1]] #direc temp
+			files <- list.files(direc6, recursive = TRUE)
+			setwd(direc6)
+			zip:::zip(zipfile = paste(direc6,'.zip',sep=''), files = files)
+			setwd(sessiontemp)  #restores session
+			
+			#Download handler       
+			output$outlierdownload <- downloadHandler(
+				filename <- function() {
+					paste("results.zip")
+				},      
+				content <- function(file) {
+					setwd(direc6)
+					file.copy(paste(direc6,'.zip',sep=''), file) 
+					setwd(sessiontemp)  
+				},
+				contentType = "application/zip"
+			)
 
-		setwd(sessiontemp) #restores session
+			setwd(sessiontemp) #restores session
+		}
 	})

@@ -22,7 +22,10 @@ Updated Help page information.
 
 Updated user manual (15.NOVEMBER.2017).
 
-Overhaul of UI to simplify
+Overhaul of UI to simplify.
+
+Added fragmentary example data.
+
 
 
 Moderate changes:
@@ -33,11 +36,13 @@ Redesigned the 2D interface and fixed several minor bugs resulting in shiny cras
 
 Added dilated hausdorff distance to 2D settings.
 
-Added statistical option to change from 1 to 2 tail t-tests
+Added statistical option to change from 1 to 2 tail t-tests.
 
-Removed shinyBS dep for bsModals
+Removed shinyBS dep for bsModals.
 
-Switched terminology from cores to threads for functions
+Switched terminology from cores to threads for functions.
+
+
 
 Bug fixes:
 

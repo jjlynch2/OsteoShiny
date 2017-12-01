@@ -228,49 +228,49 @@
 		if(input$testtype2 == 'Regression_match') {
 
 			if(input$standard == "Standard") {
-				if(input$assbone1 == 'Clavicle') {threshold <- input$clavicle; measurements <- input$MeasurementsUsed1} 
-				if(input$assbone1 == 'Scapula') {threshold <- input$scapula; measurements <- input$MeasurementsUsed2}   
-				if(input$assbone1 == 'Humerus') {threshold <- input$humerus; measurements <- input$MeasurementsUsed3} 
-				if(input$assbone1 == 'Ulna') {threshold <- input$ulna; measurements <- input$MeasurementsUsed4} 
-				if(input$assbone1 == 'Radius') {threshold <- input$radius; measurements <- input$MeasurementsUsed5} 
-				if(input$assbone1 == 'Os_coxa') {threshold <- input$os_coxa; measurements <- input$MeasurementsUsed6} 
-				if(input$assbone1 == 'Femur') {threshold <- input$femur; measurements <- input$MeasurementsUsed7} 
-				if(input$assbone1 == 'Tibia') {threshold <- input$tibia; measurements <- input$MeasurementsUsed8} 
-				if(input$assbone1 == 'Fibula') {threshold <- input$fibula; measurements <- input$MeasurementsUsed9}  
+				if(input$ab1 == 'Clavicle') {threshold <- input$clavicle; measurements <- input$MeasurementsUsed1} 
+				if(input$ab1 == 'Scapula') {threshold <- input$scapula; measurements <- input$MeasurementsUsed2}   
+				if(input$ab1 == 'Humerus') {threshold <- input$humerus; measurements <- input$MeasurementsUsed3} 
+				if(input$ab1 == 'Ulna') {threshold <- input$ulna; measurements <- input$MeasurementsUsed4} 
+				if(input$ab1 == 'Radius') {threshold <- input$radius; measurements <- input$MeasurementsUsed5} 
+				if(input$ab1 == 'Os_coxa') {threshold <- input$os_coxa; measurements <- input$MeasurementsUsed6} 
+				if(input$ab1 == 'Femur') {threshold <- input$femur; measurements <- input$MeasurementsUsed7} 
+				if(input$ab1 == 'Tibia') {threshold <- input$tibia; measurements <- input$MeasurementsUsed8} 
+				if(input$ab1 == 'Fibula') {threshold <- input$fibula; measurements <- input$MeasurementsUsed9}  
 				
-				if(input$assbone2 == 'Clavicle') {threshold2 <- input$clavicle; measurements2 <- input$MeasurementsUsed1} 
-				if(input$assbone2 == 'Scapula') {threshold2 <- input$scapula; measurements2 <- input$MeasurementsUsed2}   
-				if(input$assbone2 == 'Humerus') {threshold2 <- input$humerus; measurements2 <- input$MeasurementsUsed3} 
-				if(input$assbone2 == 'Ulna') {threshold2 <- input$ulna; measurements2 <- input$MeasurementsUsed4} 
-				if(input$assbone2 == 'Radius') {threshold2 <- input$radius; measurements2 <- input$MeasurementsUsed5} 
-				if(input$assbone2 == 'Os_coxa') {threshold2 <- input$os_coxa; measurements2 <- input$MeasurementsUsed6} 
-				if(input$assbone2 == 'Femur') {threshold2 <- input$femur; measurements2 <- input$MeasurementsUsed7} 
-				if(input$assbone2 == 'Tibia') {threshold2 <- input$tibia; measurements2 <- input$MeasurementsUsed8} 
-				if(input$assbone2 == 'Fibula') {threshold2 <- input$fibula; measurements2 <- input$MeasurementsUsed9}   
+				if(input$ab2 == 'Clavicle') {threshold2 <- input$clavicle; measurements2 <- input$MeasurementsUsed1} 
+				if(input$ab2 == 'Scapula') {threshold2 <- input$scapula; measurements2 <- input$MeasurementsUsed2}   
+				if(input$ab2 == 'Humerus') {threshold2 <- input$humerus; measurements2 <- input$MeasurementsUsed3} 
+				if(input$ab2 == 'Ulna') {threshold2 <- input$ulna; measurements2 <- input$MeasurementsUsed4} 
+				if(input$ab2 == 'Radius') {threshold2 <- input$radius; measurements2 <- input$MeasurementsUsed5} 
+				if(input$ab2 == 'Os_coxa') {threshold2 <- input$os_coxa; measurements2 <- input$MeasurementsUsed6} 
+				if(input$ab2 == 'Femur') {threshold2 <- input$femur; measurements2 <- input$MeasurementsUsed7} 
+				if(input$ab2 == 'Tibia') {threshold2 <- input$tibia; measurements2 <- input$MeasurementsUsed8} 
+				if(input$ab2 == 'Fibula') {threshold2 <- input$fibula; measurements2 <- input$MeasurementsUsed9}   
 				if(is.null(threshold)) {threshold <- 1}  
 				if(is.null(threshold2)) {threshold2 <- 1}   
 
 			}
 			if(input$standard == "Supplemental") {
-				if(input$assbone1 == 'Clavicle') {threshold <- input$claviclea; measurements <- input$MeasurementsUseda} 
-				if(input$assbone1 == 'Scapula') {threshold <- input$scapulab; measurements <- input$MeasurementsUsedb}   
-				if(input$assbone1 == 'Humerus') {threshold <- input$humerusc; measurements <- input$MeasurementsUsedc} 
-				if(input$assbone1 == 'Ulna') {threshold <- input$ulnad; measurements <- input$MeasurementsUsedd} 
-				if(input$assbone1 == 'Radius') {threshold <- input$radiuse; measurements <- input$MeasurementsUsede} 
-				if(input$assbone1 == 'Os_coxa') {threshold <- input$os_coxaf; measurements <- input$MeasurementsUsedf} 
-				if(input$assbone1 == 'Femur') {threshold <- input$femurg; measurements <- input$MeasurementsUsedg} 
-				if(input$assbone1 == 'Tibia') {threshold <- input$tibiah; measurements <- input$MeasurementsUsedh} 
-				if(input$assbone1 == 'Fibula') {threshold <- input$fibulai; measurements <- input$MeasurementsUsedi}    
+				if(input$ab1 == 'Clavicle') {threshold <- input$claviclea; measurements <- input$MeasurementsUseda} 
+				if(input$ab1 == 'Scapula') {threshold <- input$scapulab; measurements <- input$MeasurementsUsedb}   
+				if(input$ab1 == 'Humerus') {threshold <- input$humerusc; measurements <- input$MeasurementsUsedc} 
+				if(input$ab1 == 'Ulna') {threshold <- input$ulnad; measurements <- input$MeasurementsUsedd} 
+				if(input$ab1 == 'Radius') {threshold <- input$radiuse; measurements <- input$MeasurementsUsede} 
+				if(input$ab1 == 'Os_coxa') {threshold <- input$os_coxaf; measurements <- input$MeasurementsUsedf} 
+				if(input$ab1 == 'Femur') {threshold <- input$femurg; measurements <- input$MeasurementsUsedg} 
+				if(input$ab1 == 'Tibia') {threshold <- input$tibiah; measurements <- input$MeasurementsUsedh} 
+				if(input$ab1 == 'Fibula') {threshold <- input$fibulai; measurements <- input$MeasurementsUsedi}    
 				
-				if(input$assbone2 == 'Clavicle') {threshold2 <- input$claviclea; measurements2 <- input$MeasurementsUseda} 
-				if(input$assbone2 == 'Scapula') {threshold2 <- input$scapulab; measurements2 <- input$MeasurementsUsedb}   
-				if(input$assbone2 == 'Humerus') {threshold2 <- input$humerusc; measurements2 <- input$MeasurementsUsedc} 
-				if(input$assbone2 == 'Ulna') {threshold2 <- input$ulnad; measurements2 <- input$MeasurementsUsedd} 
-				if(input$assbone2 == 'Radius') {threshold2 <- input$radiuse; measurements2 <- input$MeasurementsUsede} 
-				if(input$assbone2 == 'Os_coxa') {threshold2 <- input$os_coxaf; measurements2 <- input$MeasurementsUsedf} 
-				if(input$assbone2 == 'Femur') {threshold2 <- input$femurg; measurements2 <- input$MeasurementsUsedg} 
-				if(input$assbone2 == 'Tibia') {threshold2 <- input$tibiah; measurements2 <- input$MeasurementsUsedh} 
-				if(input$assbone2 == 'Fibula') {threshold2 <- input$fibulai; measurements2 <- input$MeasurementsUsedi}              
+				if(input$ab2 == 'Clavicle') {threshold2 <- input$claviclea; measurements2 <- input$MeasurementsUseda} 
+				if(input$ab2 == 'Scapula') {threshold2 <- input$scapulab; measurements2 <- input$MeasurementsUsedb}   
+				if(input$ab2 == 'Humerus') {threshold2 <- input$humerusc; measurements2 <- input$MeasurementsUsedc} 
+				if(input$ab2 == 'Ulna') {threshold2 <- input$ulnad; measurements2 <- input$MeasurementsUsedd} 
+				if(input$ab2 == 'Radius') {threshold2 <- input$radiuse; measurements2 <- input$MeasurementsUsede} 
+				if(input$ab2 == 'Os_coxa') {threshold2 <- input$os_coxaf; measurements2 <- input$MeasurementsUsedf} 
+				if(input$ab2 == 'Femur') {threshold2 <- input$femurg; measurements2 <- input$MeasurementsUsedg} 
+				if(input$ab2 == 'Tibia') {threshold2 <- input$tibiah; measurements2 <- input$MeasurementsUsedh} 
+				if(input$ab2 == 'Fibula') {threshold2 <- input$fibulai; measurements2 <- input$MeasurementsUsedi}              
 				if(is.null(threshold)) {threshold <- 1}   
 				if(is.null(threshold2)) {threshold2 <- 1}
 
@@ -282,7 +282,7 @@
 				if(input$regtesttypem == "PCA-CCA") {regtypee <- TRUE}
 				if(input$regtesttypem == "Simple") {regtypee <- FALSE}
 
-			wtf <- reg.input(threshold=c(threshold, threshold2),sort = tempdata1, bone1 = input$assbone1, side1 = input$assside1, bone2 = input$assbone2, side2 = input$assside2, measurement_standard = input$standard, measurements1 = measurements, measurements2 = measurements2)
+			wtf <- reg.input(threshold=c(threshold, threshold2),sort = tempdata1, bone1 = input$ab1, side1 = input$assside1, bone2 = input$ab2, side2 = input$assside2, measurement_standard = input$standard, measurements1 = measurements, measurements2 = measurements2)
 			direc2 <- reg.multitest(sort = wtf[[1]], ref = wtf[[2]], splitn = wtf[[3]], prediction_interval = input$asspredlevel, alphatest = input$alphapred2, output_options = c(input$fileoutput1, input$fileoutput1plot), threads = numbercoresglobal$ncore, test = regtypee, alphalevel = input$alphalevel)
 			ll <- nrow(direc2[[2]]) + nrow(direc2[[3]])
 		}
@@ -412,12 +412,12 @@
 						column(6,
 							h4("Predictor"),
 							selectInput("assside1", "Side", c(Left='Left', Right='Right')),
-							selectInput("assbone1", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"))
+							selectInput("ab1", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"))
 						),
 						column(6,
 							h4("Predicted"),
 							selectInput("assside2", "Side", c(Left='Left', Right='Right')),
-							selectInput("assbone2", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"))
+							selectInput("ab2", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"))
 						)
 					)
 				})

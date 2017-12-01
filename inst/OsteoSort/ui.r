@@ -1580,13 +1580,13 @@ shinyUI(
 						imageOutput('plotoutlier', width=400, height=400),
 						tabsetPanel(id="tabSelectedoutlier",
 							tabPanel("Upper outliers",
-								DT::dataTableOutput('tablejustfuckingworka')
+								DT::dataTableOutput('tjbingworka')
 							),		
 							tabPanel("Lower outliers",
-						 		DT::dataTableOutput('tablejustfuckingworkb')
+						 		DT::dataTableOutput('tjbingworkb')
 						 	),
 						 	tabPanel("Non-outliers",
-						 		DT::dataTableOutput('tablejustfuckingworkc')
+						 		DT::dataTableOutput('tjbingworkc')
 						 	)
 					 	),
 					
@@ -1712,13 +1712,13 @@ shinyUI(
 						imageOutput('plotoutlier4', width=400, height=400),
 						tabsetPanel(id="tabSelectedoutlier",
 							tabPanel("Upper outliers",
-								DT::dataTableOutput('tablejustfuckingworka4')
+								DT::dataTableOutput('tjbingworka4')
 							),		
 							tabPanel("Lower outliers",
-								DT::dataTableOutput('tablejustfuckingworkb4')
+								DT::dataTableOutput('tjbingworkb4')
 						 	),
 						 	tabPanel("Non-outliers",
-					 			DT::dataTableOutput('tablejustfuckingworkc4')
+					 			DT::dataTableOutput('tjbingworkc4')
 						 	)
 					 	),
 					
