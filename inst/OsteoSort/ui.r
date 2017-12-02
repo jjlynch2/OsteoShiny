@@ -9,14 +9,9 @@ library(shinythemes)
 
 #Navigation bar interface
 shinyUI(
-
-
-
-
 	navbarPage(theme = shinytheme("flatly"), 
-			windowTitle = "OsteoSort 1.2.2",
-			title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
-
+		windowTitle = "OsteoSort 1.2.2",
+		title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates the process of conducting outlier, pair, articulation, and association analyses of commingled human skeletal assemblages.</p><p>&nbsp;</p> <p>The methods are split into four primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Osteoshape sorting</li><li>Outlier sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p><p>The input of postmortem measurement and antemortem data requires standardized templates, both of which can be accessed below."),
 					HTML("<h1>Files</h1><hr /><p>&nbsp;</p>"),
@@ -36,17 +31,12 @@ shinyUI(
 						selectInput('testtype', 'Analysis', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
 						uiOutput("testtype"),
 							conditionalPanel(condition = "input.zz == 'huur' || input.zz == 'hurr' || input.zz == 'hufr' || input.zz == 'hutr' || input.zz == 'hufir' || input.zz == 'ulrr' || input.zz == 'ulfr' || input.zz == 'ultr' || input.zz == 'ulfir' || input.zz == 'rafr' || input.zz == 'ratr' || input.zz == 'rafir' || input.zz == 'fetr' || input.zz == 'fefir' || input.zz == 'tifir' || input.zz == 'humerus' || input.zz == 'ulna' || input.zz == 'radius' || input.zz == 'femur' || input.zz == 'tibia' || input.zz == 'fibula' || input.zz == 'scapula' || input.zz == 'os_coxa' || input.zz == 'clavicle' ",
-
 									selectInput("a", "Measurements", c(Standard='single_standard', Supplemental='single_supplemental'))
-
 							),		
 						conditionalPanel(condition = "input.testtype == 'Regression_match'",
 							selectInput("prr", label = "Predictor", c("Bone1", "Bone2"))
 						),
 							conditionalPanel(condition = "input.a == 'single_standard'", 
-							
-							
-							
 								conditionalPanel(condition = "input.zz == 'huur'",
 									fluidRow(
 											column(6,
@@ -492,8 +482,6 @@ shinyUI(
 										)
 									)
 								),
-								
-								
 								conditionalPanel(condition = "input.zz == 'tibia'",
 									fluidRow(
 										
@@ -517,8 +505,6 @@ shinyUI(
 										)
 									)
 								),	
-								
-								
 								conditionalPanel(condition = "input.zz == 'fibula'",
 									fluidRow(
 										
