@@ -10,8 +10,8 @@ library(shinythemes)
 #Navigation bar interface
 shinyUI(
 	navbarPage(theme = shinytheme("flatly"), 
-		windowTitle = "OsteoSort 1.2.2",
-		title=div(img(src="OsteoSort.png", width = "30px"), "OsteoSort 1.2.2"),
+		windowTitle = paste("OsteoSort ", gsub("'", "" , packageVersion("OsteoSort")), sep=""),
+		title=div(img(src="OsteoSort.png", width = "30px"), paste("OsteoSort ", gsub("'", "" , packageVersion("OsteoSort")), sep="")),
 		tabPanel("Help",
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates outlier, antemortem, pair, articulation, and association analyses of commingled human skeletal assemblages.</p><p>&nbsp;</p> <p>The methods are split into four primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Outlier sorting</li><li>Osteoshape sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p>"),
 					HTML("<h1>Files</h1><hr /><p>&nbsp;</p>"),
