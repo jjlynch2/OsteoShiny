@@ -9,19 +9,71 @@ library(shinythemes)
 
 #Navigation bar interface
 shinyUI(
+
+
+
+
 	navbarPage(theme = shinytheme("flatly"), 
 		windowTitle = paste("OsteoSort ", gsub("'", "" , packageVersion("OsteoSort")), sep=""),
 		title=div(img(src="OsteoSort.png", width = "30px"), paste("OsteoSort ", gsub("'", "" , packageVersion("OsteoSort")), sep="")),
-		tabPanel("Help",
+navbarMenu("Help",
+		tabPanel("About",
+
+
+				
+
 					HTML("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr /><p>&nbsp;</p><p>OsteoSort automates outlier, antemortem, pair, articulation, and association analyses of commingled human skeletal assemblages.</p><p>&nbsp;</p> <p>The methods are split into four primary modules:</p><p>&nbsp;</p><ul><li>Osteometric sorting</li><li>Outlier sorting</li><li>Osteoshape sorting</li><li>Antemortem sorting</li></ul><p>&nbsp;</p>"),
-					HTML("<h1>Files</h1><hr /><p>&nbsp;</p>"),
+
+
+					HTML("<hr><span style='font-family: 'Times New Roman', serif;'> 
+						<p>
+						<h2>
+						References
+						</h2>
+						<p>&nbsp;</p>
+						Lynch JJ, Byrd JE, LeGarde CB. The power of exclusion using automated osteometric sorting: pair-matching. J Forensic Sci 2018 [In press]. https://doi.org/10.1111/1556-4029.13560. Epub 2017 May 26.
+						<p>&nbsp;</p>
+						Lynch JJ. An analysis on the choice of alpha level in the osteometric pair-matching of the os coxa, scapula, and clavicle. J Forensic Sci 2018 [In press]. https://doi.org/10.1111/1556-4029.13599. Epub 2017 July 18.
+						<p>&nbsp;</p>
+						Lynch JJ. The automation of regression modeling in osteometric sorting: an ordination approach. J Forensic Sci 2018 [In press]. https://doi.org/10.1111/1556-4029.13597. Epub 2017 July 21.
+						<p>&nbsp;</p>
+						Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci 2018 [In press]. https://doi.org/10.1111/1556-4029.13670. Epub 2017 Oct 16.
+						<p>&nbsp;</p>
+						Lynch JJ. An automated two-dimensional pairsie form registration for pair-matching fragmented skeletal elements. J Forensic Sci [Under Review].
+						<p>&nbsp;</p>
+						Lynch JJ. Antemortem stature association using osteometric sorting: a new method for shortlisting elements with known individuals. J Forensic Sci [Under Review].
+						<p>&nbsp;</p>
+						</p>
+					")
+		),
+
+		tabPanel("Files",
+					HTML("<hr><span style='font-family: 'Times New Roman', serif;'> 
+					<p>
+					<strong>Postmortem template: </strong> Standardized template for importing postmortem data
+					<p>&nbsp;</p>
+					<strong>Antemortem template: </strong> Standardized template for importing antemortem data
+					<p>&nbsp;</p>
+					<strong>Help Guide: </strong> User help guide for using OsteoSort
+					<p>&nbsp;</p>
+					<strong>Example Data: </strong> Example data analytics
+					<p>&nbsp;</p>
+					</p>
+					"),
 					downloadButton('postmortem_template', 'Postmortem template'),
 					downloadButton('antemortem_template', 'Antemortem template'),
 					downloadButton('osteoguide', 'Help Guide'),
-					actionButton('Create_Desktop_Icon', 'Create Desktop Icon', icon = icon("gears")),
 					downloadButton('example_data', "Example Data")
 		),
-		
+		tabPanel("Measurements",
+
+			DT::dataTableOutput('measurement_conversion_table')
+
+		),
+		tabPanel("Misc",
+				actionButton('Create_Desktop_Icon', 'Create Desktop Icon', icon = icon("gears"))
+		)
+),
 		navbarMenu("Osteometric sorting",
 			tabPanel("Single comparison",
 				titlePanel(""),

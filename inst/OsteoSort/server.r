@@ -80,6 +80,13 @@ shinyServer(function(input, output, session) {
 		},
 	)  	
 
+
+	output$measurement_conversion_table <- DT::renderDataTable(read.table(system.file("extdata", "Standardized_Measurements.csv", package = "OsteoShiny"), header = TRUE, sep=","), options = list(lengthMenu = c(10,20,30,40,50), pageLength = 20), rownames = FALSE)
+	
+
+	  
+
+
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
 			icon_name <- "OsteoSort.bat"
