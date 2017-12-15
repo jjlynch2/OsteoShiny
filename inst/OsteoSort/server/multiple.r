@@ -215,7 +215,7 @@
 			if(is.null(threshold)) {threshold <- 1}   
 
 			wtf <- pm.input(bone=toString(input$bone), sort=tempdata1, measurement_standard='supplemental',threshold=threshold, measurements=measurements)                                	      
-			direc2 <- pm.ttest(tails = input$tails2, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir=sessiontemp, alphalevel = input$alphalevel, absolutevalue = input$absolutevalue, testagainst = input$testagainst, output_options =  c(input$fileoutput1, input$fileoutput1plot), threads = numbercoresglobal$ncore, power = input$power2)
+			direc2 <- pm.ttest(tails = input$tails2, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir=sessiontemp, alphalevel = input$alphalevel, absolutevalue = input$absolutevalue, testagainstzero = input$testagainst, output_options =  c(input$fileoutput1, input$fileoutput1plot), threads = numbercoresglobal$ncore, power = input$power2)
 			ll <- nrow(direc2[[2]]) + nrow(direc2[[3]])           
 		}
 		if(input$bone == 'hu' | input$bone == 'hr' | input$bone == 'hs' | input$bone == "hss" | input$bone == 'fi' | input$bone == 'ft' | input$bone == 'ftt') {

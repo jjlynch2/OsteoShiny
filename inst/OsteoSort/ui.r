@@ -51,9 +51,9 @@ shinyUI(
 							<p>&nbsp;</p>
 							Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci 2018 [In press]. https://doi.org/10.1111/1556-4029.13670. Epub 2017 Oct 16.
 							<p>&nbsp;</p>
-							Lynch JJ. An automated two-dimensional pairsie form registration for pair-matching fragmented skeletal elements. [Under Review].
+							Lynch JJ. An automated two-dimensional pairwise form registration for pair-matching fragmented skeletal elements. [Under Review].
 							<p>&nbsp;</p>
-							Lynch JJ. Antemortem stature association using osteometric sorting: a new method for shortlisting elements with known individuals. [Under Review].
+							Lynch JJ and Byrd JE. Antemortem stature association using osteometric sorting: a new method for shortlisting elements with known individuals. [Under Review].
 							<p>&nbsp;</p>
 							</p>
 						")
@@ -66,16 +66,16 @@ shinyUI(
 						<p>&nbsp;</p>
 						<strong>Antemortem template: </strong> Standardized template for importing antemortem data
 						<p>&nbsp;</p>
-						<strong>Help Guide: </strong> User help guide for using OsteoSort
+						<strong>Help guide: </strong> User help guide for using OsteoSort
 						<p>&nbsp;</p>
-						<strong>Example Data: </strong> Example data for testing analytics
+						<strong>Example data: </strong> Example data for testing analytics
 						<p>&nbsp;</p>
 						</p>
 						"),
 						downloadButton('postmortem_template', 'Postmortem template'),
 						downloadButton('antemortem_template', 'Antemortem template'),
-						downloadButton('osteoguide', 'Help Guide'),
-						downloadButton('example_data', "Example Data")
+						downloadButton('osteoguide', 'Help guide'),
+						downloadButton('example_data', "Example data")
 			),
 			tabPanel("Measurements",
 
