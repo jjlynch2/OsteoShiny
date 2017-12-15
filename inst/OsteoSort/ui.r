@@ -21,9 +21,6 @@ shinyUI(
 	navbarMenu("Help",
 			tabPanel("About",
 
-
-					
-
 						HTML(paste("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr/>",
 								#"<p>&nbsp;</p><p>Automated osteological sorting of human commingled assemblages</p>",
 								

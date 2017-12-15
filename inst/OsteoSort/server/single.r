@@ -1,12 +1,6 @@
 	################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison ################single comparison 
 
 
-
-
-
-
-
-
 	output$contents2 <- renderUI({
 	   HTML(paste("Select the parameters and enter measurements to begin."))
 	})
@@ -25,7 +19,7 @@
 		if(input$testtype == 'Articulation_match') {
 			output$testtype <- renderUI({
 
-					selectInput('zz', 'Elements', c(Humerus_Ulna='hu',Humerus_Radius='hr', Humerus_Scapula1='hs', Humerus_Scapula2='hss', Femur_Os_coxa='fi', Femur_Tibia='ft', Fibula_Tibia='ftt'))
+					selectInput('zz', 'Elements', c(Humerus_Ulna='hu',Humerus_Radius='hr', Humerus_Scapula1='hs', Humerus_Scapula2='hss', Femur_Os_coxa='fi', Femur_Tibia='ft', Fibula_Tibia='ftt'), 'fi')
 
 			})
 		}
