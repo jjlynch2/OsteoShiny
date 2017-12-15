@@ -417,7 +417,7 @@
 						column(6,
 							h4("Predicted"),
 							selectInput("assside2", "Side", c(Left='Left', Right='Right')),
-							selectInput("ab2", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula") 'Ulna')
+							selectInput("ab2", "Element", c(Clavicle="Clavicle", Scapula="Scapula", Humerus="Humerus", Radius="Radius", Ulna="Ulna", Os_coxa="Os_coxa", Femur="Femur", Tibia="Tibia", Fibula="Fibula"), 'Ulna')
 						)
 					)
 				})
