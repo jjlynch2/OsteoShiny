@@ -2,7 +2,7 @@
 
 
 	output$contents2 <- renderUI({
-	   HTML(paste("Select the parameters and enter measurements to begin."))
+	   HTML(paste(""))
 	})
 
 

@@ -17,7 +17,7 @@
 	
 	
 	output$antestat_outputm <- renderUI({
-	   HTML(paste("Upload the antemortem stature and postmortem measurement files and select process to begin.</br></br>"))
+	   HTML(paste(""))
 	})	
 
 	#file upload render for multiple comparison
@@ -95,8 +95,18 @@
 			TN <- co
 
 		
-			coo <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+TP), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+FP), digits = 3), "<br/>", sep = "")
-
+			coo <- paste("TP: ", 				"<font color=\"#00688B\">",TP, "</font>", 
+					"<br/>","FP: ", 			"<font color=\"#00688B\">",FP, "</font>", 
+					"<br/>","FN: ", 			"<font color=\"#00688B\">",FN, "</font>", 
+					"<br/>","TN: ", 			"<font color=\"#00688B\">", TN, "</font>", 
+					"<br/>","FPR: ", 			"<font color=\"#00688B\">",1 - round(TN/(TN+FP), digits = 3) ,"</font>", 
+					"<br/>","Sens: ", 			"<font color=\"#00688B\">",round(TP/(TP+FN), digits = 3), "</font>", 
+					"<br/>","Spec: ", 			"<font color=\"#00688B\">",round(TN/(TN+FP), digits = 3),"</font>", 
+					"<br/>","PPV: ", 			"<font color=\"#00688B\">",round(TP/(TP+FP), digits = 3), "</font>", 
+					"<br/>","NPV: ", 			"<font color=\"#00688B\">",round(TN/(TN+FN), digits = 3),"</font>", 
+					"<br/>","FDR: ", 			"<font color=\"#00688B\">",round(FP/(FP+TP), digits = 3), "</font>", 
+					"<br/>","EFF: ", 			"<font color=\"#00688B\">",round((TP+TN) / (TP+TN+FN+FP), digits = 3),"</font>", 
+					"<br/>", sep = "")
 		}
 
 		temp1 <- outtemp2m[[2]][1]
@@ -110,7 +120,12 @@
 		ex_rate <- nrow(outtemp2m[[3]]) / n_comp
 			#display output
 			output$antestat_outputm <- renderUI({
-					HTML(paste("Statistical analysis complete.", '<br/>',"Number of comparisons conducted: ", n_comp,"<br/>", "Antemortem specimens: ", ante_sample, "<br/>","Postmortem specimens: ", post_sample, "<br/>", "Total number of potential matches: ", nrow(outtemp2m[[2]]), "<br/>", "Total number of exclusions: ", nrow(outtemp2m[[3]]), " (", round(nrow(outtemp2m[[3]]) / n_comp, digits = 3) * 100, "%)", "<br/>", coo))
+					HTML(paste("<strong>",'<br/>',"Comparisons: ", 					"<font color=\"#00688B\">",n_comp,"</font>", 
+									 "<br/>", "Antemortem specimens: ", 			"<font color=\"#00688B\">",ante_sample, "</font>", 
+									 "<br/>","Postmortem specimens: ", 			"<font color=\"#00688B\">",post_sample, "</font>", 
+									 "<br/>", "Potential associations: ", 			"<font color=\"#00688B\">",nrow(outtemp2m[[2]]), "</font>", 
+									 "<br/>", "Exclusions: ", 					"<font color=\"#00688B\">",nrow(outtemp2m[[3]]), " (", round(nrow(outtemp2m[[3]]) / n_comp, digits = 3) * 100, "%)", "</font>", 
+									 "<br/>", coo, "<strong>"))
 			}) 
 
 			output$antestat_table1m <- DT::renderDataTable({

@@ -13,7 +13,7 @@
 	})
 	
 	output$outliercontent4 <- renderUI({
-	   HTML(paste("Select the parameters and upload the file to begin.</br></br>"))
+	   HTML(paste(""))
 	})	
 	
 	#clears session for multiple comparison
@@ -80,7 +80,11 @@
 		
 		#display output
 		output$outliercontent4 <- renderUI({
-				HTML(paste("Statistical analysis complete.", '<br/>',"Number of outliers: ",outliercount,'<br/>',"Mean: ", outtemp[[5]], "<br/>", "Standard Deviation: ", outtemp[[6]], "<br/>", "Median: ", outtemp[[7]], "<br/>", "Interquartile: ", outtemp[[8]]))
+				HTML(paste("<strong>Outliers: ",            "<font color=\"#00688B\">",outliercount, "</font>",
+						'<br/>',"Mean: ",                 "<font color=\"#00688B\">",outtemp[[5]], "</font>",
+						"<br/>", "Standard Deviation: ",  "<font color=\"#00688B\">",outtemp[[6]], "</font>",
+						"<br/>", "Median: ",              "<font color=\"#00688B\">",outtemp[[7]], "</font>",
+						"<br/>", "Interquartile: ",       "<font color=\"#00688B\">",outtemp[[8]], "</font>","</strong>"))
 		})   
 
 		
@@ -101,6 +105,8 @@
 					output$plotoutlier4 <- renderImage({
 						list(src = nimages,
 							contentType = 'image/jpg',
+							width = 400,
+							height = 400,
 							alt = "A"
 						)
 					}, deleteFile = FALSE)

@@ -13,7 +13,7 @@
 	})
 
 	output$contents2D <- renderUI({
-	   HTML(paste("Select the parameters and upload images to begin."))
+	   HTML(paste(""))
 	})	
 
 	output$resettableInput2D <- renderUI({
@@ -277,7 +277,7 @@
 
 
 			output$contents2D <- renderUI({
-				HTML(paste("Potential Matches: ", pm))
+				HTML(paste("<strong>Potential matches: ", "<font color=\"#00688B\">", pm, "</font></strong"))
 			})
 
 			if(fileoutput2Dexcel1$fileoutput2Dexcel1 || fileoutput2Dexcel2$fileoutput2Dexcel2 || fileoutput2Dplot$fileoutput2Dplot || fileoutput2Dtps$fileoutput2Dtps) {

@@ -2,7 +2,7 @@
 		
 	
 	output$contents <- renderUI({
-	   HTML(paste("Select the parameters and upload the file to begin.</br></br>"))
+	   HTML(paste(""))
 	})	
 
 	
@@ -345,7 +345,18 @@
 			TN <- co
 
 		
-			co <- paste("True Positive: ", TP, "<br/>", "False Positive: ", FP, "<br/>", "False Negative: ", FN, "<br/>", "True Negative: ", TN, "<br/>", "FPR: ", 1 - round(TN/(TN+FP), digits = 3) ,"<br/>", "Sensitivity: ", round(TP/(TP+FN), digits = 3), "<br/>", "Specificity: ", round(TN/(TN+FP), digits = 3),"<br/>",  "Positive Predictive Value: ", round(TP/(TP+FP), digits = 3), "<br/>", "Negative Predictive Value: ", round(TN/(TN+FN), digits = 3),"<br/>", "False Discovery Rate: ", round(FP/(FP+TP), digits = 3), "<br/>","Efficiency: ", round((TP+TN) / (TP+TN+FN+FP), digits = 3), "<br/>", sep = "")
+			co <- paste("TP: ", 				"<font color=\"#00688B\">",TP, "</font>", 
+					"<br/>","FP: ", 			"<font color=\"#00688B\">",FP, "</font>", 
+					"<br/>","FN: ", 			"<font color=\"#00688B\">",FN, "</font>", 
+					"<br/>","TN: ", 			"<font color=\"#00688B\">", TN, "</font>", 
+					"<br/>","FPR: ", 			"<font color=\"#00688B\">",1 - round(TN/(TN+FP), digits = 3) ,"</font>", 
+					"<br/>","Sens: ", 			"<font color=\"#00688B\">",round(TP/(TP+FN), digits = 3), "</font>", 
+					"<br/>","Spec: ", 			"<font color=\"#00688B\">",round(TN/(TN+FP), digits = 3),"</font>", 
+					"<br/>","PPV: ", 			"<font color=\"#00688B\">",round(TP/(TP+FP), digits = 3), "</font>", 
+					"<br/>","NPV: ", 			"<font color=\"#00688B\">",round(TN/(TN+FN), digits = 3),"</font>", 
+					"<br/>","FDR: ", 			"<font color=\"#00688B\">",round(FP/(FP+TP), digits = 3), "</font>", 
+					"<br/>","EFF: ", 			"<font color=\"#00688B\">",round((TP+TN) / (TP+TN+FN+FP), digits = 3),"</font>", 
+					"<br/>", sep = "")
 
 		}
 		
@@ -357,7 +368,11 @@
 
 		#Output results                  
 			output$contents <- renderUI({
-				HTML(paste(co,"Statistical analysis complete.",'<br/>',"Number of comparisons conducted: ",ll, "<br/>", "Total specimens tested: ", samplesize, '<br/>', "Total number of potential matches: ", nmatch ,'<br/>', "Total number of exclusions: ", ll - nmatch, " (", round((ll - nmatch) / ll, digits = 3) * 100, "%)", '<br/><br/>'))
+				HTML(paste("<strong>","<br/>","Comparisons: ",   "<font color=\"#00688B\">", ll, "</font>", 
+                                  "<br/>", "Specimens: ",           "<font color=\"#00688B\">",samplesize, "</font>", 
+                                  '<br/>', "Potential matches: ",  "<font color=\"#00688B\">",nmatch , "</font>",
+                                  '<br/>', "Exclusions: ",         "<font color=\"#00688B\">",ll - nmatch, " (", round((ll - nmatch) / ll, digits = 3) * 100, "%)",  "</font>",
+							'<br/>',co,'<br/></strong>'))
 			})   
 
 			output$table <- DT::renderDataTable({

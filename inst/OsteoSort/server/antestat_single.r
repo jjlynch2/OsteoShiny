@@ -7,7 +7,7 @@
 	
 	
 	output$antestat_output <- renderUI({
-	   HTML(paste("Enter the parameters and select process to begin.</br></br>"))
+	   HTML(paste(""))
 	})	
 
 	observeEvent(input$proantestat, {
@@ -49,7 +49,7 @@
 		
 			#display output
 			output$antestat_output <- renderUI({
-					HTML(paste("Statistical analysis complete.", '<br/>'))
+					HTML(paste(""))
 			})   
 		
 			#Fix for using exclusion in multiple. Switches to which ever has a result for single

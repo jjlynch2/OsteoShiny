@@ -1625,9 +1625,11 @@ shinyUI(
 							width=2
 					),
 					mainPanel(
+				
+								htmlOutput('outliercontent'),
 					
-						htmlOutput('outliercontent'),
-						imageOutput('plotoutlier', width=400, height=400),
+								imageOutput('plotoutlier', width=400, height=400),
+					
 						tabsetPanel(id="tabSelectedoutlier",
 							tabPanel("Upper outliers",
 								DT::dataTableOutput('tjbingworka')
@@ -1758,8 +1760,10 @@ shinyUI(
 					),
 					mainPanel(
 					
+		
 						htmlOutput('outliercontent4'),
 						imageOutput('plotoutlier4', width=400, height=400),
+				
 						tabsetPanel(id="tabSelectedoutlier",
 							tabPanel("Upper outliers",
 								DT::dataTableOutput('tjbingworka4')
