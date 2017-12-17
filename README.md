@@ -2,13 +2,11 @@ OsteoShiny
 
 A Shiny based GUI R package for the OsteoSort package.
 
-Changes for OsteoShiny version : 1.2.7
+Changes for OsteoShiny version : 1.2.8
 
 
 Minor changes:
-Updated Example_Data
-Adjusted output text
+Added vb script to generate a .lnk shortcut rather than using a .bat file
+Added a .desktop icon rather than .sh
+.sh is left for non-Windows/Linux
 
-Moderate changes:
-Added ability to select alpha level cutoff for PCACCA-regression statistics modal
-Adjusted default threads to n-1 
