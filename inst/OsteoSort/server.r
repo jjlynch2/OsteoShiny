@@ -91,7 +91,7 @@ shinyServer(function(input, output, session) {
 		if(Sys.info()[['sysname']] == "Windows") {
 
 			#creates .bat to LNK to
-			cat(paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" "), file = 	system.file("extdata/osteosort.bat") )
+			cat(paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" "), file = 	paste(system.file("extdata"), "osteosort.bat", sep="/") )
 
 
 			target <- normalizePath(system.file("extdata/osteosort.bat"))
