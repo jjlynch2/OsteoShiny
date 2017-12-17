@@ -90,14 +90,13 @@ shinyServer(function(input, output, session) {
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
 
-			#creates .bat to LNK to
-			cat(paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" "), file = 	paste(system.file("extdata", package = "OsteoShiny"), "osteosort.bat", sep="/") )
 
 
-			target <- normalizePath(system.file("extdata/osteosort.bat", package = "OsteoShiny"))
-			icon <- normalizePath(system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny"))
-			pathname <- normalizePath(paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.LNK", sep = "/"))
-			R.utils::createWindowsShortcut(pathname, target=target, icon=icon, overwrite = TRUE)
+			target <- paste('"', file.path(R.home("bin"), "R.exe"), " -e ", "library(OsteoShiny);OsteoSort()", '"', sep="")
+			icon <- paste('"', system.file("vbs/OsteoSort.ico", package = "OsteoShiny"), '"', sep="")
+			pathname <- paste('"', paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.lnk", sep = "/"), '"', sep="")
+			system(paste("cscript", system.file("vbs/createLink.vbs", package = "OsteoShiny"), pathname, target, icon, sep=" "))
+
 		}
 		if(Sys.info()[['sysname']] == "Linux") {
 			icon_name <- "OsteoSort.desktop"
