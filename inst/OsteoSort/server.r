@@ -89,14 +89,28 @@ shinyServer(function(input, output, session) {
 
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
-			icon_name <- "OsteoSort.bat"
-		cat(paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" "), file = paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), icon_name, sep = "/"))
+			target <- paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" ")
+			icon <- system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny")
+			pathname <- paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.LNK", sep = "/")
+			R.utils::createWindowsShortcut(pathname, target=target, icon=icon)
 		}
-		if(Sys.info()[['sysname']] != "Windows") {
+		if(Sys.info()[['sysname']] == "Linux") {
+			icon_name <- "OsteoSort.desktop"
+			cat(		paste(
+						"[Desktop Entry]\nEncoding=UTF-8\nTerminal=true\nType=Application\nCategories=Application\nName=OsteoSort\n",
+						"Version=",	packageVersion("OsteoShiny"),"\n",
+
+						 "Icon=",		system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny"),"\n",
+						 "Exec=",		paste(file.path(R.home("bin"), "R"), "-e", "library(OsteoShiny);OsteoSort()", sep=" ")
+					,sep=""),#paste
+				file = paste(file.path(path.expand("~"), "Desktop"), "OsteoSort.desktop", sep = "/")
+			)#cat
+			Sys.chmod(paste(file.path(path.expand("~"), "Desktop"), "OsteoSort.desktop", sep="/"), mode = "0777", use_umask = TRUE)
+		}
+		if(Sys.info()[['sysname']] != "Linux" && Sys.info()[['sysname']] != "Windows") { #temporary for mac
 			icon_name <- "OsteoSort.sh"
-			excc <- "R"
-			cat(paste(file.path(R.home("bin"), "R"), "-e", "'library(OsteoShiny);OsteoSort()'", sep=" "), file = paste(file.path(path.expand("~"), "Desktop"), icon_name, sep = "/"))
-			Sys.chmod(paste(file.path(path.expand("~"), "Desktop"), icon_name, sep="/"), mode = "0777", use_umask = TRUE)
+			cat(paste(file.path(R.home("bin"), "R"), "-e", "'library(OsteoShiny);OsteoSort()'", sep=" "), file = paste(file.path(path.expand("~"), "Desktop"), "OsteoSort.sh", sep = "/"))
+			Sys.chmod(paste(file.path(path.expand("~"), "Desktop"), "OsteoSort.sh", sep="/"), mode = "0777", use_umask = TRUE)
 		}
 
 	})
