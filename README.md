@@ -11,3 +11,4 @@ Adjusted output text
 
 Moderate changes:
 Added ability to select alpha level cutoff for PCACCA-regression statistics modal
+Adjusted default threads to n-1 
