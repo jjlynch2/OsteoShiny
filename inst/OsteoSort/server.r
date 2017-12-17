@@ -89,9 +89,9 @@ shinyServer(function(input, output, session) {
 
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
-			target <- paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" ")
-			icon <- system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny")
-			pathname <- paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.LNK", sep = "/")
+			target <- paste(paste(normalizePath(file.path(R.home("bin"), "R.exe")),sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" ")
+			icon <- normalizePath(system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny"))
+			pathname <- normalizepath(paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.LNK", sep = "/"))
 			R.utils::createWindowsShortcut(pathname, target=target, icon=icon, overwrite = TRUE)
 		}
 		if(Sys.info()[['sysname']] == "Linux") {
