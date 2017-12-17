@@ -92,7 +92,7 @@ shinyServer(function(input, output, session) {
 			target <- paste(paste('"',normalizePath(gsub("/","\\\\", file.path(R.home("bin"), "R.exe"))),'"',sep=""),  "-e", "library(OsteoShiny);OsteoSort()", sep=" ")
 			icon <- system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny")
 			pathname <- paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.LNK", sep = "/")
-			R.utils::createWindowsShortcut(pathname, target=target, icon=icon)
+			R.utils::createWindowsShortcut(pathname, target=target, icon=icon, overwrite = TRUE)
 		}
 		if(Sys.info()[['sysname']] == "Linux") {
 			icon_name <- "OsteoSort.desktop"
