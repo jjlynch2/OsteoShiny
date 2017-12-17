@@ -91,7 +91,7 @@
 		ncores2D$ncores2D <- input$ncores2D
 	})
 	output$ncores2D <- renderUI({
-		sliderInput(inputId = "ncores2D", label = "Number of threads", min=1, max=detectCores(), value=1, step =1)
+		sliderInput(inputId = "ncores2D", label = "Number of threads", min=1, max=detectCores(), value=detectCores()-1, step =1)
 	})
 
 
@@ -100,7 +100,7 @@
 		meanit2D$meanit2D <- input$meanit2D
 	})
 	output$comp_options <- renderUI({
-		sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=4, step=1)
+		sliderInput(inputId = "meanit2D", label = "Number of mean iterations", min=1, max=100, value=2, step=1)
 	})
 
 

@@ -5,7 +5,7 @@
 		numbercoresglobalm$ncorem <- input$numbercoresm
 	})
 	output$ncoresm <- renderUI({
-		sliderInput(inputId = "numbercoresm", label = "Number of threads", min=1, max=detectCores(), value=1, step =1)
+		sliderInput(inputId = "numbercoresm", label = "Number of threads", min=1, max=detectCores(), value=detectCores()-1, step =1)
 	})
 
 	 ####This is the antemortem - postmortem comparison server side code made for local import into server.r

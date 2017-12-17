@@ -1293,7 +1293,7 @@ shinyUI(
 										radioButtons(inputId ="regtesttypes", label = "Regression type", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 			
 
-										checkboxInput(inputId = "alphapred", label = "Use alpha level hypothesis", value = FALSE),
+										checkboxInput(inputId = "alphapred", label = "Use alpha level hypothesis", value = TRUE),
 
 								sliderInput(inputId = "alphalevels2", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01)
 								),
@@ -1547,7 +1547,7 @@ shinyUI(
 
 										radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 
-										checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = FALSE),
+										checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = TRUE),
 
 										sliderInput(inputId = "asspredlevel", label = "Prediction interval level", min=0.01, max=1, value=0.95, step=0.01)
 									),
