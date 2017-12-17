@@ -96,7 +96,7 @@ shinyServer(function(input, output, session) {
 			arguments <- paste('"', "-e ", "library(OsteoShiny);OsteoSort()", '"', sep="")
 			icon <- paste('"', system.file("vbs/OsteoSort.ico", package = "OsteoShiny"), '"', sep="")
 			pathname <- paste('"', paste(gsub("/Documents", "", file.path(path.expand("~"), "Desktop") ), "OsteoSort.lnk", sep = "/"), '"', sep="")
-			vbs <- system.file("vbs/createLink.vbs", package = "OsteoShiny")
+			vbs <- paste('"', system.file("vbs/createLink.vbs", package = "OsteoShiny"), '"', sep="")
 			system(paste("cscript", vbs, pathname, target, icon, sep=" "))
 
 		}
