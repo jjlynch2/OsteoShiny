@@ -13,3 +13,7 @@ Added .desktop for Linux
 
 Added .command for mac
 
+
+Bug fixes:
+
+Added conditional statement to remove images in 2D analysis, if present, when clicking the clear action button. This prevents crashing when running fragmentary analysis prior to complete. The new images are not overwritten so the old images are run through the analysis. 
