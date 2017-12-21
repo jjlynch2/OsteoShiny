@@ -13,6 +13,8 @@ Added .desktop for Linux
 
 Added .command for mac
 
+Updated measurement standards table switching Sca_03 to 44 and Sca_04 to 43
+
 
 Bug fixes:
 
