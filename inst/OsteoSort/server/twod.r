@@ -29,6 +29,14 @@
 	})
 
 	observeEvent(input$clearFile2D, {
+		
+		if(!is.null(input$leftimages$datapath) && !is.null(input$leftimages$datapath)) { #prevents crashing
+			file.remove(input$leftimages$datapath)
+			file.remove(input$leftimages$name)
+			file.remove(input$rightimages$datapath)
+			file.remove(input$rightimages$name)
+		}
+
 		fileInput('leftimages', 'Upload first image set', accept=c('jpeg', "jpg"), multiple = TRUE)
 		fileInput('rightimages', 'Upload second image set', accept=c('jpeg', "jpg"), multiple = TRUE)
 	})
