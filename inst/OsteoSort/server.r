@@ -76,7 +76,6 @@ shinyServer(function(input, output, session) {
 	
 	observeEvent(input$Create_Desktop_Icon, {
 		if(Sys.info()[['sysname']] == "Windows") {
-
 			target <- paste('"', file.path(R.home("bin"), "R.exe"), '"', sep="")
 			arguments <- paste('"', "-e ", "library(OsteoShiny);OsteoSort()", '"', sep="")
 			icon <- paste('"', system.file("vbs/OsteoSort.ico", package = "OsteoShiny"), '"', sep="")
@@ -90,7 +89,6 @@ shinyServer(function(input, output, session) {
 				paste(
 					"[Desktop Entry]\nEncoding=UTF-8\nTerminal=true\nType=Application\nCategories=Application\nName=OsteoSort\n",
 					"Version=",	packageVersion("OsteoShiny"),"\n",
-
 					"Icon=",		system.file("OsteoSort/www/OsteoSort.png", package = "OsteoShiny"),"\n",
 					"Exec=",		paste(file.path(R.home("bin"), "R"), "-e", "library(OsteoShiny);OsteoSort()", sep=" ")
 				,sep=""),#paste
