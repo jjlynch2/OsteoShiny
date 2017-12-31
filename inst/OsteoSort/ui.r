@@ -43,7 +43,7 @@ themeSelector <- function() {
 }
 #Navigation bar interface
 shinyUI(
-	navbarPage(theme = shinytheme("yeti"), windowTitle = "OsteoSort", title=div(img(src="OsteoSort.png", width = "28px"), "OsteoSort"),
+	navbarPage(theme = shinytheme("yeti"), windowTitle = "OsteoSort", title=div(img(src="OsteoSort.png", width = "20px"), "OsteoSort"),
 	navbarMenu("Help",
 			tabPanel("About",
 				HTML(paste("<h1><span style='font-family: 'Times New Roman', serif;'><strong>OsteoSort</strong></span></h1><hr/>",
@@ -89,14 +89,20 @@ shinyUI(
 				downloadButton('postmortem_template', 'Postmortem template'),
 				downloadButton('antemortem_template', 'Antemortem template'),
 				downloadButton('osteoguide', 'Help guide'),
-				downloadButton('example_data', "Example data")
+				downloadButton('example_data', "Example data"),
+
+				tags$style(type = "text/css", "#postmortem_template { width:12%; font-size:85% }"),
+				tags$style(type = "text/css", "#antemortem_template { width:12%; font-size:85% }"),
+				tags$style(type = "text/css", "#osteoguide { width:12%; font-size:85% }"),
+				tags$style(type = "text/css", "#example_data { width:12%; font-size:85% }")
 			),
 			tabPanel("Measurements",
 				DT::dataTableOutput('measurement_conversion_table')
 
 			),
 			tabPanel("Misc",
-					actionButton('Create_Desktop_Icon', 'Create Desktop Icon', icon = icon("gears")),
+					actionButton('Create_Desktop_Icon', 'Create desktop icon', icon = icon("gears")),
+					tags$style(type = "text/css", "#Create_Desktop_Icon { width:12%; font-size:85% }"),
 					themeSelector()
 			)
 		), #Help tab
@@ -105,6 +111,7 @@ shinyUI(
 				titlePanel(""),
 				sidebarLayout(
 					sidebarPanel(
+    tags$style(type='text/css', ".selectize-input { font-size: 14px; line-height: 14px;} .selectize-dropdown { font-size: 14px; line-height: 14px; }"),
 						selectInput('testtype', 'Analysis', c(Pair='Pair_match',Articulation='Articulation_match',Association='Regression_match'), 'Pair_match'),
 						uiOutput("testtype"),
 							conditionalPanel(condition = "input.zz == 'huur' || input.zz == 'hurr' || input.zz == 'hufr' || input.zz == 'hutr' || input.zz == 'hufir' || input.zz == 'ulrr' || input.zz == 'ulfr' || input.zz == 'ultr' || input.zz == 'ulfir' || input.zz == 'rafr' || input.zz == 'ratr' || input.zz == 'rafir' || input.zz == 'fetr' || input.zz == 'fefir' || input.zz == 'tifir' || input.zz == 'humerus' || input.zz == 'ulna' || input.zz == 'radius' || input.zz == 'femur' || input.zz == 'tibia' || input.zz == 'fibula' || input.zz == 'scapula' || input.zz == 'os_coxa' || input.zz == 'clavicle' ",
@@ -399,7 +406,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'humerus'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a401', label = 'Hum_01', value = ''),								
 											numericInput(inputId = 'a411', label = 'Hum_02', value = ''),		
 											numericInput(inputId = 'a421', label = 'Hum_03', value = ''),																		
@@ -407,7 +414,7 @@ shinyUI(
 											numericInput(inputId = 'a441', label = 'Hum_05', value = '')																								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a402', label = 'Hum_01', value = ''),								
 											numericInput(inputId = 'a412', label = 'Hum_02', value = ''),		
 											numericInput(inputId = 'a422', label = 'Hum_03', value = ''),																		
@@ -419,7 +426,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'ulna'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a481', label = 'Uln_01', value = ''),							
 											numericInput(inputId = 'a491', label = 'Uln_04', value = ''),	
 											numericInput(inputId = 'a501', label = 'Uln_05', value = ''),	
@@ -427,7 +434,7 @@ shinyUI(
 											#numericInput(inputId = 'a521', label = '52', value = '')																																																						
 										),
 										column(6,
-										   h4("Right"),
+										   h5("Right"),
 											numericInput(inputId = 'a482', label = 'Uln_01', value = ''),							
 											numericInput(inputId = 'a492', label = 'Uln_04', value = ''),	
 											numericInput(inputId = 'a502', label = 'Uln_05', value = ''),	
@@ -438,13 +445,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'radius'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a451', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'a461', label = 'Rad_05', value = ''),	
 											numericInput(inputId = 'a471', label = 'Rad_06', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a452', label = 'Rad_01', value = ''),								
 											numericInput(inputId = 'a462', label = 'Rad_05', value = ''),	
 											numericInput(inputId = 'a472', label = 'Rad_06', value = '')		
@@ -454,7 +461,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'femur'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a601', label = 'Fem_01', value = ''),								
 											numericInput(inputId = 'a611', label = 'Fem_02', value = ''),
 											numericInput(inputId = 'a621', label = 'Fem_03', value = ''),
@@ -464,7 +471,7 @@ shinyUI(
 											numericInput(inputId = 'a661', label = 'Fem_07', value = '')
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a602', label = 'Fem_01', value = ''),								
 											numericInput(inputId = 'a612', label = 'Fem_02', value = ''),
 											numericInput(inputId = 'a622', label = 'Fem_03', value = ''),
@@ -478,7 +485,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'tibia'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a691', label = 'Tib_01', value = ''),								
 											numericInput(inputId = 'a701', label = 'Tib_02', value = ''),
 											numericInput(inputId = 'a711', label = 'Tib_03', value = ''),
@@ -486,7 +493,7 @@ shinyUI(
 											numericInput(inputId = 'a731', label = 'Tib_05', value = '')	
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a692', label = 'Tib_01', value = ''),								
 											numericInput(inputId = 'a702', label = 'Tib_02', value = ''),
 											numericInput(inputId = 'a712', label = 'Tib_03', value = ''),
@@ -498,12 +505,12 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'fibula'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a751', label = 'Fib_01', value = ''),								
 											numericInput(inputId = 'a761', label = 'Fib_02', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a752', label = 'Fib_01', value = ''),								
 											numericInput(inputId = 'a762', label = 'Fib_02', value = '')	
 										)
@@ -512,12 +519,12 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'os_coxa'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a561', label = 'Osc_01', value = ''),								
 											numericInput(inputId = 'a571', label = 'Osc_02', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a562', label = 'Osc_01', value = ''),								
 											numericInput(inputId = 'a572', label = 'Osc_02', value = '')	
 										)
@@ -526,12 +533,12 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'scapula'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a381', label = 'Sca_01', value = ''),								
 											numericInput(inputId = 'a391', label = 'Sca_02', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a382', label = 'Sca_01', value = ''),								
 											numericInput(inputId = 'a392', label = 'Sca_02', value = '')	
 										)
@@ -540,13 +547,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'clavicle'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a351', label = 'Cla_01', value = ''),								
 											numericInput(inputId = 'a361', label = 'Cla_04', value = ''),
 											numericInput(inputId = 'a371', label = 'Cla_05', value = '')
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a352', label = 'Cla_01', value = ''),								
 											numericInput(inputId = 'a362', label = 'Cla_04', value = ''),
 											numericInput(inputId = 'a372', label = 'Cla_05', value = '')	
@@ -560,14 +567,14 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'humerus'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a41A1', label = 'Hum_06', value = ''),								
 											numericInput(inputId = 'a42A1', label = 'Hum_07', value = ''),
 											numericInput(inputId = 'a44B1', label = 'Hum_08', value = ''),
 											numericInput(inputId = 'a44D1', label = 'Hum_09', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a41A2', label = 'Hum_06', value = ''),								
 											numericInput(inputId = 'a42A2', label = 'Hum_07', value = ''),
 											numericInput(inputId = 'a44B2', label = 'Hum_08', value = ''),
@@ -578,13 +585,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'ulna'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a51A1', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'a51B1', label = 'Uln_10', value = ''),
 											numericInput(inputId = 'a51C1', label = 'Uln_11', value = '')							
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a51A2', label = 'Uln_09', value = ''),							
 											numericInput(inputId = 'a51B2', label = 'Uln_10', value = ''),
 											numericInput(inputId = 'a51C2', label = 'Uln_11', value = '')	
@@ -594,7 +601,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'radius'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a47A1', label = 'Rad_07', value = ''),								
 											numericInput(inputId = 'a47B1', label = 'Rad_08', value = ''),
 											numericInput(inputId = 'a47C1', label = 'Rad_09', value = ''),
@@ -602,7 +609,7 @@ shinyUI(
 											numericInput(inputId = 'a47E1', label = 'Rad_10', value = '')							
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a47A2', label = 'Rad_07', value = ''),								
 											numericInput(inputId = 'a47B2', label = 'Rad_08', value = ''),
 											numericInput(inputId = 'a47C2', label = 'Rad_09', value = ''),
@@ -614,14 +621,14 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'femur'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a68A1', label = 'Fem_14', value = ''),								
 											numericInput(inputId = 'a68B1', label = 'Fem_15', value = ''),
 											numericInput(inputId = 'a68D1', label = 'Fem_16', value = ''),
 											numericInput(inputId = 'a68E1', label = 'Fem_17', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a68A2', label = 'Fem_14', value = ''),								
 											numericInput(inputId = 'a68B2', label = 'Fem_15', value = ''),
 											numericInput(inputId = 'a68D2', label = 'Fem_16', value = ''),
@@ -632,13 +639,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'tibia'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a74A1', label = 'Tib_10', value = ''),								
 											numericInput(inputId = 'a74B1', label = 'Tib_11', value = ''),
 											numericInput(inputId = 'a74F1', label = 'Tib_12', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a74A2', label = 'Tib_10', value = ''),								
 											numericInput(inputId = 'a74B2', label = 'Tib_11', value = ''),
 											numericInput(inputId = 'a74F2', label = 'Tib_12', value = '')	
@@ -648,13 +655,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'fibula'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a76A1', label = 'Fib_03', value = ''),								
 											numericInput(inputId = 'a76B1', label = 'Fib_04', value = ''),
 											numericInput(inputId = 'a76C1', label = 'Fib_05', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a76A2', label = 'Fib_03', value = ''),								
 											numericInput(inputId = 'a76B2', label = 'Fib_04', value = ''),
 											numericInput(inputId = 'a76C2', label = 'Fib_05', value = '')	
@@ -664,7 +671,7 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'os_coxa'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a59A1', label = 'Osc_14', value = ''),								
 											numericInput(inputId = 'a59B1', label = 'Osc_15', value = ''),
 											numericInput(inputId = 'a59C1', label = 'Osc_16', value = ''),
@@ -672,7 +679,7 @@ shinyUI(
 											numericInput(inputId = 'a59E1', label = 'Osc_17', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a59A2', label = 'Osc_14', value = ''),								
 											numericInput(inputId = 'a59B2', label = 'Osc_15', value = ''),
 											numericInput(inputId = 'a59C2', label = 'Osc_16', value = ''),
@@ -684,13 +691,13 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'scapula'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a39A1', label = 'Sca_03', value = ''),								
 											numericInput(inputId = 'a39B1', label = 'Sca_04', value = ''),
 											numericInput(inputId = 'a39D1', label = 'Sca_05', value = '')								
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a39A2', label = 'Sca_03', value = ''),								
 											numericInput(inputId = 'a39B2', label = 'Sca_04', value = ''),
 											numericInput(inputId = 'a39D2', label = 'Sca_05', value = '')	
@@ -700,14 +707,14 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'clavicle'",
 									fluidRow(
 										column(6,
-											h4("Left"),
+											h5("Left"),
 											numericInput(inputId = 'a37A1', label = 'Cla_06', value = ''),								
 											numericInput(inputId = 'a37B1', label = 'Cla_07', value = ''),
 											numericInput(inputId = 'a37E1', label = 'Cla_08', value = ''),
 											numericInput(inputId = 'a37D1', label = 'Cla_09', value = '')							
 										),
 										column(6,
-											h4("Right"),
+											h5("Right"),
 											numericInput(inputId = 'a37A2', label = 'Cla_06', value = ''),								
 											numericInput(inputId = 'a37B2', label = 'Cla_07', value = ''),
 											numericInput(inputId = 'a37E2', label = 'Cla_08', value = ''),
@@ -1080,9 +1087,9 @@ shinyUI(
 									downloadButton("downloadData2", "save")
 								)
 							),
-							tags$style(type = "text/css", "#downloadData2 { width:110% }"),
-							tags$style(type = "text/css", "#settings2 { width:110% }"),
-							tags$style(type = "text/css", "#proc { width:110% }"),
+							tags$style(type = "text/css", "#downloadData2 { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#settings2 { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#proc { width:100%; font-size:85% }"),
 							width=2
 					), #sidepanel
 					mainPanel(
@@ -1098,17 +1105,17 @@ shinyUI(
 					 		tabPanel("Statistical Parameters",
 							fluidRow(
 								column(4, 
-									h4("Association"),
+									h5("Association"),
 									radioButtons(inputId ="regtesttypes", label = "Regression type", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 									checkboxInput(inputId = "alphapred", label = "Use alpha level hypothesis", value = TRUE),
 									sliderInput(inputId = "alphalevels2", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01)
 								),
 								column(4,
-									h4("Common"),
+									h5("Common"),
 									sliderInput(inputId = "alphalevels", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01)
 								),
 								column(4,
-									h4("Pair & Articulation"),
+									h5("Pair & Articulation"),
 									conditionalPanel(condition = "input.testtype == 'Articulation_match'",
 										checkboxInput(inputId = "absolutevalues2", label = "Absolute D-value |a-b|", value = FALSE),
 										conditionalPanel(condition = "input.absolutevalues2",
@@ -1160,10 +1167,10 @@ shinyUI(
 									downloadButton("downloadData", "save    ")
 								)
 							),
-							tags$style(type = "text/css", "#settings1 { width:110% }"),
-							tags$style(type = "text/css", "#pro { width:110% }"),
-							tags$style(type = "text/css", "#clearFile1 { width:110% }"),
-							tags$style(type = "text/css", "#downloadData { width:110% }"),
+							tags$style(type = "text/css", "#settings1 { width:100%; font-size:85%  }"),
+							tags$style(type = "text/css", "#pro { width:100%; font-size:85%  }"),
+							tags$style(type = "text/css", "#clearFile1 { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#downloadData { width:100%; font-size:85% }"),
 							width=2
 					),
 					mainPanel(
@@ -1333,18 +1340,18 @@ shinyUI(
 								tabPanel("Statistical Parameters",
 									fluidRow(
 										column(4,
-											h4("Association"),
+											h5("Association"),
 											radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 											checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = TRUE),
 											sliderInput(inputId = "asspredlevel", label = "Prediction interval level", min=0.01, max=1, value=0.95, step=0.01)
 										),
 										column(4,
-											h4("Common"),
+											h5("Common"),
 											sliderInput(inputId = "alphalevel", label = "Alpha level", min=0.01, max=1, value=0.05, step = 0.01),
 											checkboxInput(inputId = "research", label = "Calculate research statistics", value = FALSE)								
 										),
 										column(4,
-											h4("Pair & Articulation"),
+											h5("Pair & Articulation"),
 											conditionalPanel(condition = "input.testtype2 == 'Articulation_match'",
 												checkboxInput(inputId = "absolutevalue2", label = "Absolute D-value |a-b|", value = FALSE),
 												conditionalPanel(condition = "input.absolutevalue2",
@@ -1397,10 +1404,10 @@ shinyUI(
 								downloadButton("outlierdownload", "save    ")
 							)
 						),
-						tags$style(type = "text/css", "#settings3 { width:110% }"),
-						tags$style(type = "text/css", "#pro3 { width:110% }"),
-						tags$style(type = "text/css", "#clearFile3 { width:110% }"),
-						tags$style(type = "text/css", "#outlierdownload { width:110% }"),
+						tags$style(type = "text/css", "#settings3 { width:100%; font-size:85% }"),
+						tags$style(type = "text/css", "#pro3 { width:100%; font-size:85% }"),
+						tags$style(type = "text/css", "#clearFile3 { width:100%; font-size:85% }"),
+						tags$style(type = "text/css", "#outlierdownload { width:100%; font-size:85% }"),
 						width=2
 					),
 					mainPanel(
@@ -1520,10 +1527,10 @@ shinyUI(
 									downloadButton("outlierdownload4", "save    ")
 								)
 							),
-							tags$style(type = "text/css", "#settings4 { width:110% }"),
-							tags$style(type = "text/css", "#pro4 { width:110% }"),
-							tags$style(type = "text/css", "#clearFile4 { width:110% }"),
-							tags$style(type = "text/css", "#outlierdownload4 { width:110% }"),
+							tags$style(type = "text/css", "#settings4 { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#pro4 { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#clearFile4 { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#outlierdownload4 { width:100%; font-size:85% }"),
 							width=2
 					),
 					mainPanel(
@@ -1627,10 +1634,10 @@ shinyUI(
 									downloadButton("downloadData2D", "save    ")
 								)
 							),
-							tags$style(type = "text/css", "#settings2D { width:110% }"),
-							tags$style(type = "text/css", "#pro2D { width:110% }"),
-							tags$style(type = "text/css", "#clearFile2D { width:110% }"),
-							tags$style(type = "text/css", "#downloadData2D { width:110% }"),
+							tags$style(type = "text/css", "#settings2D { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#pro2D { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#clearFile2D { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#downloadData2D { width:100%; font-size:85% }"),
 							width = 2
 						),
 						mainPanel(
@@ -1647,7 +1654,7 @@ shinyUI(
 									tabPanel("Statistical Parameters",
 										fluidRow(
 											column(4,
-												h4("Outline"),
+												h5("Outline"),
 												uiOutput('nthreshold'),
 												uiOutput('mirror2D'),
 								 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
@@ -1657,7 +1664,7 @@ shinyUI(
 												)
 											),
 											column(4, 
-												h4("Registration"),
+												h5("Registration"),
 												conditionalPanel(condition = "input.fragcomp == 'Complete'",
 														uiOutput('comp_options')
 												),
@@ -1665,7 +1672,7 @@ shinyUI(
 												uiOutput('trans2D')
 											),
 											column(4,
-												h4("Distance"),
+												h5("Distance"),
 												uiOutput('distance2D'),
 								 				conditionalPanel(condition = "input.distance2D == 'Segmented-Hausdorff' || input.distance2D == 'Uni-Hausdorff' || input.distance2D == 'Hausdorff'",
 													uiOutput('max_avg_distance')
@@ -1745,9 +1752,9 @@ shinyUI(
 									downloadButton("downloadantestat", "save    ")
 								)
 							),
-							tags$style(type = "text/css", "#settingsante { width:110% }"),
-							tags$style(type = "text/css", "#proantestat { width:110% }"),
-							tags$style(type = "text/css", "#downloadantestat { width:110% }"),
+							tags$style(type = "text/css", "#settingsante { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#proantestat { width:100%; font-size:85% }"),
+							tags$style(type = "text/css", "#downloadantestat { width:100%; font-size:85% }"),
 							width=2
 					),
 					mainPanel(
@@ -1800,10 +1807,10 @@ shinyUI(
 								downloadButton("downloadantestatm", "save    ")
 							)
 						),
-						tags$style(type = "text/css", "#settingsantem { width:110% }"),
-						tags$style(type = "text/css", "#proantestatm { width:110% }"),
-						tags$style(type = "text/css", "#clearFile1ante { width:110% }"),
-						tags$style(type = "text/css", "#downloadantestatm { width:110% }"),
+						tags$style(type = "text/css", "#settingsantem { width:100%; font-size:85% }"),
+						tags$style(type = "text/css", "#proantestatm { width:100%; font-size:85% }"),
+						tags$style(type = "text/css", "#clearFile1ante { width:100%; font-size:85% }"),
+						tags$style(type = "text/css", "#downloadantestatm { width:100%; font-size:85% }"),
 						width=2
 					),
 					mainPanel(

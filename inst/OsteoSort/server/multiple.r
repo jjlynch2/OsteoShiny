@@ -6,12 +6,12 @@ output$contents <- renderUI({
 output$resettableInput <- renderUI({
 	input$clearFile1
 	input$uploadFormat
-	fileInput('file1', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))  
+	fileInput('file1', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))
 })
 
 #clears session for multiple comparison
 observeEvent(input$clearFile1, {
-	fileInput('file1', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))  
+	fileInput('file1', '', accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv'))
 })
 
 ######standard measurement combinator
