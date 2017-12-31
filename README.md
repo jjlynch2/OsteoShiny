@@ -21,6 +21,9 @@ Removed plyr as dependency
 
 Added live theme selector 
 
+Adjusted articulation default options
+
+
 
 Cleaned up code indenting and changed default bootstrap theme to yeti (smaller font looks cleaner across different screen resolutions)
 

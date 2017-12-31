@@ -1109,12 +1109,22 @@ shinyUI(
 								),
 								column(4,
 									h4("Pair & Articulation"),
-									checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
-									conditionalPanel(condition = "input.absolutevalues",
-										checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
+									conditionalPanel(condition = "input.testtype == 'Articulation_match'",
+										checkboxInput(inputId = "absolutevalues2", label = "Absolute D-value |a-b|", value = FALSE),
+										conditionalPanel(condition = "input.absolutevalues2",
+											checkboxInput(inputId = "power12", label = "Half-normalization transformation", value = FALSE)
+										),
+										sliderInput(inputId = "tails12", label = "Tails", min=1, max=2, value=2, step=1),
+										checkboxInput(inputId = "testagainstsingle2", label = "Zero sample mean", value = FALSE)						
 									),
-									sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=1, step=1),
-									checkboxInput(inputId = "testagainstsingle", label = "Zero sample mean", value = FALSE)
+									conditionalPanel(condition = "input.testtype == 'Pair_match'",
+										checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
+										conditionalPanel(condition = "input.absolutevalues",
+											checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
+										),
+										sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=1, step=1),
+										checkboxInput(inputId = "testagainstsingle", label = "Zero sample mean", value = FALSE)
+									)
 								)
 								) #fluidrow
 							)#bsmodal
@@ -1335,12 +1345,22 @@ shinyUI(
 										),
 										column(4,
 											h4("Pair & Articulation"),
-											checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
-											conditionalPanel(condition = "input.absolutevalue",
-												checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
+											conditionalPanel(condition = "input.testtype2 == 'Articulation_match'",
+												checkboxInput(inputId = "absolutevalue2", label = "Absolute D-value |a-b|", value = FALSE),
+												conditionalPanel(condition = "input.absolutevalue2",
+													checkboxInput(inputId = "power22", label = "Half-normalization transformation", value = FALSE)
+												),
+												sliderInput(inputId = "tails22", label = "Tails", min=1, max=2, value=2, step=1),
+												checkboxInput(inputId = "testagainst2", label = "Zero sample mean", value = FALSE)
 											),
-											sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=1, step=1),
-											checkboxInput(inputId = "testagainst", label = "Zero sample mean", value = FALSE)
+											conditionalPanel(condition = "input.testtype2 == 'Pair_match'",
+												checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
+												conditionalPanel(condition = "input.absolutevalue",
+													checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
+												),
+												sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=1, step=1),
+												checkboxInput(inputId = "testagainst", label = "Zero sample mean", value = FALSE)
+											)
 										)
 									)								
 								),

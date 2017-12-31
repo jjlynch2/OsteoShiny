@@ -209,7 +209,7 @@ observeEvent(input$pro, {
 		}
 		if(input$bone == 'hu' | input$bone == 'hr' | input$bone == 'hs' | input$bone == "hss" | input$bone == 'fi' | input$bone == 'ft' | input$bone == 'ftt') {
 			wtf <- art.input(bone=toString(input$bone), sort=tempdata1)
-			direc2 <- art.ttest(tails = input$tails2, power = input$power2, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir=sessiontemp, alphalevel = input$alphalevel, absolutevalue = input$absolutevalue, testagainstzero = input$testagainst, output_options =  c(input$fileoutput1, input$fileoutput1plot), threads = numbercoresglobal$ncore)   
+			direc2 <- art.ttest(tails = input$tails22, power = input$power22, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir=sessiontemp, alphalevel = input$alphalevel, absolutevalue = input$absolutevalue2, testagainstzero = input$testagainst2, output_options =  c(input$fileoutput1, input$fileoutput1plot), threads = numbercoresglobal$ncore)   
 			ll <- nrow(direc2[[2]]) + nrow(direc2[[3]])                    
 		}      
 	}
