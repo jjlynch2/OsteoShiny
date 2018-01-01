@@ -22,13 +22,13 @@ shinyUI(
 					References
 					</h2>
 					<p>&nbsp;</p>
-					Lynch JJ, Byrd JE, LeGarde CB. The power of exclusion using automated osteometric sorting: pair-matching. J Forensic Sci 2018. https://doi.org/10.1111/1556-4029.13560. Epub 2017 May 26.
+					Lynch JJ, Byrd JE, LeGarde CB. The power of exclusion using automated osteometric sorting: pair-matching. J Forensic Sci 2018. <a href='https://doi.org/10.1111/1556-4029.13560', target='_blank'>https://doi.org/10.1111/1556-4029.13560</a>. Epub 2017 May 26.
 					<p>&nbsp;</p>
-					Lynch JJ. An analysis on the choice of alpha level in the osteometric pair-matching of the os coxa, scapula, and clavicle. J Forensic Sci. https://doi.org/10.1111/1556-4029.13599. Epub 2017 July 18.
+					Lynch JJ. An analysis on the choice of alpha level in the osteometric pair-matching of the os coxa, scapula, and clavicle. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13599', target='_blank'>https://doi.org/10.1111/1556-4029.13599</a/>. Epub 2017 July 18.
 					<p>&nbsp;</p>
-					Lynch JJ. The automation of regression modeling in osteometric sorting: an ordination approach. J Forensic Sci. https://doi.org/10.1111/1556-4029.13597. Epub 2017 July 21.
+					Lynch JJ. The automation of regression modeling in osteometric sorting: an ordination approach. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13597', target='_blank'>https://doi.org/10.1111/1556-4029.13597</a>. Epub 2017 July 21.
 					<p>&nbsp;</p>
-					Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci. https://doi.org/10.1111/1556-4029.13670. Epub 2017 Oct 16.
+					Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13670', target='_blank'>https://doi.org/10.1111/1556-4029.13670</a>. Epub 2017 Oct 16.
 					<p>&nbsp;</p>
 					Lynch JJ. An automated two-dimensional pairwise form registration for pair-matching fragmented skeletal elements. [Under Review].
 					<p>&nbsp;</p>
