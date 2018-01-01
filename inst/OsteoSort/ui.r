@@ -38,18 +38,6 @@ shinyUI(
 					")
 			),
 			tabPanel("Files",
-				HTML("<hr><span style='font-family: 'Times New Roman', serif;'> 
-					<p>
-						<strong>Postmortem template: </strong> Standardized template for importing postmortem data
-						<p>&nbsp;</p>
-						<strong>Antemortem template: </strong> Standardized template for importing antemortem data
-						<p>&nbsp;</p>
-						<strong>Help guide: </strong> User help guide for using OsteoSort
-						<p>&nbsp;</p>
-						<strong>Example data: </strong> Example data for testing analytics
-						<p>&nbsp;</p>
-					</p>
-				"),
 				downloadButton('postmortem_template', 'Postmortem template'),
 				downloadButton('antemortem_template', 'Antemortem template'),
 				downloadButton('osteoguide', 'Help guide'),
