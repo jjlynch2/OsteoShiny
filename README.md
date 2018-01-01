@@ -19,7 +19,8 @@ Updated measurement standards table switching Sca_03 to 44 and Sca_04 to 43
 Removed plyr as dependency
 
 
-Added live theme selector 
+Removed shinythemes as dependency
+
 
 Adjusted articulation default options
 
