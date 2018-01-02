@@ -87,7 +87,7 @@ output$mirror2D <- renderUI({
 	checkboxInput(inputId = "mirror2D", label = "Mirror left images to right", value = TRUE)
 })
 
-ncores2D <- reactiveValues(ncores2D = 1)
+ncores2D <- reactiveValues(ncores2D = detectCores()-1)
 observeEvent(input$ncores2D, {
 	ncores2D$ncores2D <- input$ncores2D
 })

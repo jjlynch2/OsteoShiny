@@ -130,7 +130,7 @@ output$measurementsi <- renderUI({
 }) 
 ######supplemental measurement combinator
 
-numbercoresglobal <- reactiveValues(ncore = 1)
+numbercoresglobal <- reactiveValues(ncore = detectCores()-1)
 
 observeEvent(input$numbercores, {
 	numbercoresglobal$ncore <- input$numbercores

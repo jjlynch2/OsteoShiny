@@ -1,4 +1,4 @@
-numbercoresglobalm <- reactiveValues(ncore = 1)
+numbercoresglobalm <- reactiveValues(ncorem = detectCores()-1)
 observeEvent(input$numbercoresm, {
 	numbercoresglobalm$ncorem <- input$numbercoresm
 })
