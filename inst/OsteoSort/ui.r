@@ -53,7 +53,7 @@ shinyUI(
 
 			),
 			tabPanel("Misc",
-					actionButton('Create_Desktop_Icon', 'Create desktop icon', icon = icon("gears")),
+					actionButton('Create_Desktop_Icon', 'Desktop icon', icon = icon("gears")),
 					tags$style(type = "text/css", "#Create_Desktop_Icon { width:8%; font-size:85%; background-color:#126a8f }")
 			)
 		), #Help tab
