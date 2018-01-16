@@ -30,9 +30,7 @@ shinyUI(
 					<p>&nbsp;</p>
 					Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13670', target='_blank'>https://doi.org/10.1111/1556-4029.13670</a>. Epub 2017 Oct 16.
 					<p>&nbsp;</p>
-					Lynch JJ. An automated two-dimensional pairwise form registration for pair-matching fragmented skeletal elements. [Under Review].
-					<p>&nbsp;</p>
-					Lynch JJ and Byrd JE. Antemortem stature association using osteometric sorting: a new method for shortlisting elements with known individuals. [Under Review].
+					Lynch JJ. An automated two-dimensional pairwise form registration method for pair-matching fragmented skeletal elements. J Forensic Sci [Under Review].
 					<p>&nbsp;</p>
 					</p>
 					")
