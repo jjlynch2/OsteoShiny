@@ -321,7 +321,7 @@ observeEvent(input$proc, {
 		if(input$regtesttypes == "PCA-CCA") {regtypee <- TRUE}
 		if(input$regtesttypes == "Simple") {regtypee <- FALSE}
 
-		sortreg <- rbind.fill(as.data.frame(sort1),as.data.frame(sort2))
+		sortreg <- plyr::rbind.fill(as.data.frame(sort1),as.data.frame(sort2))
 		outputtemp1 <- reg.input(sort = sortreg, bone1 = sort1[3], side1 = sort1[2], bone2 = sort2[3], side2 = sort2[2], measurement_standard = input$a)
 		direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput333), test = regtypee)					
 		direc2tab <- rbind(direc2[[2]], direc2[[3]]) #combine exlcuded and not excluded for table display				
