@@ -19,7 +19,6 @@ To install directly from GitHub use the devtools R package:
 * Added .desktop for Linux
 * Added .command for mac
 * Updated measurement standards table switching Sca_03 to 44 and Sca_04 to 43
-* Removed plyr as dependency
 * Removed shinythemes as dependency
 * Adjusted articulation default options
 * Cleaned up code indenting and changed default bootstrap theme to yeti (smaller font looks cleaner across different screen resolutions)
