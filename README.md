@@ -1,7 +1,8 @@
 # Installation
-
 To install directly from GitHub use the devtools R package:
+
 `require(devtools)`
+
 `install_github("jjlynch2/OsteoShiny", ref = "v1.2.8")`
 
 # Depends
