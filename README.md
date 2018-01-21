@@ -3,7 +3,7 @@ To install directly from GitHub use the devtools R package:
 
 `require("devtools")`
 
-`install_github("jjlynch2/OsteoShiny", ref = "v1.2.9")`
+`install_github("jjlynch2/OsteoShiny", ref = "v1.2.10")`
 
 # Depends
 * OsteoSort (>= 1.2.5)
@@ -13,7 +13,7 @@ To install directly from GitHub use the devtools R package:
 * DT
 * shiny
 
-# Changes for OsteoShiny version : 1.2.9
+# Changes for OsteoShiny version : 1.2.10
 
 ## Minor changes:
 * Added vb script to generate a .lnk shortcut rather than using a .bat file
