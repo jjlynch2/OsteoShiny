@@ -11,6 +11,7 @@ To install directly from GitHub use the devtools R package:
 * zip
 * plyr
 * DT
+* shiny
 
 # Changes for OsteoShiny version : 1.2.8
 
