@@ -8,6 +8,7 @@ Depends:
     OsteoSort (>= 1.2.4),
     htmltools,
     zip,
+    plyr,
     DT
 License: GPL-2
 LazyData: false
