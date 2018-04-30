@@ -125,7 +125,7 @@ observeEvent(input$scale2D, {
 	scale2D$scale2D <- input$scale2D
 })
 output$efa_options3 <- renderUI({
-	checkboxInput(inputId = "scale2D", label = "Scale to centroid size", value = TRUE)
+	checkboxInput(inputId = "scale2D", label = "scale to centroid size", value = FALSE)
 })
 
 n_regions <- reactiveValues(n_regions = 6)

@@ -22,6 +22,7 @@ observeEvent(input$testtype, {
 	}
 })
 
+
 observeEvent(input$proc, {
 	showModal(modalDialog(title = "Calculation has started...Window will update when finished.", easyClose = FALSE, footer = NULL))
 	withProgress(message = 'Calculation has started',
@@ -213,7 +214,7 @@ observeEvent(input$proc, {
 		}
 		if(input$zz == 'hufr') {
 			reghum <- cbind(id=input$ID1,Side= input$shufrside1, Element="humerus", Hum_06=input$shufr41A, Hum_07=input$shufr42A, Hum_08=input$shufr44B, Hum_09=input$shufr44D)
-			reguln <- cbind(id=input$ID2,Side= input$shufrside2, Element="femur", Fem_14=input$shufr68A,Fem_15=input$shufr68B,Fem_16=input$shufr68D,Fem_18=input$shufr68E)
+			reguln <- cbind(id=input$ID2,Side= input$shufrside2, Element="femur", Fem_14=input$shufr68A,Fem_15=input$shufr68B,Fem_16=input$shufr68D,Fem_17=input$shufr68E)
 			testt <- 'reg'
 		}
 		if(input$zz == 'hutr') {
@@ -232,7 +233,7 @@ observeEvent(input$proc, {
 			testt <- 'reg'
 		}
 		if(input$zz == 'ulfr') {
-			reguln <- cbind(id=input$ID2, Side=input$sulfrside2,Element= "femur", Fem_14=input$sulfr68A,Fem_15=input$sulfr68B,Fem_16=input$sulfr68D,Fem_18=input$sulfr68E)
+			reguln <- cbind(id=input$ID2, Side=input$sulfrside2,Element= "femur", Fem_14=input$sulfr68A,Fem_15=input$sulfr68B,Fem_16=input$sulfr68D,Fem_17=input$sulfr68E)
 			reghum <- cbind(id=input$ID1, Side=input$sulfrside1, Element="ulna", Uln_09=input$sulfr51A, Uln_10=input$sulfr51B, Uln_11=input$sulfr51C)
 			testt <- 'reg'
 		}
@@ -248,7 +249,7 @@ observeEvent(input$proc, {
 		}	
 		if(input$zz == 'rafr') {
 			reghum <- cbind(id=input$ID1, Side=input$srafrside1, Element="radius", Rad_07=input$srafr47A, Rad_08=input$srafr47B, Rad_09=input$srafr47C, Rad_04=input$srafr47D, Rad_10=input$srafr47E)
-			reguln <- cbind(id=input$ID2, Side=input$srafrside2, Element="femur", Fem_14=input$srafr68A,Fem_15=input$srafr68B,Fem_16=input$srafr68D,Fem_18=input$srafr68E)
+			reguln <- cbind(id=input$ID2, Side=input$srafrside2, Element="femur", Fem_14=input$srafr68A,Fem_15=input$srafr68B,Fem_16=input$srafr68D,Fem_17=input$srafr68E)
 			testt <- 'reg'
 		}
 		if(input$zz == 'ratr') {
@@ -257,17 +258,17 @@ observeEvent(input$proc, {
 			testt <- 'reg'
 		}
 		if(input$zz == 'rafir') {
-			reghum <- cbind(id=input$ID1, Side=input$srafirside1,Element="radius", Rad_07=input$srafir47A, Rad_08=input$srafir47B, Rad_09=input$srafir47C, Rad_04=input$srafir47D, Rad_010=input$srafir47E)
+			reghum <- cbind(id=input$ID1, Side=input$srafirside1,Element="radius", Rad_07=input$srafir47A, Rad_08=input$srafir47B, Rad_09=input$srafir47C, Rad_04=input$srafir47D, Rad_10=input$srafir47E)
 			reguln <- cbind(id=input$ID2, Side=input$srafirside2,Element= "fibula", Fib_03=input$srafir76A, Fib_04=input$srafir76B, Fib_05=input$srafir76C)
 			testt <- 'reg'
 		}
 		if(input$zz == 'fetr') {
-			reghum <- cbind(id=input$ID1, Side=input$sfetrside1, Element="femur", Fem_14=input$sfetr68A, Fem_15=input$sfetr68B, Fem_16=input$sfetr68D,Fem_18=input$sfetr68E)
+			reghum <- cbind(id=input$ID1, Side=input$sfetrside1, Element="femur", Fem_14=input$sfetr68A, Fem_15=input$sfetr68B, Fem_16=input$sfetr68D,Fem_17=input$sfetr68E)
 			reguln <- cbind(id=input$ID2, Side=input$sfetrside2, Element="tibia", Tib_10=input$sfetr74A, Tib_11=input$sfetr74B, Tib_12=input$sfetr74F)
 			testt <- 'reg'		
 		}	
 		if(input$zz == 'fefir') {
-			reghum <- cbind(id=input$ID1, Side=input$sfefirside1, Element="femur", Fem_14=input$sfefir68A,Fem_15=input$sfefir68B,Fem_16=input$sfefir68D,Fem_18=input$sfefir68E)
+			reghum <- cbind(id=input$ID1, Side=input$sfefirside1, Element="femur", Fem_14=input$sfefir68A,Fem_15=input$sfefir68B,Fem_16=input$sfefir68D,Fem_17=input$sfefir68E)
 			reguln <- cbind(id=input$ID2, Side=input$sfefirside2, Element="fibula", Fib_03=input$sfefir76A, Fib_04=input$sfefir76B, Fib_05=input$sfefir76C)
 			testt <- 'reg'
 		}	
@@ -313,6 +314,17 @@ observeEvent(input$proc, {
 		testt <- 'art'    
 	}
 	if(testt == 'reg') {
+		
+		if(input$pcasingleuse) {
+			pcan <- NULL
+		}
+		if(is.null(input$pcasingleuse)) {
+			pcan <- NULL
+		}
+		if(!input$pcasingleuse && !is.null(input$pcasingleuse)) {
+			pcan <- input$pcasingle
+		}
+
 		if(all(is.na(reghum[,4:length(reghum)])) && all(is.na(reguln[,4:length(reguln)]))) {removeModal(); return(NULL)}###stops crashing if empty
 		if(any(is.na(reghum[,1:3])) && any(is.na(reguln[,1:3]))) {removeModal(); return(NULL)}###stops crashing if empty		
 		if(input$prr == "Bone1") { sort1 <- reghum; sort2 <- reguln}
@@ -323,7 +335,7 @@ observeEvent(input$proc, {
 
 		sortreg <- plyr::rbind.fill(as.data.frame(sort1),as.data.frame(sort2))
 		outputtemp1 <- reg.input(sort = sortreg, bone1 = sort1[3], side1 = sort1[2], bone2 = sort2[3], side2 = sort2[2], measurement_standard = input$a)
-		direc2 <- reg.multitest(sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput333), test = regtypee)					
+		direc2 <- reg.multitest(pca = pcan, sort = outputtemp1[[1]], ref = outputtemp1[[2]], splitn = outputtemp1[[3]], prediction_interval = input$alphalevels2, alphatest = input$alphapred, alphalevel = input$alphalevels, sessiontempdir = sessiontemp, output_options = c(input$fileoutput3, input$fileoutput333), test = regtypee)					
 		direc2tab <- rbind(direc2[[2]], direc2[[3]]) #combine exlcuded and not excluded for table display				
 		output$table2 <- DT::renderDataTable({
 			DT::datatable(direc2tab, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)
@@ -343,7 +355,7 @@ observeEvent(input$proc, {
 		dft <- data.frame(dft)
 		colnames(dft)[1:3] <- c("ID","Side","Element")
 		wtf <- pm.input(bone=toString(input$zz), sort=dft, measurement_standard=strsplit(input$a,"_")[[1]][2],threshold=1)                                      
-		direc2 <- pm.ttest(tails = input$tails1, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power1)  
+		direc2 <- pm.ttest(tails = input$tails1, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues, testagainstzero = input$testagainstsingle, output_options = c(input$fileoutput3, input$fileoutput333), boxcox = input$power1)  
 		tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 		output$table2 <- DT::renderDataTable({
 			DT::datatable(tempDF, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)
@@ -354,7 +366,7 @@ observeEvent(input$proc, {
 		if(any(is.na(dft[,1:length(dft)]))) {removeModal(); return(NULL)}###stops crashing if empty
 		dft <- data.frame(dft)
 		wtf <- art.input(bone=toString(input$zz), sort=dft)
-		direc2 <- art.ttest(tails = input$tails12, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues2, testagainstzero = input$testagainstsingle2, output_options = c(input$fileoutput3, input$fileoutput333), power = input$power12)           
+		direc2 <- art.ttest(tails = input$tails12, ref = wtf[[2]], sort = wtf[[1]], sessiontempdir = sessiontemp, alphalevel = input$alphalevels, absolutevalue = input$absolutevalues2, testagainstzero = input$testagainstsingle2, output_options = c(input$fileoutput3, input$fileoutput333), boxcox = input$power12)           
 		tempDF <- rbind(direc2[[2]], direc2[[3]]) #combines both dataframes into a single one. Both are needed for multiple but only 1 for single.
 		output$table2 <- DT::renderDataTable({
 			DT::datatable(tempDF, options = list(lengthMenu = c(1), pageLength = 1), rownames = FALSE)

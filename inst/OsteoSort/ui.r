@@ -4,7 +4,7 @@
 #' runApp("osteosort")
 options(warn = -1)
 library(shiny)
-
+library(rgl)
 #Navigation bar interface
 shinyUI(
 	navbarPage(theme = "css/flatly.min.css", windowTitle = "OsteoSort", title=div(img(src="OsteoSort.png", width = "25px"), "OsteoSort"),
@@ -22,15 +22,15 @@ shinyUI(
 					References
 					</h2>
 					<p>&nbsp;</p>
-					Lynch JJ, Byrd JE, LeGarde CB. The power of exclusion using automated osteometric sorting: pair-matching. J Forensic Sci 2018. <a href='https://doi.org/10.1111/1556-4029.13560', target='_blank'>https://doi.org/10.1111/1556-4029.13560</a>. Epub 2017 May 26.
+					Lynch JJ, Byrd JE, LeGarde CB. The power of exclusion using automated osteometric sorting: pair-matching. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13560', target='_blank'>https://doi.org/10.1111/1556-4029.13560</a>. Epub 2017 May 26.
 					<p>&nbsp;</p>
 					Lynch JJ. An analysis on the choice of alpha level in the osteometric pair-matching of the os coxa, scapula, and clavicle. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13599', target='_blank'>https://doi.org/10.1111/1556-4029.13599</a/>. Epub 2017 July 18.
 					<p>&nbsp;</p>
 					Lynch JJ. The automation of regression modeling in osteometric sorting: an ordination approach. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13597', target='_blank'>https://doi.org/10.1111/1556-4029.13597</a>. Epub 2017 July 21.
 					<p>&nbsp;</p>
-					Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13670', target='_blank'>https://doi.org/10.1111/1556-4029.13670</a>. Epub 2017 Oct 16.
+					Lynch JJ. An automated two-dimensional form registration method for osteological pair-matching. J Forensic Sci. <a href='https://doi.org/10.1111/1556-4029.13670', target='_blank'>https://doi.org/10.1111/1556-4029.13670</a>. Epub 2017 October 16.
 					<p>&nbsp;</p>
-					Lynch JJ. An automated two-dimensional pairwise form registration method for pair-matching fragmented skeletal elements. J Forensic Sci [Under Review].
+					Lynch JJ. An automated two-dimensional pairwise form registration method for pair-matching of fragmented skeletal remains. <a href='http://dx.doi.org/10.1111/1556-4029.13787', target='_blank'>http://dx.doi.org/10.1111/1556-4029.13787</a>. Epub 2018 April 10.
 					<p>&nbsp;</p>
 					</p>
 					")
@@ -1058,7 +1058,12 @@ shinyUI(
 									h4("Association"),
 									radioButtons(inputId ="regtesttypes", label = "Regression type", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 									checkboxInput(inputId = "alphapred", label = "Use alpha level hypothesis", value = TRUE),
-									sliderInput(inputId = "alphalevels2", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01)
+									sliderInput(inputId = "alphalevels2", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
+									
+									checkboxInput(inputId = "pcasingleuse", label = "Use all Principal Components", value = TRUE),									
+									conditionalPanel(condition = "!input.pcasingleuse",
+										sliderInput(inputId = "pcasingle", label = "Principal Components", min=1, max = 10, value = 1)
+									)
 								),
 								column(4,
 									h4("Common"),
@@ -1067,20 +1072,18 @@ shinyUI(
 								column(4,
 									h4("Pair & Articulation"),
 									conditionalPanel(condition = "input.testtype == 'Articulation_match'",
-										checkboxInput(inputId = "absolutevalues2", label = "Absolute D-value |a-b|", value = FALSE),
-										conditionalPanel(condition = "input.absolutevalues2",
-											checkboxInput(inputId = "power12", label = "Half-normalization transformation", value = FALSE)
-										),
-										sliderInput(inputId = "tails12", label = "Tails", min=1, max=2, value=2, step=1),
-										checkboxInput(inputId = "testagainstsingle2", label = "Zero sample mean", value = FALSE)						
+										checkboxInput(inputId = "absolutevalues2", label = "Absolute D-value |a-b|", value = TRUE),
+
+										checkboxInput(inputId = "power12", label = "Boxcox transformation", value = TRUE),
+										checkboxInput(inputId = "testagainstsingle2", label = "Zero sample mean", value = FALSE),						
+										sliderInput(inputId = "tails12", label = "Tails", min=1, max=2, value=2, step=1)
 									),
 									conditionalPanel(condition = "input.testtype == 'Pair_match'",
 										checkboxInput(inputId = "absolutevalues", label = "Absolute D-value |a-b|", value = TRUE),
-										conditionalPanel(condition = "input.absolutevalues",
-											checkboxInput(inputId = "power1", label = "Half-normalization transformation", value = TRUE)
-										),
-										sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=1, step=1),
-										checkboxInput(inputId = "testagainstsingle", label = "Zero sample mean", value = FALSE)
+
+										checkboxInput(inputId = "power1", label = "Boxcox transformation", value = TRUE),
+										checkboxInput(inputId = "testagainstsingle", label = "Zero sample mean", value = FALSE),
+										sliderInput(inputId = "tails1", label = "Tails", min=1, max=2, value=2, step=1)
 									)
 								)
 								) #fluidrow
@@ -1293,7 +1296,11 @@ shinyUI(
 											h4("Association"),
 											radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 											checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = TRUE),
-											sliderInput(inputId = "asspredlevel", label = "Prediction interval level", min=0.01, max=1, value=0.95, step=0.01)
+											sliderInput(inputId = "asspredlevel", label = "Prediction interval level", min=0.01, max=1, value=0.95, step=0.01),
+											checkboxInput(inputId = "pcamultipleuse", label = "Use all Principal Components", value = TRUE),									
+											conditionalPanel(condition = "!input.pcamultipleuse",
+												sliderInput(inputId = "pcamultiple", label = "Principal Components", min=1, max = 10, value = 1)
+											)										
 										),
 										column(4,
 											h4("Common"),
@@ -1304,19 +1311,17 @@ shinyUI(
 											h4("Pair & Articulation"),
 											conditionalPanel(condition = "input.testtype2 == 'Articulation_match'",
 												checkboxInput(inputId = "absolutevalue2", label = "Absolute D-value |a-b|", value = FALSE),
-												conditionalPanel(condition = "input.absolutevalue2",
-													checkboxInput(inputId = "power22", label = "Half-normalization transformation", value = FALSE)
-												),
-												sliderInput(inputId = "tails22", label = "Tails", min=1, max=2, value=2, step=1),
-												checkboxInput(inputId = "testagainst2", label = "Zero sample mean", value = FALSE)
+
+												checkboxInput(inputId = "power22", label = "Boxcox transformation", value = FALSE),
+												checkboxInput(inputId = "testagainst2", label = "Zero sample mean", value = FALSE),
+												sliderInput(inputId = "tails22", label = "Tails", min=1, max=2, value=2, step=1)
 											),
 											conditionalPanel(condition = "input.testtype2 == 'Pair_match'",
 												checkboxInput(inputId = "absolutevalue", label = "Absolute D-value |a-b|", value = TRUE),
-												conditionalPanel(condition = "input.absolutevalue",
-													checkboxInput(inputId = "power2", label = "Half-normalization transformation", value = TRUE)
-												),
-												sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=1, step=1),
-												checkboxInput(inputId = "testagainst", label = "Zero sample mean", value = FALSE)
+
+												checkboxInput(inputId = "power2", label = "Boxcox transformation", value = TRUE),
+												checkboxInput(inputId = "testagainst", label = "Zero sample mean", value = FALSE),
+												sliderInput(inputId = "tails2", label = "Tails", min=1, max=2, value=2, step=1)
 											)
 										)
 									)								
@@ -1557,7 +1562,7 @@ shinyUI(
 			)
 		),		
 		navbarMenu("Osteoshape sorting",		
-			tabPanel("2D comparison",
+			tabPanel("2D pair-matching",
 				titlePanel(""),
 					sidebarLayout(
 						sidebarPanel(
@@ -1643,8 +1648,142 @@ shinyUI(
 						)
 					)
 			),
-			tabPanel("3D comparison"
+			tabPanel("3D preprocess",
+				titlePanel(""),
+					sidebarLayout(
+						sidebarPanel(
+							uiOutput('resettableInput3Da'),
+							fluidRow(
+								column(6,
+									actionButton("simlify","simplify", icon=icon("sort-by-attributes"))
+								),
+							),	
+							fluidRow(
+								column(6,
+									actionButton("start"," digitize", icon=icon("edit"))
+								),
+								column(6,
+									actionButton("colorize"," colorize", icon=icon("tint"))
+								)
+							),	
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("previous"," previous", icon=icon("arrow-left"))
+								),
+								column(6,
+									actionButton("nnext"," next    ", icon = icon("arrow-right"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile3Da", " clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("savedata", " save    ")
+								)
+							),
+							tags$style(type = "text/css", "#colorize { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#start { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#previous { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#nnext { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#clearFile3Da { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#savedata { width:100%; font-size:85%; background-color:#126a8f }"),
+							width = 2
+						),
+						mainPanel(
 
+							rglwidgetOutput('webgl3Dalign', width = "1200px", height = "400px")
+
+						)
+					)		
+			),
+			tabPanel("3D pair-matching",
+				titlePanel(""),
+					sidebarLayout(
+						sidebarPanel(
+							selectInput(inputId ="fragcomp3d", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
+							uiOutput('resettableInput3D'),	
+							uiOutput('resettableInput3DD'),
+							uiOutput("mspec3D"),
+							fluidRow(
+								column(6,
+									actionButton("settings3D","settings", icon=icon("keyboard-o"))
+								),
+								column(6,
+									actionButton("pro3D","process ", icon = icon("cog"))
+								)
+							),
+							fluidRow(br()),
+							fluidRow(
+								column(6,
+									actionButton("clearFile3D", "clear   ", icon = icon("window-close"))
+								),
+								column(6,
+									downloadButton("downloadData3D", "save    ")
+								)
+							),
+							tags$style(type = "text/css", "#settings3D { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#pro3D { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#clearFile3D { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#downloadData3D { width:100%; font-size:85%; background-color:#126a8f }"),
+							width = 2
+						),
+						mainPanel(
+							uiOutput("contents3D"),
+
+
+
+
+						tabsetPanel(id="tabSelected3D",
+							tabPanel("Results ",
+								DT::dataTableOutput('table3D')
+							),
+							tabPanel("Render ",
+								rglwidgetOutput('webgl3D', width = "1200px", height = "400px")
+							)
+					 	),
+
+
+							bsModal("settings3DD", title = "Settings", trigger = "settings3D", size = "large", 
+								tabsetPanel(id="tabSelected33",
+									tabPanel("Output Parameters",
+										uiOutput('fileoutput3Dexcel1'),
+										uiOutput('fileoutput3Dexcel2'),
+										uiOutput('fileoutput3Dtps'),
+										uiOutput('fileoutput3Dplot')
+									),
+									tabPanel("Statistical Parameters",
+										fluidRow(
+											column(4,
+												h4("Outline"),
+												uiOutput('banding'),
+												conditionalPanel(condition = "input.banding",
+													uiOutput('nthreshold3D')
+												)
+											),
+											column(4, 
+												h4("Registration"),
+												uiOutput('icp3D'),
+												uiOutput('trans3D')
+											),
+											column(4,
+												h4("Distance"),
+												uiOutput('distance3D'),
+												uiOutput('max_avg_distance3D'),
+												uiOutput('shortlistn3D'),
+												uiOutput('hidedist3D')
+											)
+										)
+									),
+									tabPanel("Computational Parameters",
+										uiOutput('ncores3D')
+									)
+								)		
+							)
+						)
+					)
 			)		
 
 		),

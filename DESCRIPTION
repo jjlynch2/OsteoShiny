@@ -5,14 +5,23 @@ Authors@R: person("Jeff", "Lynch", email = "jjlynch@bioarch.net", role = c("aut"
 Description: This package allows the statistical osteological sorting of commingled
     human skeletal remains using metric, 2D, and 3D data in a shiny GUI. http://osteosort.net
 Depends:
-	R (>= 3.3.0)
-License: GPL-2
-LazyData: false
-Imports:
-    OsteoSort (>= 1.2.5),
+	R (>= 3.3.0),
+    OsteoSort (>= 1.2.6),
     shiny,
     htmltools,
     zip,
     plyr,
+    rgl (>= 0.99.0),
+    DT
+License: GPL-2
+LazyData: false
+Imports:
+    OsteoSort (>= 1.2.6),
+    shiny,
+    htmltools,
+    zip,
+    plyr,
+    rgl,
+    shinyRGL,
     DT
 RoxygenNote: 6.0.1
