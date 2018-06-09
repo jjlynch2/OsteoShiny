@@ -75,7 +75,6 @@ shinyUI(
 								conditionalPanel(condition = "input.zz == 'huur'",
 									fluidRow(
 											column(6,
-											
 											selectInput("huurside1", "Side", c(Left='Left', Right='Right')),
 											numericInput(inputId = 'huur40', label = 'Hum_01', value = ''),								
 											numericInput(inputId = 'huur41', label = 'Hum_02', value = ''),		
@@ -1612,10 +1611,10 @@ shinyUI(
 												h4("Outline"),
 												uiOutput('nthreshold'),
 												uiOutput('mirror2D'),
+												uiOutput('efa_options3'),
 								 				conditionalPanel(condition = "input.fragcomp == 'Complete'",
 													uiOutput('efa_options1'),
-													uiOutput('efa_options2'),
-													uiOutput('efa_options3')
+													uiOutput('efa_options2')
 												)
 											),
 											column(4, 
@@ -1656,7 +1655,7 @@ shinyUI(
 							fluidRow(
 								column(6,
 									actionButton("simlify","simplify", icon=icon("sort-by-attributes"))
-								),
+								)
 							),	
 							fluidRow(
 								column(6,
@@ -1736,14 +1735,14 @@ shinyUI(
 
 
 
-						tabsetPanel(id="tabSelected3D",
-							tabPanel("Results ",
-								DT::dataTableOutput('table3D')
-							),
-							tabPanel("Render ",
-								rglwidgetOutput('webgl3D', width = "1200px", height = "400px")
-							)
-					 	),
+							tabsetPanel(id="tabSelected3D",
+								tabPanel("Results ",
+									DT::dataTableOutput('table3D')
+								),
+								tabPanel("Render ",
+									rglwidgetOutput('webgl3D', width = "1200px", height = "400px")
+								)
+						 	),
 
 
 							bsModal("settings3DD", title = "Settings", trigger = "settings3D", size = "large", 

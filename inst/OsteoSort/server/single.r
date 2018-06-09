@@ -169,7 +169,7 @@ observeEvent(input$proc, {
 		}
 		if(input$zz == 'ulna') {
 			left <- cbind(input$ID1,  "Left", "Ulna", input$a51A1,input$a51B1,input$a51C1)
-			right <- cbind(input$ID2,  "Right", "Ulna", input$a52A2,input$a52B2,input$a52C2) 
+			right <- cbind(input$ID2,  "Right", "Ulna", input$a51A2,input$a51B2,input$a51C2) 
 			testt <- 'pair'                                
 		}
 		if(input$zz == 'femur') {
@@ -343,6 +343,8 @@ observeEvent(input$proc, {
 		output$contents2 <- renderUI({  HTML(paste(""))})    
 	}
 	if(testt == 'pair') {
+global1 <<- left
+global2 <<- right
 		#if(all(is.na(left[,4:length(left)])) && all(is.na(right[,4:length(right)]))) {removeModal(); return(NULL)}###stops crashing if empty
 		if(any(is.na(left[,1:3])) && any(is.na(right[,1:3]))) {removeModal(); return(NULL)}###stops crashing if empty IDs and associated info
 		m_counter <- (length(left)-3)		
@@ -350,7 +352,6 @@ observeEvent(input$proc, {
 			if(is.na(left[,i]) || is.na(right[,i])) {m_counter <- m_counter - 1}
 			if(m_counter <= 0) {removeModal(); return(NULL)}
 		}
-
 		dft <- rbind(left,right) 
 		dft <- data.frame(dft)
 		colnames(dft)[1:3] <- c("ID","Side","Element")

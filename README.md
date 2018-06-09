@@ -5,10 +5,10 @@ To install directly from GitHub use the devtools R package:
 `install.packages("devtools")`
 `library(devtools)`
 
-`install_github("jjlynch2/OsteoShiny", ref = "v1.3.0")`
+`install_github("jjlynch2/OsteoShiny")`
 
 # Depends
-* OsteoSort (>= 1.2.6)
+* OsteoSort (>= 1.3.0)
 * htmltools
 * zip
 * plyr
@@ -33,3 +33,4 @@ To install directly from GitHub use the devtools R package:
 
 ## Bug fixes:
 *Fixed two bugs in the single user interface to avoid crashing when running association analyses with the Radius and Femur
+*Fixed a bug with supplemental measurements and the ulna crashing in the single user interface
