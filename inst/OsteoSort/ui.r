@@ -1646,144 +1646,144 @@ shinyUI(
 							)
 						)
 					)
-			),
-			tabPanel("3D preprocess",
-				titlePanel(""),
-					sidebarLayout(
-						sidebarPanel(
-							uiOutput('resettableInput3Da'),
-							fluidRow(
-								column(6,
-									actionButton("simlify","simplify", icon=icon("sort-by-attributes"))
-								)
-							),	
-							fluidRow(
-								column(6,
-									actionButton("start"," digitize", icon=icon("edit"))
-								),
-								column(6,
-									actionButton("colorize"," colorize", icon=icon("tint"))
-								)
-							),	
-							fluidRow(br()),
-							fluidRow(
-								column(6,
-									actionButton("previous"," previous", icon=icon("arrow-left"))
-								),
-								column(6,
-									actionButton("nnext"," next    ", icon = icon("arrow-right"))
-								)
-							),
-							fluidRow(br()),
-							fluidRow(
-								column(6,
-									actionButton("clearFile3Da", " clear   ", icon = icon("window-close"))
-								),
-								column(6,
-									downloadButton("savedata", " save    ")
-								)
-							),
-							tags$style(type = "text/css", "#colorize { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#start { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#previous { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#nnext { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#clearFile3Da { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#savedata { width:100%; font-size:85%; background-color:#126a8f }"),
-							width = 2
-						),
-						mainPanel(
-
-							rglwidgetOutput('webgl3Dalign', width = "1200px", height = "400px")
-
-						)
-					)		
-			),
-			tabPanel("3D pair-matching",
-				titlePanel(""),
-					sidebarLayout(
-						sidebarPanel(
-							selectInput(inputId ="fragcomp3d", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
-							uiOutput('resettableInput3D'),	
-							uiOutput('resettableInput3DD'),
-							uiOutput("mspec3D"),
-							fluidRow(
-								column(6,
-									actionButton("settings3D","settings", icon=icon("keyboard-o"))
-								),
-								column(6,
-									actionButton("pro3D","process ", icon = icon("cog"))
-								)
-							),
-							fluidRow(br()),
-							fluidRow(
-								column(6,
-									actionButton("clearFile3D", "clear   ", icon = icon("window-close"))
-								),
-								column(6,
-									downloadButton("downloadData3D", "save    ")
-								)
-							),
-							tags$style(type = "text/css", "#settings3D { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#pro3D { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#clearFile3D { width:100%; font-size:85%; background-color:#126a8f }"),
-							tags$style(type = "text/css", "#downloadData3D { width:100%; font-size:85%; background-color:#126a8f }"),
-							width = 2
-						),
-						mainPanel(
-							uiOutput("contents3D"),
-
-
-
-
-							tabsetPanel(id="tabSelected3D",
-								tabPanel("Results ",
-									DT::dataTableOutput('table3D')
-								),
-								tabPanel("Render ",
-									rglwidgetOutput('webgl3D', width = "1200px", height = "400px")
-								)
-						 	),
-
-
-							bsModal("settings3DD", title = "Settings", trigger = "settings3D", size = "large", 
-								tabsetPanel(id="tabSelected33",
-									tabPanel("Output Parameters",
-										uiOutput('fileoutput3Dexcel1'),
-										uiOutput('fileoutput3Dexcel2'),
-										uiOutput('fileoutput3Dtps'),
-										uiOutput('fileoutput3Dplot')
-									),
-									tabPanel("Statistical Parameters",
-										fluidRow(
-											column(4,
-												h4("Outline"),
-												uiOutput('banding'),
-												conditionalPanel(condition = "input.banding",
-													uiOutput('nthreshold3D')
-												)
-											),
-											column(4, 
-												h4("Registration"),
-												uiOutput('icp3D'),
-												uiOutput('trans3D')
-											),
-											column(4,
-												h4("Distance"),
-												uiOutput('distance3D'),
-												uiOutput('max_avg_distance3D'),
-												uiOutput('shortlistn3D'),
-												uiOutput('hidedist3D')
-											)
-										)
-									),
-									tabPanel("Computational Parameters",
-										uiOutput('ncores3D')
-									)
-								)		
-							)
-						)
-					)
-			)		
+			)
+#			tabPanel("3D preprocess",
+#				titlePanel(""),
+#					sidebarLayout(
+#						sidebarPanel(
+#							uiOutput('resettableInput3Da'),
+#							fluidRow(
+#								column(6,
+#									actionButton("simlify","simplify", icon=icon("sort-by-attributes"))
+#								)
+#							),	
+#							fluidRow(
+#								column(6,
+#									actionButton("start"," digitize", icon=icon("edit"))
+#								),
+#								column(6,
+#									actionButton("colorize"," colorize", icon=icon("tint"))
+#								)
+#							),	
+#							fluidRow(br()),
+#							fluidRow(
+#								column(6,
+#									actionButton("previous"," previous", icon=icon("arrow-left"))
+#								),
+#								column(6,
+#									actionButton("nnext"," next    ", icon = icon("arrow-right"))
+#								)
+#							),
+#							fluidRow(br()),
+#							fluidRow(
+#								column(6,
+#									actionButton("clearFile3Da", " clear   ", icon = icon("window-close"))
+#								),
+#								column(6,
+#									downloadButton("savedata", " save    ")
+#								)
+#							),
+#							tags$style(type = "text/css", "#colorize { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#start { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#previous { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#nnext { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#clearFile3Da { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#savedata { width:100%; font-size:85%; background-color:#126a8f }"),
+#							width = 2
+#						),
+#						mainPanel(
+#
+#							rglwidgetOutput('webgl3Dalign', width = "1200px", height = "400px")
+#
+#						)
+#					)		
+#			),
+#			tabPanel("3D pair-matching",
+#				titlePanel(""),
+#					sidebarLayout(
+#						sidebarPanel(
+#							selectInput(inputId ="fragcomp3d", label = "Analysis:", choices = c("Complete", "Fragmented"), selected = "Complete"),
+#							uiOutput('resettableInput3D'),	
+#							uiOutput('resettableInput3DD'),
+#							uiOutput("mspec3D"),
+#							fluidRow(
+#								column(6,
+#									actionButton("settings3D","settings", icon=icon("keyboard-o"))
+#								),
+#								column(6,
+#									actionButton("pro3D","process ", icon = icon("cog"))
+#								)
+#							),
+#							fluidRow(br()),
+#							fluidRow(
+#								column(6,
+#									actionButton("clearFile3D", "clear   ", icon = icon("window-close"))
+#								),
+#								column(6,
+#									downloadButton("downloadData3D", "save    ")
+#								)
+#							),
+#							tags$style(type = "text/css", "#settings3D { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#pro3D { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#clearFile3D { width:100%; font-size:85%; background-color:#126a8f }"),
+#							tags$style(type = "text/css", "#downloadData3D { width:100%; font-size:85%; background-color:#126a8f }"),
+#							width = 2
+#						),
+#						mainPanel(
+#							uiOutput("contents3D"),
+#
+#
+#
+#
+#							tabsetPanel(id="tabSelected3D",
+#								tabPanel("Results ",
+#									DT::dataTableOutput('table3D')
+#								),
+#								tabPanel("Render ",
+#									rglwidgetOutput('webgl3D', width = "1200px", height = "400px")
+#								)
+#						 	),
+#
+#
+#							bsModal("settings3DD", title = "Settings", trigger = "settings3D", size = "large", 
+#								tabsetPanel(id="tabSelected33",
+#									tabPanel("Output Parameters",
+#										uiOutput('fileoutput3Dexcel1'),
+#										uiOutput('fileoutput3Dexcel2'),
+#										uiOutput('fileoutput3Dtps'),
+#										uiOutput('fileoutput3Dplot')
+#									),
+#									tabPanel("Statistical Parameters",
+#										fluidRow(
+#											column(4,
+#												h4("Outline"),
+#												uiOutput('banding'),
+#												conditionalPanel(condition = "input.banding",
+#													uiOutput('nthreshold3D')
+#												)
+#											),
+#											column(4, 
+#												h4("Registration"),
+#												uiOutput('icp3D'),
+#												uiOutput('trans3D')
+#											),
+#											column(4,
+#												h4("Distance"),
+#												uiOutput('distance3D'),
+#												uiOutput('max_avg_distance3D'),
+#												uiOutput('shortlistn3D'),
+#												uiOutput('hidedist3D')
+#											)
+#										)
+#									),
+#									tabPanel("Computational Parameters",
+#										uiOutput('ncores3D')
+#									)
+#								)		
+#							)
+#						)
+#					)
+#			)		
 
 		),
 		navbarMenu("Antemortem sorting",	
