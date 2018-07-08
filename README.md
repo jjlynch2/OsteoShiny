@@ -1,11 +1,11 @@
-#Current development status for 1.2.11
+#Current development status for 1.2.11rc1
 # Installation
 To install directly from GitHub use the devtools R package:
 
 `install.packages("devtools")`
 `library(devtools)`
 
-`install_github("jjlynch2/OsteoShiny", ref="v1.2.11")`
+`install_github("jjlynch2/OsteoShiny", ref="v1.2.11rc1")`
 
 # Depends
 * OsteoSort (>= 1.2.6)
@@ -15,7 +15,7 @@ To install directly from GitHub use the devtools R package:
 * DT
 * shiny
 
-# Changes for OsteoShiny version : 1.2.11
+# Changes for OsteoShiny version : 1.2.11rc1
 
 ## Minor changes:
 * Updated Example_Data to include outliers
