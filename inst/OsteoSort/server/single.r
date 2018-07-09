@@ -315,14 +315,17 @@ observeEvent(input$proc, {
 	}
 	if(testt == 'reg') {
 		
-		if(input$pcasingleuse) {
+		if(input$pcasingleuse == "All") {
 			pcan <- NULL
 		}
 		if(is.null(input$pcasingleuse)) {
 			pcan <- NULL
 		}
-		if(!input$pcasingleuse && !is.null(input$pcasingleuse)) {
-			pcan <- input$pcasingle
+		if(input$pcasingleuse == "Select") {
+			pcan <- input$pcasingle1
+		}
+		if(input$pcasingleuse == "Variance") {
+			pcan <- input$pcasingle2
 		}
 
 		if(all(is.na(reghum[,4:length(reghum)])) && all(is.na(reguln[,4:length(reguln)]))) {removeModal(); return(NULL)}###stops crashing if empty

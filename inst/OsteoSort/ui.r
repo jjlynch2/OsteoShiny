@@ -1058,10 +1058,17 @@ shinyUI(
 									radioButtons(inputId ="regtesttypes", label = "Regression type", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 									checkboxInput(inputId = "alphapred", label = "Use alpha level hypothesis", value = TRUE),
 									sliderInput(inputId = "alphalevels2", label = "Prediction interval level", min=0.01, max=1, value=0.95, step = 0.01),
+								
+									conditionalPanel(condition = "input.regtesttypes == 'PCA-CCA'",
+										radioButtons(inputId ="pcasingleuse", label = "Principal Component Analysis", choices = c("All", "Select", "Variance"), selected = "Variance"),
 									
-									checkboxInput(inputId = "pcasingleuse", label = "Use all Principal Components", value = TRUE),									
-									conditionalPanel(condition = "!input.pcasingleuse",
-										sliderInput(inputId = "pcasingle", label = "Principal Components", min=1, max = 10, value = 1)
+										conditionalPanel(condition = "input.pcasingleuse == 'Select'",
+											sliderInput(inputId = "pcasingle1", label = "Principal Components", min=1, max = 10, value = 1)
+										),
+
+										conditionalPanel(condition = "input.pcasingleuse == 'Variance'",
+											sliderInput(inputId = "pcasingle2", label = "Cumulative Variance", min=0.1, max = 0.99, value = 0.99)
+										)
 									)
 								),
 								column(4,
@@ -1296,10 +1303,20 @@ shinyUI(
 											radioButtons(inputId ="regtesttypem", label = "Regression:", choices = c("PCA-CCA", "Simple"), selected = "PCA-CCA"),
 											checkboxInput(inputId = "alphapred2", label = "Use alpha levels for regression", value = TRUE),
 											sliderInput(inputId = "asspredlevel", label = "Prediction interval level", min=0.01, max=1, value=0.95, step=0.01),
-											checkboxInput(inputId = "pcamultipleuse", label = "Use all Principal Components", value = TRUE),									
-											conditionalPanel(condition = "!input.pcamultipleuse",
-												sliderInput(inputId = "pcamultiple", label = "Principal Components", min=1, max = 10, value = 1)
-											)										
+
+
+											conditionalPanel(condition = "input.regtesttypem == 'PCA-CCA'",
+												radioButtons(inputId ="pcamultipleuse", label = "Principal Component Analysis", choices = c("All", "Select", "Variance"), selected = "Variance"),
+											
+												conditionalPanel(condition = "input.pcamultipleuse == 'Select'",
+													sliderInput(inputId = "pcamultiple1", label = "Principal Components", min=1, max = 10, value = 1)
+												),
+
+												conditionalPanel(condition = "input.pcamultipleuse == 'Variance'",
+													sliderInput(inputId = "pcamultiple2", label = "Cumulative Variance", min=0.1, max = 0.99, value = 0.99)
+												)
+											)
+									
 										),
 										column(4,
 											h4("Common"),

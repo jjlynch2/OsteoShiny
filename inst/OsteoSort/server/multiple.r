@@ -263,15 +263,17 @@ observeEvent(input$pro, {
 		if(input$regtesttypem == "PCA-CCA") {regtypee <- TRUE}
 		if(input$regtesttypem == "Simple") {regtypee <- FALSE}
 
-
-		if(input$pcamultipleuse) {
+		if(input$pcamultipleuse == "All") {
 			pcan <- NULL
 		}
 		if(is.null(input$pcamultipleuse)) {
 			pcan <- NULL
 		}
-		if(!input$pcamultipleuse && !is.null(input$pcamultipleuse)) {
-			pcan <- input$pcamultiple
+		if(input$pcamultipleuse == "Select") {
+			pcan <- input$pcamultiple1
+		}
+		if(input$pcamultipleuse == "Variance") {
+			pcan <- input$pcamultiple2
 		}
 
 
