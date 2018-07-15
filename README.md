@@ -29,5 +29,5 @@ To install directly from GitHub use the devtools R package:
 * Added option (default) to select number of Principal Components based on cumulative variance 
 
 ## Bug fixes:
-*Fixed two bugs in the single user interface to avoid crashing when running association analyses with the Radius and Femur
-*Fixed a bug with supplemental measurements and the ulna crashing in the single user interface
+* Fixed two bugs in the single user interface to avoid crashing when running association analyses with the Radius and Femur
+* Fixed a bug with supplemental measurements and the ulna crashing in the single user interface
