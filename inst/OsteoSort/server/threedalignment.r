@@ -177,11 +177,12 @@ observeEvent(input$simplify, {
 			for (i in 1:ll) {	
 				ttt <- filelist3$list[[i]]
 				filelist3$list[[i]] <- kmeans.3d(filelist3$list[[i]], cluster = vara$vara)
-			}
-			if(!is.null(landmarks$landmarks[[i]][[2]])) {
-				tempp <- euclidean_distance_matrix_rcpp(as.matrix(ttt[landmarks$landmarks[[i]][[2]],]), as.matrix(filelist3$list[[i]]))
-				landmarks$landmarks[[i]][[2]] <- unique(which(tempp < tva$tva, arr.ind = TRUE)[,2])
-				if(length(landmarks$landmarks[[i]][[2]]) == 0) { landmarks$landmarks[[i]][[2]] <- NULL }
+
+				if(!is.null(landmarks$landmarks[[i]][[2]])) {
+					tempp <- euclidean_distance_matrix_rcpp(as.matrix(ttt[landmarks$landmarks[[i]][[2]],]), as.matrix(filelist3$list[[i]]))
+					landmarks$landmarks[[i]][[2]] <- unique(which(tempp < tva$tva, arr.ind = TRUE)[,2])
+					if(length(landmarks$landmarks[[i]][[2]]) == 0) { landmarks$landmarks[[i]][[2]] <- NULL }
+				}
 			}
 		}
 
@@ -190,71 +191,85 @@ observeEvent(input$simplify, {
 })
 
 observeEvent(input$nnext, {
-	if(position$pos < length(filelist3$list)) {
-		position$pos = position$pos + 1
+	if(length(input$aligndata$datapath) > 0) {
+		if(position$pos < length(filelist3$list)) {
+			position$pos = position$pos + 1
+		}
 	}
 })
 
 observeEvent(input$previous, {
-	if(position$pos > 1) {
-		position$pos = position$pos - 1
+	if(length(input$aligndata$datapath) > 0) {
+		if(position$pos > 1) {
+			position$pos = position$pos - 1
+		}
 	}
 })
 
 observeEvent(input$start, {
-	showModal(modalDialog(title = "Digitization has started...Please check the RGL window.", easyClose = FALSE, footer = NULL))
-	temp_p <- filelist3$list[[position$pos]]
-	landmarks$landmarks[[position$pos]][[1]] <- digitize.3d(temp_p, type = "single")
-	removeModal()  
+	if(length(input$aligndata$datapath) > 0) {
+		showModal(modalDialog(title = "Digitization has started...Please check the RGL window.", easyClose = FALSE, footer = NULL))
+		temp_p <- filelist3$list[[position$pos]]
+		landmarks$landmarks[[position$pos]][[1]] <- digitize.3d(temp_p, type = "single")
+		removeModal()  
+	}
 })
 observeEvent(input$start2, {
-	showModal(modalDialog(title = "Digitization has started...Please check the RGL window.", easyClose = FALSE, footer = NULL))
-	temp_p <- filelist3$list[[position$pos]]
-	landmarks$landmarks[[position$pos]][[2]] <- digitize.3d(temp_p, type = "multiple")
-	removeModal()  
+	if(length(input$aligndata$datapath) > 0) {
+		showModal(modalDialog(title = "Digitization has started...Please check the RGL window.", easyClose = FALSE, footer = NULL))
+		temp_p <- filelist3$list[[position$pos]]
+		landmarks$landmarks[[position$pos]][[2]] <- digitize.3d(temp_p, type = "multiple")
+		removeModal()  
+	}
 })
 
 observeEvent(input$RGB1, {
-	showModal(modalDialog(title = "RGB landmark extraction has started...", easyClose = FALSE, footer = NULL))
-	if(input$alln == "Present") {		
-		temp_p <- filelist3$list[[position$pos]]
-		landmarks$landmarks[[position$pos]][[1]] <- RGB.locator.3d(temp_p, r = red$red, g = green$green, b = blue$blue,type = "landmark",threads = ncorespc$ncorespc)[[1]]
-	}
-	if(input$alln == "All") {		
-		ll <- length(filelist3$list)
-		for (i in 1:ll) {	
-			landmarks$landmarks[[i]][[1]] <- RGB.locator.3d(filelist3$list[[i]], r = red$red, g = green$green, b = blue$blue, type = "landmark",threads = ncorespc$ncorespc)[[1]]
+	if(length(input$aligndata$datapath) > 0) {
+		showModal(modalDialog(title = "RGB landmark extraction has started...", easyClose = FALSE, footer = NULL))
+		if(input$alln == "Present") {		
+			temp_p <- filelist3$list[[position$pos]]
+			landmarks$landmarks[[position$pos]][[1]] <- RGB.locator.3d(temp_p, r = red$red, g = green$green, b = blue$blue,type = "landmark",threads = ncorespc$ncorespc)[[1]]
 		}
-	}
-	removeModal()  
+		if(input$alln == "All") {		
+			ll <- length(filelist3$list)
+			for (i in 1:ll) {	
+				landmarks$landmarks[[i]][[1]] <- RGB.locator.3d(filelist3$list[[i]], r = red$red, g = green$green, b = blue$blue, type = "landmark",threads = ncorespc$ncorespc)[[1]]
+			}
+		}
+		removeModal() 
+	} 
 })
 observeEvent(input$RGB2, {
-	showModal(modalDialog(title = "RGB fracture extraction has started...", easyClose = FALSE, footer = NULL))
-	if(input$alln == "Present") {		
-		temp_p <- filelist3$list[[position$pos]]
-		landmarks$landmarks[[position$pos]][[2]] <- RGB.locator.3d(temp_p, f = fra$fra,type = "fracture",threads = ncorespc$ncorespc,f_threshold = fracturet$fracturet)[[1]]
-	}
-	if(input$alln == "All") {		
-		ll <- length(filelist3$list)
-		for (i in 1:ll) {	
-			landmarks$landmarks[[i]][[2]] <- RGB.locator.3d(filelist3$list[[i]], f = fra$fra, type = "fracture", threads = ncorespc$ncorespc, f_threshold = fracturet$fracturet)[[1]]
+	if(length(input$aligndata$datapath) > 0) {
+		showModal(modalDialog(title = "RGB fracture extraction has started...", easyClose = FALSE, footer = NULL))
+		if(input$alln == "Present") {		
+			temp_p <- filelist3$list[[position$pos]]
+			landmarks$landmarks[[position$pos]][[2]] <- RGB.locator.3d(temp_p, f = fra$fra,type = "fracture",threads = ncorespc$ncorespc,f_threshold = fracturet$fracturet)[[1]]
 		}
+		if(input$alln == "All") {		
+			ll <- length(filelist3$list)
+			for (i in 1:ll) {	
+				landmarks$landmarks[[i]][[2]] <- RGB.locator.3d(filelist3$list[[i]], f = fra$fra, type = "fracture", threads = ncorespc$ncorespc, f_threshold = fracturet$fracturet)[[1]]
+			}
+		}
+		removeModal()  
 	}
-	removeModal()  
 })
 
 
 observeEvent(input$RGB3, {
-	showModal(modalDialog(title = "RGB calibration has started...Please select colors for landmarks 1-3 and fracture margin...", easyClose = FALSE, footer = NULL))
+	if(length(input$aligndata$datapath) > 0) {
+		showModal(modalDialog(title = "RGB calibration has started...Please select colors for landmarks 1-3 and fracture margin...", easyClose = FALSE, footer = NULL))
 
-	temp_p <- filelist3$list[[position$pos]]
-	RGBtemp <- RGB.calibrate.3d(temp_p)
-	red$red = RGBtemp[1,]
-	green$green = RGBtemp[2,]
-	blue$blue = RGBtemp[3,]
-	fra$fra = RGBtemp[4,]
-	
-	removeModal()  
+		temp_p <- filelist3$list[[position$pos]]
+		RGBtemp <- RGB.calibrate.3d(temp_p)
+		red$red = RGBtemp[1,]
+		green$green = RGBtemp[2,]
+		blue$blue = RGBtemp[3,]
+		fra$fra = RGBtemp[4,]
+		
+		removeModal()  
+	}
 })
 
 

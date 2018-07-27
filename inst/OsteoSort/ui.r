@@ -1704,10 +1704,10 @@ shinyUI(
 							fluidRow(br()),
 							fluidRow(
 								column(6,
-									actionButton("simplify","simplify", icon=icon("cloud-download"))
+									actionButton("pcset","settings", icon=icon("keyboard-o"))
 								),
 								column(6,
-									actionButton("settingspointcloud","settings", icon=icon("keyboard-o"))
+									actionButton("simplify","simplify", icon=icon("cloud-download"))
 								)
 							),
 							fluidRow(br()),
@@ -1731,7 +1731,7 @@ shinyUI(
 									uiOutput("coordinates")
 								)
 							),
-							tags$style(type = "text/css", "#settingspointcloud { width:100%; font-size:85%; background-color:#126a8f }"),
+							tags$style(type = "text/css", "#pcset { width:100%; font-size:85%; background-color:#126a8f }"),
 							tags$style(type = "text/css", "#simplify { width:100%; font-size:85%; background-color:#126a8f }"),
 							tags$style(type = "text/css", "#start2 { width:100%; font-size:85%; background-color:#126a8f }"),
 							tags$style(type = "text/css", "#RGB1 { width:100%; font-size:85%; background-color:#126a8f }"),
@@ -1745,10 +1745,9 @@ shinyUI(
 							width = 2
 						),
 						mainPanel(
-
-
-							bsModal("settingspointcloud", title = "Settings", trigger = "settingspointcloud", size = "large", 
-								tabsetPanel(id="tabSelected3333",
+							rglwidgetOutput('webgl3Dalign', width = "1200px", height = "1200px"),
+							bsModal("pcset3D", title = "Settings", trigger = "pcset", size = "large", 
+								tabsetPanel(id="pcset33",
 									tabPanel("Statistical Parameters",
 										fluidRow(
 											column(4,
@@ -1767,8 +1766,8 @@ shinyUI(
 										uiOutput('ncorespc')
 									)
 								)
-							),#modal
-							rglwidgetOutput('webgl3Dalign', width = "1200px", height = "1200px")
+							)#modal
+
 						)#main
 					)#		
 			),
