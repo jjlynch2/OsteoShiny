@@ -7,7 +7,7 @@
 library(shiny)
 options(rgl.useNULL=TRUE) #required to avoid rgl device opening 
 library(rgl)
-options(shiny.maxRequestSize=30*1024^2) #increased file upload size to 30MB
+options(shiny.maxRequestSize=200*1024^2) #increased file upload size to 30MB
 options(warn = -1) #disables warnings
 
 shinyServer(function(input, output, session) {
@@ -26,8 +26,8 @@ shinyServer(function(input, output, session) {
 	source("../../server/metric.r", local=TRUE) ###imports metric comparison server code
 	source("../../server/stature.r", local=TRUE) ###imports stature outlier comparison server code
 	source("../../server/twod.r", local=TRUE) ###imports two-dimensional scomparison server code
-	#source("../../server/threed.r", local=TRUE) ###imports three-dimensional comparison server code
-	#source("../../server/threedalignment.r", local=TRUE) ###imports three-dimensional alignment tool
+	source("../../server/threed.r", local=TRUE) ###imports three-dimensional comparison server code
+	source("../../server/threedalignment.r", local=TRUE) ###imports three-dimensional alignment tool
 	source("../../server/antestat_single.r", local=TRUE) ###imports single comparison antemortem stature code
 	source("../../server/antestat_multiple.r", local=TRUE) ###imports multiple comparison antemortem stature code
 	################stops the shiny app when closing session

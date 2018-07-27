@@ -148,7 +148,7 @@ observeEvent(input$icp3D, {
 	icp3D$icp3D <- input$icp3D
 })
 output$icp3D <- renderUI({
-	sliderInput(inputId = "icp3D", label = "Number of iterative closest point iterations", min=1, max=1000, value=1, step=1)
+	sliderInput(inputId = "icp3D", label = "Number of iterative closest point iterations", min=1, max=1000, value=10, step=1)
 })
 
 trans3D <- reactiveValues(trans3D = "rigid")
