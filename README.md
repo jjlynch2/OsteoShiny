@@ -6,7 +6,7 @@ To install directly from GitHub use the devtools R package:
 
 `library(devtools)`
 
-`install_github("jjlynch2/OsteoShiny", ref="v1.2.11")`
+`install_github("jjlynch2/OsteoShiny", force = TRUE)`
 
 # Depends
 * OsteoSort (>= 1.2.6)
